@@ -70,6 +70,7 @@ td.row-actions button:last-child{margin-right:0}
 dialog{border:0;border-radius:12px;padding:24px;max-width:760px;width:calc(100% - 32px)}
 dialog::backdrop{background:rgba(20,24,50,.45)}
 .hidden{display:none!important}
+.ver{text-align:center;color:#aab;font-size:11px;padding:8px 0 16px}
 .card.warn{background:#FFF6E0;border-color:#F2C46B;color:#5a4300}
 tr.left td{color:#9aa}
 .bellwrap{position:relative}
@@ -162,6 +163,7 @@ td.wrap{white-space:pre-wrap;min-width:180px;max-width:360px}
 </header>
 <main id="app"></main>
 <div class="toast" id="toast"></div>
+<div class="ver">版本 2026-10-12b</div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
@@ -1389,8 +1391,8 @@ function viewUsers() {
   app.innerHTML = `<div class="card">
     <div class="toolbar"><h1 style="margin:0">人員管理</h1><span class="spacer"></span><button id="addU">＋ 新增人員</button></div>
     <p class="muted">人員用這裡登記的 Google 帳號登入即可使用。人員離職請用「編輯 → 狀態：離職」，會保留姓名並立即停止登入。</p>
-    <div class="tablewrap"><table><thead><tr><th>中文名</th><th>英文名</th><th>Google 帳號</th><th>角色</th><th>區域</th><th>狀態</th><th></th></tr></thead>
-    <tbody id="ubody">${list.map(u => `<tr data-e="${esc(u.email)}" class="${u.active === false ? 'left' : ''}"><td>${esc(u.nameZh)}</td><td>${esc(u.nameEn)}</td><td>${esc(u.email)}</td><td>${ROLE[u.role] || esc(u.role)}${u.alsoSales && !['sales', 'manager'].includes(u.role) ? '＋業務' : ''}${u.alsoEngineer && u.role !== 'engineer' ? '＋工程師' : ''}</td><td>${esc(userRegions(u).join('、'))}</td>
+    <div class="tablewrap"><table><thead><tr><th>中文名</th><th>英文名</th><th>Google 帳號</th><th>公司信箱</th><th>通知寄到</th><th>角色</th><th>區域</th><th>狀態</th><th></th></tr></thead>
+    <tbody id="ubody">${list.map(u => `<tr data-e="${esc(u.email)}" class="${u.active === false ? 'left' : ''}"><td>${esc(u.nameZh)}</td><td>${esc(u.nameEn)}</td><td>${esc(u.email)}</td><td>${esc(u.companyEmail || '')}</td><td>${[u.notifyGmail !== false ? 'Gmail' : '', u.notifyCompany && u.companyEmail ? '公司' : ''].filter(Boolean).join('＋') || '不寄'}</td><td>${ROLE[u.role] || esc(u.role)}${u.alsoSales && !['sales', 'manager'].includes(u.role) ? '＋業務' : ''}${u.alsoEngineer && u.role !== 'engineer' ? '＋工程師' : ''}</td><td>${esc(userRegions(u).join('、'))}</td>
       <td>${u.active === false ? (() => { const n = leftCustomers().filter(c => c.salesEmail === u.email).length; return '離職' + (n ? `　<a href="#" data-a="cust">${n} 位客戶待調整</a>` : ''); })() : '在職'}</td>
       <td class="row-actions"><button class="ghost" data-a="edit">編輯</button>${u.email === me.email ? '' : '<button class="danger" data-a="del">刪除</button>'}</td></tr>`).join('')}</tbody></table></div>
     <p class="muted">共 ${list.length} 人</p>
@@ -1411,6 +1413,25 @@ function viewUsers() {
   });
 }
 
+// 更換 Google 帳號：把所有指向舊帳號的欄位改成新帳號
+async function moveUserRefs(oldE, newE) {
+  const FIELDS = ['salesEmail', 'engineerEmail', 'createdBy'];
+  const jobs = [];
+  const scan = d => {
+    const x = d.data(), upd = {};
+    FIELDS.forEach(f => { if (x[f] === oldE) upd[f] = newE; });
+    if (Object.keys(upd).length) jobs.push([d.ref, { ...upd, updatedBy: me.email, updatedAt: serverTimestamp() }]);
+  };
+  const sources = [collection(db, 'customers'), collection(db, 'demos'), collection(db, 'schedules'), collectionGroup(db, 'purchases'), collectionGroup(db, 'issues'), collectionGroup(db, 'installs')];
+  for (const src of sources) (await getDocs(src)).docs.forEach(scan);
+  for (let i = 0; i < jobs.length; i += 200) {
+    const b = writeBatch(db);
+    jobs.slice(i, i + 200).forEach(([ref, upd]) => b.update(ref, upd));
+    await b.commit();
+  }
+  return jobs.length;
+}
+
 function userForm(u) {
   const isNew = !u;
   const cur = u || { role: 'sales', regions: [] };
@@ -1418,7 +1439,9 @@ function userForm(u) {
   const dlg = document.createElement('dialog');
   dlg.innerHTML = `<form id="uf"><h1>${isNew ? '新增人員' : '編輯人員'}</h1>
     <div class="grid">
-      <div class="field"><label>Google 帳號（Gmail）*</label><input name="email" type="email" value="${esc(cur.email)}" ${isNew ? '' : 'disabled'}></div>
+      <div class="field"><label>Google 帳號（Gmail，登入用）*</label><input name="email" type="email" value="${esc(cur.email)}"></div>
+      <div class="field"><label>公司信箱</label><input name="companyEmail" type="email" value="${esc(cur.companyEmail)}" placeholder="例：name@tmic.com.tw"></div>
+      <div class="field"><label>通知信寄到</label><div class="checks"><label><input type="checkbox" name="notifyGmail" ${cur.notifyGmail !== false ? 'checked' : ''}>Gmail</label><label><input type="checkbox" name="notifyCompany" ${cur.notifyCompany ? 'checked' : ''}>公司信箱</label></div><div class="muted">兩個都勾就兩邊都寄</div></div>
       <div class="field"><label>中文名 *</label><input name="nameZh" value="${esc(cur.nameZh)}"></div>
       <div class="field"><label>英文名</label><input name="nameEn" value="${esc(cur.nameEn)}"></div>
       <div class="field"><label>角色 *</label><select name="role">${Object.entries(ROLE).map(([k, t]) => `<option value="${k}" ${cur.role === k ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
@@ -1426,7 +1449,7 @@ function userForm(u) {
       <div class="field"><label>狀態</label><select name="active"><option value="1" ${cur.active !== false ? 'selected' : ''}>在職</option><option value="0" ${cur.active === false ? 'selected' : ''}>離職（停止登入、保留資料）</option></select></div>
       <div class="field"><label>其他</label><div class="checks"><label><input type="checkbox" name="alsoSales" ${cur.alsoSales ? 'checked' : ''}>兼任業務</label><label><input type="checkbox" name="alsoEngineer" ${cur.alsoEngineer ? 'checked' : ''}>兼任工程師</label></div><div class="muted">勾選後會出現在業務／工程師選單</div></div>
     </div>
-    ${isNew ? '' : '<p class="muted">要更換 Google 帳號，請刪除後重新新增。</p>'}
+    ${isNew ? '' : '<p class="muted">更改 Google 帳號後，此人負責的客戶、Demo 紀錄、行程、紀錄的建立者都會一起改到新帳號；之後請用新帳號登入。</p>'}
     <div class="row-actions" style="margin-top:24px;justify-content:flex-end"><button type="button" class="ghost" id="cancel">取消</button><button type="submit" id="save">儲存</button></div>
   </form>`;
   document.body.appendChild(dlg);
@@ -1436,20 +1459,38 @@ function userForm(u) {
   dlg.addEventListener('cancel', () => dlg.remove());
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const email = (isNew ? form.email.value : cur.email).trim().toLowerCase();
+    const email = form.email.value.trim().toLowerCase();
+    const oldEmail = isNew ? '' : cur.email;
+    const changed = !isNew && email !== oldEmail;
+    const companyEmail = form.companyEmail.value.trim().toLowerCase();
     const nameZh = form.nameZh.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast('請輸入正確的 Google 帳號');
     if (!nameZh) return toast('請填寫中文名');
     if (form.role.value === 'manager' && !form.querySelector('input[name=reg]:checked')) return toast('業務主管至少要勾選一個負責區域');
-    if (isNew && users.has(email)) return toast('這個帳號已經在名單中');
+    if ((isNew || changed) && users.has(email)) return toast('這個帳號已經在名單中');
+    if (companyEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyEmail)) return toast('公司信箱格式不正確');
+    if (form.notifyCompany.checked && !companyEmail) return toast('勾選寄到公司信箱，請先填公司信箱');
+    if (!form.notifyGmail.checked && !form.notifyCompany.checked && !confirm('兩個信箱都沒勾，此人將收不到任何通知信，確定嗎？')) return;
+    if (changed && oldEmail === me.email) return toast('不能更改自己正在登入的帳號，請由另一位管理者操作');
+    if (changed && !confirm(`確定把 Google 帳號\n${oldEmail}\n改成\n${email}？\n\n此人負責的客戶、Demo 紀錄、行程、各項紀錄都會一起改到新帳號，舊帳號會立即無法登入。`)) return;
     if (email === me.email && form.active.value === '0') return toast('不能把自己設為離職');
     if (!isNew && email === me.email && form.role.value !== 'admin' && !confirm('你正在移除自己的管理者權限，確定嗎？')) return;
     dlg.querySelector('#save').disabled = true;
     try {
-      await setDoc(doc(db, 'users', email), {
-        email, nameZh, nameEn: form.nameEn.value.trim(), role: form.role.value, regions: [...form.querySelectorAll('input[name=reg]:checked')].map(i => i.value), region: '', alsoEngineer: form.alsoEngineer.checked, alsoSales: form.alsoSales.checked,
+      const data = {
+        email, nameZh, nameEn: form.nameEn.value.trim(), companyEmail, notifyGmail: form.notifyGmail.checked, notifyCompany: form.notifyCompany.checked, role: form.role.value, regions: [...form.querySelectorAll('input[name=reg]:checked')].map(i => i.value), region: '', alsoEngineer: form.alsoEngineer.checked, alsoSales: form.alsoSales.checked,
         active: form.active.value === '1', updatedBy: me.email, updatedAt: serverTimestamp()
-      }, { merge: true });
+      };
+      if (changed) {
+        dlg.querySelector('#save').textContent = '更新中…';
+        await setDoc(doc(db, 'users', email), { ...cur, ...data, placeholder: false });
+        const n = await moveUserRefs(oldEmail, email);
+        await deleteDoc(doc(db, 'users', oldEmail));
+        close();
+        alert(`已改成新帳號，共更新 ${n} 筆資料。\n請通知 ${nameZh} 改用 ${email} 登入。`);
+        return;
+      }
+      await setDoc(doc(db, 'users', email), data, { merge: true });
       close();
       const n = form.active.value === '0' ? [...customers.values()].filter(c => !c.deleted && c.salesEmail === email).length : 0;
       if (n) { alert(`${nameZh} 已設為離職。\n\n他目前負責 ${n} 位客戶，請到「客戶」頁點「查看名單」調整負責業務。`); }

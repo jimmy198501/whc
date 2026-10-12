@@ -1,1530 +1,949 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TMIC CRM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>韋宏小C招募特攻隊｜十二週行動節奏挑戰</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#1F2A66;--navy-2:#2B3880;--purple:#7F1085;--ink:#1f2328;--muted:#3D4E56;--line:#e3e6ee;--bg:#f5f6fa;--card:#fff;--danger:#c0392b}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Noto Sans TC',system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:15px}
-a{color:var(--navy)}
-header{background:#fff;border-bottom:3px solid var(--navy);position:sticky;top:0;z-index:10}
-.hin{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:0 24px;min-height:60px}
-.brand{display:flex;align-items:baseline;gap:6px;font-weight:700;color:var(--navy);font-size:24px;letter-spacing:.5px;white-space:nowrap;flex:none}
-.brand .dot{color:var(--purple)}
-.brand small{font-size:13px;color:var(--purple);font-weight:500;letter-spacing:1px}
-nav{display:flex;gap:4px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
-nav a{padding:8px 14px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap;flex:none}
-nav a.active{background:var(--navy);color:#fff}
-.me{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;flex:none;white-space:nowrap}
-#meName{overflow:hidden;text-overflow:ellipsis}
-main{max-width:1200px;margin:0 auto;padding:24px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
-h1{font-size:20px;color:var(--navy);margin:0 0 16px}
-h2{font-size:16px;color:var(--navy);margin:0 0 12px;padding-left:10px;border-left:4px solid var(--purple)}
-button{font:inherit;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:8px;padding:8px 16px;cursor:pointer;font-weight:500}
-button.ghost{background:#fff;color:var(--navy)}
-button.accent{background:var(--purple);border-color:var(--purple)}
-button.danger{background:#fff;color:var(--danger);border-color:var(--danger)}
-button:disabled{opacity:.5;cursor:not-allowed}
-input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;background:#fff;color:var(--ink)}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--navy-2);outline-offset:-1px}
-input:disabled{background:#f3f4f7}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
-.toolbar input{max-width:260px}
-.toolbar select{width:auto}
-.spacer{flex:1}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{border:0;border-radius:0;background:#fff;color:var(--muted);padding:7px 14px}
-.seg button.on{background:var(--navy);color:#fff}
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{color:var(--muted);font-weight:500;background:#fafbfd}
-th.sortable{cursor:pointer;user-select:none}
-th .arrow{color:var(--purple)}
-tbody.click tr{cursor:pointer}
-tbody.click tr:hover{background:#f3f4fb}
-.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:500}
-.tag.potential{background:#f1e6f4;color:var(--purple)}
-.tag.formal{background:#e5e8f5;color:var(--navy)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px 20px}
-.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-.field .val{min-height:22px;word-break:break-all}
-.checks{display:flex;flex-wrap:wrap;gap:16px}
-.checks label{display:flex;align-items:center;gap:6px;font-size:14px}
-.checks input{width:auto}
-.row-actions{display:flex;gap:8px;flex-wrap:wrap}
-td.row-actions{display:table-cell;white-space:nowrap}
-td.row-actions button{margin-right:6px}
-td.row-actions button:last-child{margin-right:0}
-.muted{color:var(--muted);font-size:13px}
-.center{min-height:75vh;display:flex;align-items:center;justify-content:center}
-.login{text-align:center;max-width:400px;width:100%}
-.login .brand{justify-content:center;font-size:36px}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;display:none;z-index:50;max-width:90vw}
-dialog{border:0;border-radius:12px;padding:24px;max-width:760px;width:calc(100% - 32px)}
-dialog::backdrop{background:rgba(20,24,50,.45)}
-.hidden{display:none!important}
-.ver{text-align:center;color:#aab;font-size:11px;padding:8px 0 16px}
-.card.warn{background:#FFF6E0;border-color:#F2C46B;color:#5a4300}
-tr.left td{color:#9aa}
-.bellwrap{position:relative}
-.bell{padding:6px 10px;position:relative}
-.badge{position:absolute;top:-6px;right:-6px;background:var(--purple);color:#fff;border-radius:999px;font-size:11px;min-width:18px;height:18px;line-height:18px;text-align:center;padding:0 4px}
-.panel{position:absolute;right:0;top:44px;width:340px;max-height:420px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(20,24,50,.15);z-index:30;text-align:left;color:var(--ink)}
-.panel .ph{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:500}
-.panel .ni{padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
-.panel .ni:hover{background:#f3f4fb}
-.panel .ni .t{font-weight:500}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.cal .dh{padding:6px;text-align:center;font-size:13px;color:var(--muted);background:#fafbfd;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.cal .dc{min-height:104px;padding:4px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer;overflow:hidden}
-.cal .dc.out{background:#fafbfd;color:#aab}
-.cal .dc.today .dn{background:var(--navy);color:#fff;border-radius:999px;padding:0 6px}
-.cal .dn{font-size:12px;display:inline-block;margin-bottom:2px}
-.cal.week .dc{min-height:260px}
-.ev{display:block;font-size:12px;padding:2px 6px;margin-bottom:2px;border-radius:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;color:#fff}
-.ev.north{background:#3F51B5}
-.ev.midsouth{background:#2E7D32}
-.ev.leave{background:#D32F2F}
-.ev.holiday{background:#F6C026;color:#3a2e00;cursor:default}
-.ev.none{background:#78849E}
-.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:10px}
-.legend span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
-.legend .north::before{background:#3F51B5}.legend .midsouth::before{background:#2E7D32}.legend .leave::before{background:#D32F2F}.legend .holiday::before{background:#F6C026}.legend .none::before{background:#78849E}.legend .plain::before{display:none}
-.pick{max-height:320px;overflow:auto;margin-top:8px}
-.pick div{padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer}
-.pick div:hover{background:#f3f4fb}
-@media (max-width:640px){.cal .dc{min-height:64px}.ev{font-size:10px;padding:1px 3px}.panel{position:fixed;left:8px;right:8px;top:96px;width:auto}}
-td.wrap{white-space:pre-wrap;min-width:180px;max-width:360px}
-.files a{display:block;font-size:13px}
-.filelist{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
-.filelist span{display:flex;gap:8px;align-items:center;font-size:13px}
-.x{background:none;border:0;color:var(--danger);padding:0 4px;cursor:pointer}
-.small{padding:4px 10px;font-size:13px}
-.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.sec-head h2{margin:0}
-.full{grid-column:1/-1}
-/* 中等寬度（平板、小筆電）：選單換到第二行 */
-@media (max-width:1060px){
-  .hin{flex-wrap:wrap;gap:6px 16px;padding:8px 20px 0}
-  .me{margin-left:auto}
-  nav{order:3;flex-basis:100%;padding-bottom:6px}
+:root{
+  --paper:#eedfbc; --cream:#fff9e8; --navy:#15286a; --navy-d:#0d1a48;
+  --red:#c8102e; --ink:#1d1a16; --mut:#6a604c; --line:rgba(21,40,106,.28);
 }
-/* 手機 */
-@media (max-width:640px){
-  body{font-size:14px}
-  .hin{padding:8px 12px 0;gap:4px 10px}
-  .brand{font-size:20px}
-  .brand small{font-size:11px}
-  .me{gap:6px;font-size:12px;min-width:0;flex:1;justify-content:flex-end}
-  #meName{max-width:38vw}
-  .me button{padding:5px 10px;font-size:13px}
-  .bell{padding:4px 8px}
-  nav{margin:0 -12px;padding:0 12px 6px}
-  nav a{padding:6px 12px;font-size:14px}
-  main{padding:12px 10px}
-  .card{padding:14px;border-radius:10px;margin-bottom:12px}
-  h1{font-size:18px;margin-bottom:12px}
-  .toolbar{gap:6px}
-  .toolbar input,.toolbar select{flex:1 1 140px;max-width:none!important;min-width:0}
-  .seg{max-width:100%;overflow-x:auto}
-  .seg button{padding:6px 10px;white-space:nowrap;flex:none}
-  .tablewrap{overflow:visible}
-  .tablewrap thead{display:none}
-  .tablewrap table,.tablewrap tbody,.tablewrap tr{display:block;width:100%}
-  .tablewrap tr{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:8px;background:#fff}
-  .tablewrap td{display:flex;gap:10px;border:0;padding:3px 0;white-space:normal;word-break:break-word;font-size:14px}
-  .tablewrap td::before{content:attr(data-label);flex:none;width:64px;color:var(--muted);font-size:12px;padding-top:2px}
-  .tablewrap td[data-label=""]::before{display:none}
-  .tablewrap td.wrap{min-width:0;max-width:none}
-  .tablewrap td.row-actions{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px}
-  .tablewrap td.row-actions button{margin:0}
-  .tablewrap .files{flex-direction:column}
-  .grid{grid-template-columns:1fr 1fr;gap:10px 12px}
-  dialog{padding:16px;width:calc(100% - 16px);max-height:calc(100vh - 32px)}
-  dialog .grid{grid-template-columns:1fr}
-  button{padding:7px 12px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(ellipse at 50% 20%,rgba(255,255,255,.35),transparent 60%),
+    radial-gradient(ellipse at center,transparent 55%,rgba(110,80,20,.26) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .1 0 0 0 .16 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  padding-bottom:calc(40px + env(safe-area-inset-bottom,0px));
 }
+.wrap{max-width:560px;margin:0 auto;padding:0 14px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,summary:focus-visible,label:focus-within{outline:3px solid var(--red);outline-offset:2px}
+
+/* ---------- 海報頭 ---------- */
+.starband{background:var(--navy);color:#fff;font-size:13px;letter-spacing:.7em;padding:6px 0 6px .7em;white-space:nowrap;overflow:hidden;text-align:center}
+.stripes{height:14px;border-top:3px solid var(--navy);border-bottom:3px solid var(--navy);background:repeating-linear-gradient(90deg,var(--red) 0 22px,var(--cream) 22px 44px)}
+.hero{text-align:center;padding:16px 0 20px}
+.ribbon{display:inline-block;background:var(--navy);color:#fff;font-weight:900;font-size:16px;letter-spacing:.18em;padding:5px 16px 5px 18px;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--red)}
+.iw{margin:8px 0 0;font-family:Anton,Impact,"Noto Sans TC",sans-serif;font-weight:400;font-size:clamp(68px,24vw,128px);line-height:.98;color:var(--navy);text-shadow:4px 4px 0 rgba(29,26,22,.14)}
+.iw .you{color:var(--red)}
+.tagline{margin:10px 0 0;font-weight:900;font-size:clamp(20px,6vw,27px);color:var(--navy)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.chips span{border:2px solid var(--navy);background:var(--cream);padding:3px 11px;font-weight:700;font-size:13px;border-radius:999px}
+.hero.compact{padding:12px 0 14px}
+.hero.compact .iw{font-size:clamp(48px,16vw,76px)}
+.hero.compact .tagline{font-size:clamp(16px,4.6vw,20px)}
+
+/* ---------- 版面 ---------- */
+section{margin-top:18px}
+.card{background:var(--cream);border:3px solid var(--navy);border-radius:6px;box-shadow:5px 5px 0 var(--navy);padding:16px 14px}
+.tag{display:inline-block;background:var(--navy);color:#fff;font-weight:900;font-size:15px;letter-spacing:.06em;padding:3px 12px;transform:rotate(-1deg);margin-bottom:10px}
+.tag.red{background:var(--red)}
+.note{margin:8px 0 0;font-size:13px;color:var(--mut);line-height:1.6}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h2{margin:0 0 4px;font-size:20px;font-weight:900;color:var(--navy)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--red);color:#fff;border:3px solid var(--navy);border-radius:4px;box-shadow:3px 3px 0 var(--navy);font-weight:900;padding:9px 16px;font-size:16px;text-decoration:none;user-select:none}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--navy)}
+.btn.ghost{background:var(--cream);color:var(--navy)}
+.btn.small{padding:6px 12px;font-size:14px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* ---------- 選隊長 / 選自己 ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pick{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:58px;padding:8px;background:var(--cream);color:var(--navy);border:3px solid var(--navy);border-radius:4px;box-shadow:3px 3px 0 var(--navy);font-size:19px;font-weight:900}
+.pick:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--navy)}
+.pick small{font-size:12px;font-weight:700;color:var(--red)}
+.pick.chief{grid-column:1/-1;background:var(--navy);color:#fff}
+.pick.chief small{color:#ffd9de}
+.list{display:grid;gap:10px}
+.list .pick{flex-direction:row;justify-content:flex-start;padding:10px 14px}
+
+/* ---------- 使用者列 ---------- */
+.me{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);color:#fff;padding:10px 14px;border-radius:6px;box-shadow:4px 4px 0 var(--red)}
+.me b{font-size:20px}
+.me small{display:block;font-size:13px;opacity:.85}
+.me button{background:transparent;color:#fff;border:2px solid #fff;border-radius:4px;padding:4px 10px;font-weight:700;font-size:13px}
+.banner{margin-top:12px;background:#fff3c4;border:2px dashed var(--navy);padding:8px 12px;font-size:13px;line-height:1.6}
+
+/* ---------- 進度 ---------- */
+.big{font-family:Anton,Impact,"Noto Sans TC",sans-serif;font-size:58px;line-height:1;color:var(--navy)}
+.big small{font-family:"Noto Sans TC",sans-serif;font-size:18px;font-weight:900}
+.bar{height:14px;background:#fff;border:3px solid var(--navy);margin-top:8px}
+.bar i{display:block;height:100%;background:var(--red)}
+.pass{background:var(--red);color:#fff;border:3px double #fff;outline:3px solid var(--red);font-weight:900;padding:2px 12px;transform:rotate(4deg);letter-spacing:.1em}
+.stamps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:14px}
+.stamp{position:relative;min-width:0;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:3px solid var(--navy);border-radius:50%;color:var(--navy);font-weight:900;font-size:clamp(12px,4.2vw,18px);line-height:1;padding:0}
+.stamp small{font-size:10px;margin-top:1px}
+.stamp.done{background:var(--red);color:#fff}
+.stamp.done b{position:absolute;top:-9px;right:-5px;font-size:15px;color:var(--navy);text-shadow:0 0 0 #fff,1px 1px 0 #fff,-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff}
+.stamp.cur{box-shadow:0 0 0 3px var(--cream),0 0 0 6px var(--red)}
+.stamp.lock{opacity:.5;border-style:dashed}
+.stamp.sel{background:var(--navy);color:#fff}
+.stamp.sel.done{background:var(--red)}
+
+/* ---------- 每週任務 ---------- */
+.chip{display:inline-block;border:2px solid var(--navy);background:#fff;font-weight:900;font-size:12px;padding:1px 8px;border-radius:999px;color:var(--navy)}
+.chip.red{background:var(--red);color:#fff}
+.task{display:flex;gap:12px;padding:14px 0;border-top:2px dashed var(--line)}
+.task:first-of-type{border-top:0}
+.no{flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Anton,Impact,sans-serif;font-size:18px}
+.task.ok .no{background:var(--red)}
+.task .body{flex:1;min-width:0}
+.task h3{margin:0;font-size:17px;font-weight:900;color:var(--navy)}
+.task p{margin:2px 0 8px;font-size:13px;color:var(--mut);line-height:1.5}
+.task .state{flex:0 0 24px;font-size:22px;color:var(--red);text-align:right}
+.stepper{display:flex;align-items:center;gap:10px}
+.step{width:42px;height:42px;background:var(--cream);color:var(--navy);border:3px solid var(--navy);border-radius:4px;box-shadow:2px 2px 0 var(--navy);font-size:24px;font-weight:900;line-height:1;padding:0}
+.step:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--navy)}
+.step[disabled]{opacity:.4;pointer-events:none}
+.val{min-width:76px;text-align:center;font-family:Anton,Impact,sans-serif;font-size:28px;color:var(--navy)}
+.val small{font-family:"Noto Sans TC",sans-serif;font-size:14px;font-weight:700;color:var(--mut)}
+.thumb{display:block;max-width:100%;max-height:170px;border:3px solid var(--navy);border-radius:4px;margin:0 0 8px;background:#fff}
+.lockmsg{margin:12px 0 0;padding:10px 12px;background:#fff3c4;border:2px dashed var(--navy);font-size:14px;font-weight:700;color:var(--navy)}
+
+.shots{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 10px}
+.shot{position:relative;width:78px;height:78px;margin:0}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;border:3px solid var(--navy);border-radius:4px;background:#fff}
+.shot .x{position:absolute;top:-9px;right:-9px;width:26px;height:26px;padding:0;border-radius:50%;background:var(--red);color:#fff;border:2px solid var(--navy);font-weight:900;font-size:16px;line-height:1}
+
+.tabs{display:flex;gap:10px;margin:16px 0 0}
+.tabs button{flex:1;padding:10px;background:var(--cream);color:var(--navy);border:3px solid var(--navy);border-radius:4px;box-shadow:3px 3px 0 var(--navy);font-weight:900;font-size:16px}
+.tabs button.on{background:var(--navy);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 4px}
+.stat{border:3px solid var(--navy);background:#fff;padding:8px 4px;text-align:center}
+.stat b{display:block;font-family:Anton,Impact,"Noto Sans TC",sans-serif;font-weight:400;font-size:30px;line-height:1.15;color:var(--red)}
+.stat span{font-size:12px;font-weight:700;color:var(--mut)}
+.sel,.inp{width:100%;font:inherit;font-size:16px;padding:9px 10px;border:3px solid var(--navy);border-radius:4px;background:#fff;color:var(--ink)}
+.lbl{display:block;margin:12px 0 4px;font-weight:900;color:var(--navy);font-size:14px}
+.teams{display:grid;gap:14px;margin-top:18px}
+.team{display:block;width:100%;text-align:left;background:var(--cream);border:3px solid var(--navy);border-radius:6px;box-shadow:4px 4px 0 var(--navy);padding:12px 14px}
+.team:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--navy)}
+.top{display:flex;align-items:center;gap:12px}
+.top h3{margin:0;font-size:19px;font-weight:900;color:var(--navy)}
+.top small{color:var(--mut);font-weight:700;font-size:13px}
+.rank{font-family:Anton,Impact,sans-serif;font-size:34px;color:var(--red);min-width:30px;line-height:1}
+.pc{margin-left:auto;font-family:Anton,Impact,sans-serif;font-size:34px;color:var(--navy);line-height:1}
+.mrow{padding:12px 0;border-top:2px dashed var(--line)}
+.mrow:first-child{border-top:0}
+.mrow .h{display:flex;align-items:center;gap:8px}
+.mrow .h b{font-size:18px;color:var(--navy)}
+.mrow .h .r{margin-left:auto;font-weight:900;color:var(--red);font-size:20px}
+.dots{display:flex;gap:4px;margin-top:8px}
+.dots i{flex:1;height:10px;border:2px solid var(--navy);background:#fff;border-radius:2px}
+.dots i.on{background:var(--red)}
+.adm-task{padding:8px 0;border-top:2px dashed var(--line)}
+.adm-task:first-child{border-top:0}
+.ashots{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.ashot{margin:0;width:82px}
+.ashot img{width:82px;height:82px;object-fit:cover;border:3px solid var(--navy);border-radius:4px;display:block;background:#fff}
+.ashot .acts{display:flex;gap:4px;margin-top:4px}
+.ashot .acts button{flex:1;padding:4px 0;font-size:12px;font-weight:900;border:2px solid var(--navy);background:var(--cream);color:var(--navy);border-radius:3px}
+.ashot .acts button.d{background:var(--red);color:#fff}
+code.out{display:block;word-break:break-all;background:#fff;border:2px dashed var(--navy);padding:8px;margin-top:10px;font-size:12px;user-select:all}
+
+.vpanel{margin-top:12px;padding:12px;background:#fff;border:3px solid var(--navy);border-radius:4px}
+.vweeks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.vw{min-width:0;padding:7px 0;font-weight:900;font-size:clamp(12px,3.6vw,15px);border:2px solid var(--navy);background:var(--cream);color:var(--navy);border-radius:4px}
+.vw.done{background:var(--red);color:#fff}
+.vw.none{opacity:.45;border-style:dashed}
+.vw.on{outline:3px solid var(--navy);outline-offset:1px;opacity:1}
+.vshot{display:block}
+.vshot img{width:82px;height:82px;object-fit:cover;border:3px solid var(--navy);border-radius:4px;display:block;background:#fff}
+
+/* ---------- 獎勵 ---------- */
+.rw{list-style:none;margin:0;padding:0}
+.rw li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:2px dashed var(--line);font-weight:700;color:var(--mut)}
+.rw li:first-child{border-top:0}
+.rw li b{font-family:"Noto Sans TC",sans-serif;font-size:18px;font-weight:900;white-space:nowrap}
+.rw li.on{color:var(--ink)}
+.rw li.on b{color:var(--red)}
+details{margin-top:12px;border:3px solid var(--navy);border-radius:4px;background:#fff}
+summary{cursor:pointer;padding:10px 12px;font-weight:900;color:var(--navy);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";float:right}
+details[open] summary::after{content:"－"}
+details .in{padding:0 12px 12px;font-size:14px;line-height:1.7}
+.tier{padding:8px 0;border-top:2px dashed var(--line)}
+.tier:first-child{border-top:0}
+.tier b{color:var(--red)}
+.qa details{margin-top:10px}
+
+/* ---------- 其他 ---------- */
+.foot{margin:26px 0 0;text-align:center;font-weight:900;color:var(--navy);font-size:15px}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--navy);color:#fff;font-weight:700;padding:10px 18px;border:3px solid #fff;border-radius:4px;box-shadow:3px 3px 0 var(--red);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:20;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast.bad{background:var(--red)}
+#busy{position:fixed;inset:0;background:rgba(238,223,188,.75);display:none;align-items:center;justify-content:center;z-index:30;font-weight:900;font-size:20px;color:var(--navy)}
+#busy.on{display:flex}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
 </style>
 </head>
 <body>
-<header id="hdr" class="hidden">
-  <div class="hin">
-  <div class="brand">tmic<span class="dot">.</span><small>CRM</small></div>
-  <nav id="nav"></nav>
-  <div class="me"><div class="bellwrap"><button class="ghost bell" id="bell" title="通知">🔔<span class="badge hidden" id="badge"></span></button><div class="panel hidden" id="npanel"></div></div><span id="meName"></span><button class="ghost" id="logout">登出</button></div>
-  </div>
-</header>
-<main id="app"></main>
-<div class="toast" id="toast"></div>
-<div class="ver">版本 2026-10-12b</div>
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="busy">處理中…</div>
 
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, collectionGroup, doc, getDoc, getDocs, getDocsFromCache, query, where, onSnapshot, setDoc, addDoc, updateDoc, deleteDoc, runTransaction, writeBatch, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+<script>
+(function(){
+'use strict';
 
-// ====== 1. 貼上你的 Firebase 設定（Firebase 主控台 → 專案設定 → 網頁應用程式）======
-const firebaseConfig = {
-  apiKey: "AIzaSyAOCdAhjVrrO62dBATA4e7M0QEDDxo6sx4",
-  authDomain: "tmic-crm-eeac3.firebaseapp.com",
-  projectId: "tmic-crm-eeac3",
-  storageBucket: "tmic-crm-eeac3.firebasestorage.app",
-  messagingSenderId: "202695859419",
-  appId: "1:202695859419:web:76d5a9799fc2c6a00300fe"
+/* =====================================================================
+   設定區（上線前只需要改這裡）
+   DB_URL     ：Firebase Realtime Database 網址，例如
+                https://xxxx-default-rtdb.asia-southeast1.firebasedatabase.app
+                空白 = 示範模式（資料只存在這台裝置）
+   UPLOAD_URL ：Google Apps Script 網頁應用程式網址（見 gas-upload.gs）
+   ===================================================================== */
+const CONFIG = {
+  DB_URL: 'https://elite2-d3f46-default-rtdb.asia-southeast1.firebasedatabase.app',
+  UPLOAD_URL: 'https://script.google.com/macros/s/AKfycbyNGEdya_dqG-u4cnP0x0zO1DOcxKHYCnlbi08r3D1PXOXJanfrKOVhaXVrcmDSwJU6/exec',
+  ROOT: 'whc',                   // 和菁英班共用同一個 Firebase 專案，用不同的根目錄區分
+  PROJECT: 'whc',                 // 傳給 Apps Script，決定照片存到 Drive 的哪個資料夾
+  START: [2026, 10, 5],          // 第 1 週的星期一（台北時間）
+  WEEKS: 12,
+  PASS: 10,
+  FEE: 0,                        // 沒有報名費
+  REWARD: 500,                   // 達成工作量（10/12 週）獎金
+  RECRUIT_REWARD: 1000,
+  MUFO_REWARD: 10000,
+  ALLOW_PAST_EDIT: true,         // true = 過去的週次可以補登；false = 只能填本週
+  ADMIN_HASH: ''                 // 後台密碼代碼：打開網址後面加 #admin，照畫面產生後貼在這裡
 };
-// ====== 2. 貼上 Google Apps Script 網頁應用程式網址（檔案上傳用）======
-const UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwOYummZ556WNrX-3ITTQZ8-wnNQBAc1SPNDAVL9wb0eE_Db4LSr1C3nq317XU3AakE/exec';
-// ==========================================================================
 
-const fbApp = initializeApp(firebaseConfig);
-const auth = getAuth(fbApp);
-const db = initializeFirestore(fbApp, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+/* 參賽名單：單純人名，沒有隊長／隊伍分組 */
+const NAMES = ['林幼幼','黃名志','陳雅芳','張朝森','許世澤','陳巧旂','邱秀珊','廖婕詠','葉詩恩','李彩菱','劉雨婕','李啓陽','莊遵湧'];
+const DEMO_MEMBERS = ['範例隊員 1','範例隊員 2','範例隊員 3','範例隊員 4','範例隊員 5'];
 
-const ROLE = { admin: '管理者', manager: '業務主管', sales: '業務', engineer: '工程師' };
-const REGIONS = ['台北', '台中', '台南'];
-const REGION_CODE = { '台北': 'A', '台中': 'B', '台南': 'C' };
-const LICENSES = [['serial', '單機綁序號'], ['dongle', '單機綁Dongle'], ['netPc', '網路綁電腦'], ['netDongle', '網路綁Dongle']];
-const COMMON = [['name', '客戶名稱', true], ['companyProduct', '公司產品（客戶本業）'], ['industry', '行業別'], ['address', '公司地址'], ['currentSoftware', '現用軟體'], ['contact', '聯絡人'], ['phone', '電話'], ['mobile', '行動電話'], ['email', 'E-Mail'], ['website', '公司官網']];
-const COUNTERS = [['lead_A', '台北潛在客戶', 'L-A'], ['lead_B', '台中潛在客戶', 'L-B'], ['lead_C', '台南潛在客戶', 'L-C'], ['formal', '正式客戶', 'C']];
+/* need = 每項任務要上傳幾張才算完成 */
+const TASKS = [
+  {no:1, field:'goal',      tag:'目標本',   need:1, title:'寫週目標本',   desc:'每週初寫下本週的招募目標與行動計畫，拍照上傳。'},
+  {no:2, field:'sent',      tag:'丟出',     need:10, verb:'丟出', unit:'則', doneWord:'已丟出', title:'丟出 10 則',   desc:'邀請對方做「消費人格心理測驗」、「消費問卷」或「市調」，每則上傳 1 張證明，共 10 張。'},
+  {no:3, field:'pushed',    tag:'推進名單', need:5,  verb:'推進名單', unit:'位', doneWord:'已推進', title:'推進名單 5 位', desc:'每推進 1 位上傳 1 張證明，共 5 張。'},
+  {no:4, field:'interview', tag:'面談',     need:1, title:'面談 1 位',     desc:'壽星面對面、強連結、心談、評估、QA 都可以計入，上傳證明照片。'}
+];
 
-let me = null;
-const users = new Map();
-const customers = new Map();
-let lastSync = 0;
-let unsubUsers = null;
-let unsubNotes = null;
-let notes = [];
-let timer = null;
-const ui = { status: 'all', region: '', sales: '', q: '', sort: 'no', dir: 1 };
+/* ---------- 工具 ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => Number(n).toLocaleString('en-US');
+const isDemo = !CONFIG.DB_URL;
+const LS = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+/* Firebase key 不能含 . # $ [ ] /，全部換成 _ */
+const keyOf = name => String(name).replace(/[.#$\[\]\/\s]/g, '_');
 
-const $ = s => document.querySelector(s);
-const app = $('#app');
-// 手機版表格改成卡片：每格加上欄位名稱
-function labelTables() {
-  document.querySelectorAll('.tablewrap table').forEach(t => {
-    const heads = [...t.querySelectorAll('thead th')].map(th => th.textContent.replace(/[▲▼]/g, '').trim());
-    t.querySelectorAll('tbody tr').forEach(tr => [...tr.children].forEach((td, i) => { if (!td.hasAttribute('data-label')) td.setAttribute('data-label', heads[i] || ''); }));
+const S = { screen:'me', name:null, key:null, sel:1,
+            prog:{weeks:{}, recruitPhotos:[], mufo:null} };
+
+/* ---------- 週次 ---------- */
+const startUtc = () => Date.UTC(CONFIG.START[0], CONFIG.START[1]-1, CONFIG.START[2]) - 8*3600e3; // 台北 00:00
+/* 測試用：網址加 ?week=3 可以模擬第 3 週。只在 10/5 開跑前（或示範模式）有效，開跑後自動失效 */
+function weekParam(){
+  const q = new URLSearchParams(location.search).get('week');
+  if(q === null || q === '' || isNaN(+q)) return null;
+  if(!isDemo && Date.now() >= startUtc()) return null;
+  return Math.max(0, Math.min(CONFIG.WEEKS + 1, +q));
+}
+function curWeek(){
+  const wp = weekParam();
+  if(wp !== null) return wp;
+  const d = Math.floor((Date.now() - startUtc()) / 86400e3);
+  if(d < 0) return 0;
+  return Math.min(CONFIG.WEEKS+1, Math.floor(d/7) + 1);
+}
+function weekRange(w){
+  const a = new Date(Date.UTC(CONFIG.START[0], CONFIG.START[1]-1, CONFIG.START[2] + (w-1)*7));
+  const b = new Date(Date.UTC(CONFIG.START[0], CONFIG.START[1]-1, CONFIG.START[2] + (w-1)*7 + 6));
+  const f = d => (d.getUTCMonth()+1) + '/' + d.getUTCDate();
+  return f(a) + ' – ' + f(b);
+}
+/* 示範模式不受 10/5 開跑日限制（除非網址加 ?week= 模擬）；正式上線後才依日期開放 */
+const simulated = weekParam() !== null;
+const gated = () => !isDemo || simulated;
+const isOpen = () => !gated() || curWeek() >= 1;
+function canEdit(w){
+  if(w < 1 || w > CONFIG.WEEKS) return false;
+  if(!gated()) return true;
+  const c = curWeek();
+  if(c < 1 || w > c) return false;
+  return CONFIG.ALLOW_PAST_EDIT || w === c;
+}
+const wkIn = (prog, w) => (prog.weeks && prog.weeks[w]) || {};
+const wkObj = w => wkIn(S.prog, w);
+function toArr(v){
+  if(Array.isArray(v)) return v.filter(x => x && x.url);
+  if(v && typeof v === 'object') return v.url ? [v] : Object.values(v).filter(x => x && x.url);
+  return [];
+}
+const photosOf = (x, field) => toArr(x[field]);
+const recruitCount = () => toArr(S.prog.recruitPhotos).length;
+const taskDone = (t, x) => photosOf(x, t.field).length >= t.need;
+const weekDoneIn = (prog, w) => TASKS.every(t => taskDone(t, wkIn(prog, w)));
+const weekDone = w => weekDoneIn(S.prog, w);
+function doneWeeks(){ let n = 0; for(let w=1; w<=CONFIG.WEEKS; w++) if(weekDone(w)) n++; return n; }
+const allNames = () => (NAMES && NAMES.length) ? NAMES : (isDemo ? DEMO_MEMBERS : []);
+/* 成績摘要：公開成績榜只讀這一小份，不讀照片 */
+function summaryOf(prog, name){
+  const done = [];
+  for(let w = 1; w <= CONFIG.WEEKS; w++) if(weekDoneIn(prog, w)) done.push(w);
+  return {name, done, n: done.length, at: Date.now()};
+}
+
+/* ---------- 儲存 ---------- */
+const dbUrl = p => CONFIG.DB_URL.replace(/\/$/, '') + '/' + CONFIG.ROOT + '/' + p + '.json';
+async function dbReq(method, path, body){
+  const r = await fetch(dbUrl(path), {method, headers:{'Content-Type':'application/json'}, body: body === undefined ? undefined : JSON.stringify(body)});
+  if(!r.ok) throw new Error('DB ' + r.status);
+  return r.json();
+}
+function saveDemo(ctx){ if(!LS.set('whc_demo_' + ctx.key, ctx.prog)) throw new Error('本機空間不足'); }
+function normProg(p){
+  p = p || {};
+  const weeks = {};
+  Object.keys(p.weeks || {}).forEach(w => {
+    const x = p.weeks[w] || {};
+    weeks[w] = {};
+    TASKS.forEach(t => { weeks[w][t.field] = toArr(x[t.field]); });
+  });
+  return {weeks, recruitPhotos: toArr(p.recruitPhotos), mufo: p.mufo || null};
+}
+async function loadProg(key){
+  return normProg(isDemo ? LS.get('whc_demo_' + key) : await dbReq('GET', 'progress/' + key));
+}
+/* ctx = {key, name, prog}：隊員自己存、後台存，都走同一組函式 */
+const memberCtx = () => ({key:S.key, name:S.name, prog:S.prog});
+async function syncSummary(ctx){ if(!isDemo) await dbReq('PUT', 'summary/' + ctx.key, summaryOf(ctx.prog, ctx.name)); }
+async function persistWeek(ctx, w, patch){
+  if(isDemo) return saveDemo(ctx);
+  await dbReq('PATCH', 'progress/' + ctx.key + '/weeks/' + w, patch);
+  await syncSummary(ctx);
+}
+async function persistRecruits(ctx){ if(isDemo) return saveDemo(ctx); await dbReq('PUT', 'progress/' + ctx.key + '/recruitPhotos', ctx.prog.recruitPhotos); }
+async function persistMufo(ctx){ if(isDemo) return saveDemo(ctx); await dbReq('PUT', 'progress/' + ctx.key + '/mufo', ctx.prog.mufo); }
+
+const timers = {};
+function queue(id, fn){
+  clearTimeout(timers[id]);
+  timers[id] = setTimeout(async () => {
+    try{ await fn(); toast('已儲存 ✓'); }
+    catch(e){ console.error(e); toast('儲存失敗，請確認網路後再按一次', true); }
+  }, 500);
+}
+
+/* ---------- 照片 ---------- */
+function compress(file, max, q){
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('無法讀取這張照片')); };
+    img.src = url;
   });
 }
-let labelPending = false;
-new MutationObserver(() => { if (!labelPending) { labelPending = true; requestAnimationFrame(() => { labelPending = false; labelTables(); }); } }).observe(document.body, { childList: true, subtree: true });
-const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const isAdmin = () => me?.role === 'admin';
-const userRegions = u => Array.isArray(u?.regions) ? u.regions : (u?.region ? [u.region] : []);
-const fmt = (prefix, n) => prefix + String(n).padStart(5, '0');
-const custNo = c => (c.status === 'formal' ? c.formalNo : c.leadNo) || '';
-const isLeft = email => users.get(email)?.active === false;
-const salesLabel = email => { const u = users.get(email); return u ? `${u.nameZh || ''}${u.nameEn ? ' ' + u.nameEn : ''}${u.active === false ? '（離職）' : ''}` : (email || ''); };
-const leftCustomers = () => [...customers.values()].filter(c => !c.deleted && c.salesEmail && isLeft(c.salesEmail));
-const salesOptions = sel => [...users.values()].filter(u => (u.role === 'sales' || u.role === 'manager' || u.alsoSales) && (u.active !== false || u.email === sel))
-  .sort((a, b) => (a.nameZh || '').localeCompare(b.nameZh || '', 'zh-Hant'))
-  .map(u => `<option value="${esc(u.email)}" ${u.email === sel ? 'selected' : ''}>${esc(salesLabel(u.email))}</option>`).join('');
-
-function toast(msg, ms = 3000) {
-  const t = $('#toast'); t.textContent = msg; t.style.display = 'block';
-  clearTimeout(toast._t); toast._t = setTimeout(() => (t.style.display = 'none'), ms);
+async function uploadPhoto(dataUrl, meta){
+  if(!CONFIG.UPLOAD_URL){
+    if(!isDemo) throw new Error('尚未設定照片上傳網址');
+    return {url:dataUrl, thumb:dataUrl};
+  }
+  const r = await fetch(CONFIG.UPLOAD_URL, {
+    method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({project:CONFIG.PROJECT, folder:meta.folder, filename:meta.filename, mimeType:'image/jpeg', data:dataUrl.split(',')[1]})
+  });
+  const j = await r.json();
+  if(!j.ok) throw new Error(j.error || '上傳失敗');
+  return {url:j.url, thumb:j.thumb || j.url};
 }
-function errMsg(e) {
-  if (e?.code === 'permission-denied') return '權限不足，無法執行';
-  return e?.message || String(e);
+async function handleUpload(input){
+  const files = Array.from(input.files || []);
+  if(!files.length) return;
+  const kind = input.dataset.upload, field = input.dataset.field, w = S.sel;
+  if((kind === 'task' && !canEdit(w)) || (kind !== 'task' && !isOpen())){ input.value = ''; return; }
+  const small = isDemo && !CONFIG.UPLOAD_URL;
+  busy(true);
+  try{
+    for(let i = 0; i < files.length; i++){
+      $('busy').textContent = files.length > 1 ? '上傳中 ' + (i + 1) + ' / ' + files.length + '…' : '上傳中…';
+      const dataUrl = await compress(files[i], small ? 720 : 1280, small ? .6 : .75);
+      const task = TASKS.find(t => t.field === field);
+      const tag = kind === 'task' ? 'W' + w + '_' + (task ? task.tag : field) : (kind === 'recruit' ? '招募' : 'MUFO');
+      const up = await uploadPhoto(dataUrl, {folder: S.name, filename: tag + '_' + Date.now() + '_' + i + '.jpg'});
+      const val = {url:up.url, thumb:up.thumb, at:Date.now()};
+      if(kind === 'task'){
+        const list = photosOf(wkObj(w), field).concat([val]);
+        S.prog.weeks[w] = Object.assign({}, wkObj(w), {[field]: list});
+        await persistWeek(memberCtx(), w, {[field]: list});
+      }else if(kind === 'recruit'){
+        S.prog.recruitPhotos = toArr(S.prog.recruitPhotos).concat([val]);
+        await persistRecruits(memberCtx());
+      }else{
+        S.prog.mufo = val;
+        await persistMufo(memberCtx());
+      }
+    }
+    toast('上傳成功 ✓');
+  }catch(err){
+    console.error(err);
+    toast(err && err.message ? '上傳失敗：' + err.message : '上傳失敗，請再試一次', true);
+  }finally{
+    input.value = '';
+    $('busy').textContent = '處理中…';
+    busy(false);
+    paint();
+  }
 }
 
-// ---------------- 登入 ----------------
-function viewLogin(msg) {
-  $('#hdr').classList.add('hidden');
-  app.innerHTML = `<div class="center"><div class="card login">
-    <div class="brand">tmic<span class="dot">.</span><small>CRM</small></div>
-    <p class="muted">明日國際 客戶管理系統</p>
-    ${msg ? `<p style="color:var(--danger)">${esc(msg)}</p><button class="ghost" id="switch">切換帳號</button>` : '<button id="gl">使用 Google 帳號登入</button>'}
-  </div></div>`;
-  $('#gl')?.addEventListener('click', () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => toast(errMsg(e))));
-  $('#switch')?.addEventListener('click', async () => { await signOut(auth); signInWithPopup(auth, new GoogleAuthProvider()).catch(e => toast(errMsg(e))); });
+/* ---------- 小元件 ---------- */
+let toastT;
+function toast(msg, bad){
+  const t = $('toast'); t.textContent = msg; t.className = 'show' + (bad ? ' bad' : '');
+  clearTimeout(toastT); toastT = setTimeout(() => { t.className = ''; }, 2000);
+}
+function busy(on){ $('busy').className = on ? 'on' : ''; }
+
+/* ---------- 畫面：共用頭 ---------- */
+function heroHTML(compact){
+  return '<div class="starband" aria-hidden="true">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div><div class="stripes" aria-hidden="true"></div>' +
+  '<header class="hero' + (compact ? ' compact' : '') + '">' +
+    '<div class="ribbon">韋宏小 C 招募特攻隊</div>' +
+    '<h1 class="iw" aria-label="I want you">I WANT <span class="you">YOU</span></h1>' +
+    '<p class="tagline">12 週完成 10 週，你就完賽！</p>' +
+    (compact ? '' : '<div class="chips"><span>10/5 – 12/27</span><span>完賽獎金 $' + fmt(CONFIG.REWARD) + '</span></div>') +
+  '</header><div class="stripes" aria-hidden="true"></div>';
+}
+const footHTML = () => '<p class="foot">一起努力　一起成長　一起創造更多可能</p>';
+
+/* ---------- 畫面：選自己 ---------- */
+function renderMe(){
+  S.screen = 'me';
+  const names = allNames();
+  $('app').innerHTML = heroHTML(false) + '<main class="wrap">' + tabsHTML('play') +
+    '<section><div class="card"><span class="tag">選你自己</span>' +
+    '<div class="list" style="margin-top:12px">' +
+    names.map(n => '<button class="pick" data-act="me" data-v="' + esc(n) + '">' + esc(n) + '</button>').join('') +
+    '</div></div></section>' + footHTML() + '</main>';
 }
 
-$('#logout').addEventListener('click', () => signOut(auth));
+/* ---------- 畫面：主頁 ---------- */
+function renderHome(){
+  S.screen = 'home';
+  let banner = '';
+  if(isDemo) banner = '<div class="banner">示範模式：資料只存在這台裝置，不受 10/5 開跑日限制。</div>';
+  else if(!CONFIG.UPLOAD_URL) banner = '<div class="banner">還沒設定照片上傳網址，目前無法上傳照片。</div>';
+  $('app').innerHTML = heroHTML(true) + '<main class="wrap">' + tabsHTML('play') +
+    '<section><div class="me"><div><b>' + esc(S.name) + '</b></div>' +
+    '<button data-act="logout">換人</button></div>' + banner + '</section>' +
+    '<section id="board"></section><section id="weekcard"></section><section id="recruit"></section>' +
+    '<section id="mufo"></section><section id="reward"></section>' +
+    footHTML() + '</main>';
+  paint();
+}
+function paint(){ if(S.screen !== 'home') return; paintBoard(); paintWeek(); paintRecruit(); paintMufo(); paintReward(); }
 
-onAuthStateChanged(auth, async u => {
-  me = null; customers.clear(); users.clear();
-  if (unsubUsers) { unsubUsers(); unsubUsers = null; }
-  if (unsubNotes) { unsubNotes(); unsubNotes = null; }
-  notes = []; renderBell();
-  if (timer) { clearInterval(timer); timer = null; }
-  if (!u) { viewLogin(); return; }
-  const email = (u.email || '').toLowerCase();
-  let snap = null;
-  try { snap = await getDoc(doc(db, 'users', email)); } catch (e) { snap = null; }
-  if (!snap || !snap.exists() || snap.data().active === false) {
-    viewLogin(`${email} 尚未開通，請聯絡管理者加入人員名單。`);
+function paintBoard(){
+  const n = doneWeeks(), c = curWeek(), passed = n >= CONFIG.PASS;
+  let stamps = '';
+  for(let w=1; w<=CONFIG.WEEKS; w++){
+    const d = weekDone(w);
+    stamps += '<button class="stamp' + (d ? ' done' : '') + (w === c ? ' cur' : '') + (w === S.sel ? ' sel' : '') + (w > c ? ' lock' : '') +
+      '" data-act="week" data-v="' + w + '" aria-label="第 ' + w + ' 週' + (d ? '，已完成' : '') + '"><span>' + w + '</span><small>週</small>' + (d ? '<b>★</b>' : '') + '</button>';
+  }
+  $('board').innerHTML = '<div class="card"><div class="row"><span class="tag">通關進度</span>' + (passed ? '<span class="pass">已通關</span>' : '') + '</div>' +
+    '<div class="big">' + n + '<small> / ' + CONFIG.PASS + ' 週</small></div>' +
+    '<div class="bar"><i style="width:' + Math.min(100, n / CONFIG.PASS * 100) + '%"></i></div>' +
+    '<p class="note">' + (passed ? '已完成 ' + CONFIG.PASS + ' 週，達成通關。' : '再完成 ' + (CONFIG.PASS - n) + ' 週就通關。') + '　點下方週次可以切換。</p>' +
+    '<div class="stamps">' + stamps + '</div></div>';
+}
+
+function shotsHTML(list, ed, kind, field, label){
+  if(!list.length) return '';
+  return '<div class="shots">' + list.map((p, i) =>
+    '<figure class="shot"><a href="' + esc(p.url) + '" target="_blank" rel="noopener"><img src="' + esc(p.thumb || p.url) + '" alt="' + esc(label) + ' 第 ' + (i + 1) + ' 張"></a>' +
+    (ed ? '<button class="x" data-act="del" data-kind="' + kind + '" data-field="' + field + '" data-i="' + i + '" aria-label="刪除這張照片">×</button>' : '') + '</figure>').join('') + '</div>';
+}
+function paintWeek(){
+  const w = S.sel, c = curWeek(), x = wkObj(w), ed = canEdit(w);
+  const k = TASKS.filter(t => taskDone(t, x)).length;
+  const status = w === c ? '<span class="chip red">本週</span>' : (w < c ? '<span class="chip">' + (ed ? '可補登' : '已結束') + '</span>' : (ed ? '<span class="chip">示範</span>' : '<span class="chip">未開放</span>'));
+  let lock = '';
+  if(!ed){
+    if(w > c){
+      const days = Math.ceil((startUtc() + (w-1)*7*86400e3 - Date.now()) / 86400e3);
+      lock = '<p class="lockmsg">第 ' + w + ' 週從 ' + weekRange(w).split(' – ')[0] + ' 開放' + (c === 0 && days > 0 ? '，倒數 ' + days + ' 天。' : '。') + '</p>';
+    }else{
+      lock = '<p class="lockmsg">這一週已經結束，不能再修改。</p>';
+    }
+  }
+  const rows = TASKS.map(t => {
+    const list = photosOf(x, t.field), ok = list.length >= t.need;
+    const shots = shotsHTML(list, ed, 'task', t.field, t.title);
+    const btn = ed ? '<label class="btn small">' + (list.length ? '＋ 再加一張' : '📷 拍照 / 選照片') + '<input type="file" accept="image/*" multiple data-upload="task" data-field="' + t.field + '" hidden></label>'
+      : (list.length ? '' : '<button class="btn small" disabled>📷 拍照 / 選照片（尚未開放）</button>');
+    const rem = Math.max(0, t.need - list.length);
+    const title = (t.verb && rem > 0) ? t.verb + ' ' + rem + ' ' + t.unit : t.title;   // 傳 1 張後變「丟出 9 則」
+    let cnt;
+    if(t.verb){
+      cnt = '<p class="note" style="margin:6px 0 0">' + (rem > 0 ? '本週共 ' + t.need + ' ' + t.unit + '，' + t.doneWord + ' ' + list.length + ' ' + t.unit + '，還差 ' + rem + ' ' + t.unit : '本週 ' + t.need + ' ' + t.unit + '已全部完成') + '</p>' +
+        '<div class="bar" style="height:10px;margin-top:8px"><i style="width:' + Math.min(100, list.length / t.need * 100) + '%"></i></div>';
+    }else{
+      cnt = '<p class="note" style="margin:6px 0 0">' + (list.length ? '已上傳 ' + list.length + ' 張' : '尚未上傳') + '</p>';
+    }
+    return '<div class="task' + (ok ? ' ok' : '') + '"><div class="no">' + t.no + '</div><div class="body"><h3>' + title + '</h3><p>' + t.desc + '</p>' + shots + btn + cnt + '</div><div class="state">' + (ok ? '★' : '') + '</div></div>';
+  }).join('');
+  $('weekcard').innerHTML = '<div class="card"><div class="row"><span class="tag">第 ' + w + ' 週　' + weekRange(w) + '</span>' + status + '</div>' +
+    '<p class="note" style="margin:0 0 4px">' + (k === TASKS.length ? '本週 4 項任務全部完成 ★' : '本週完成 ' + k + ' / ' + TASKS.length + ' 項，全部完成才算 1 週。') + '</p>' +
+    lock + rows + '</div>';
+}
+
+function paintRecruit(){
+  const list = toArr(S.prog.recruitPhotos), ed = isOpen();
+  $('recruit').innerHTML = '<div class="card"><div class="row"><span class="tag red">招募人數</span><span class="chip red">' + list.length + ' 人</span></div>' +
+    '<p class="note" style="margin:0 0 10px">上傳招募證明照片，1 張算 1 人。不論有沒有達成每週工作量，每招募 1 人都可獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '。</p>' +
+    shotsHTML(list, ed, 'recruit', '', '招募證明') +
+    (ed ? '<label class="btn small">＋ 上傳招募證明<input type="file" accept="image/*" multiple data-upload="recruit" hidden></label>'
+        : '<button class="btn small" disabled>＋ 上傳招募證明（尚未開放）</button>') + '</div>';
+}
+
+function paintMufo(){
+  const m = S.prog.mufo, ok = !!(m && m.url), ed = isOpen();
+  $('mufo').innerHTML = '<div class="card"><div class="row"><span class="tag red">MUFO 榮譽獎勵</span>' + (ok ? '<span class="chip red">已上傳</span>' : '') + '</div>' +
+    '<p class="note" style="margin:0 0 10px">MUFO 另外上傳，不計入每週工作量。上傳你自己的 MUFO 完成畫面才算完成，達成者獲頒 $' + fmt(CONFIG.MUFO_REWARD) + '。</p>' +
+    (ok ? '<a href="' + esc(m.url) + '" target="_blank" rel="noopener"><img class="thumb" src="' + esc(m.thumb || m.url) + '" alt="MUFO 完成畫面"></a>' : '') +
+    (ed ? '<label class="btn small">' + (ok ? '重新上傳' : '📷 上傳 MUFO 完成畫面') + '<input type="file" accept="image/*" data-upload="mufo" hidden></label>' : '<button class="btn small" disabled>📷 上傳 MUFO 完成畫面（尚未開放）</button><p class="lockmsg">10/5 開跑後開放上傳。</p>') +
+    '</div>';
+}
+
+function paintReward(){
+  const n = doneWeeks(), passed = n >= CONFIG.PASS, r = recruitCount(), m = !!(S.prog.mufo && S.prog.mufo.url);
+  /* 達成 MUFO 後，招募獎勵＋MUFO 獎金合併計算，總共封頂在 MUFO_REWARD；未達成 MUFO 時，招募獎勵不封頂 */
+  const combined = m ? CONFIG.MUFO_REWARD : r * CONFIG.RECRUIT_REWARD;
+  const sub = m ? ('招募 ' + r + ' 人，已達成 MUFO，獎金封頂 $' + fmt(CONFIG.MUFO_REWARD)) : (r > 0 ? ('招募 ' + r + ' 人，每人 $' + fmt(CONFIG.RECRUIT_REWARD)) : '尚未招募，也尚未完成 MUFO');
+  $('reward').innerHTML = '<div class="card"><span class="tag">我的獎勵</span>' +
+    '<ul class="rw">' +
+    '<li class="' + (passed ? 'on' : '') + '"><span>工作量達標獎金</span><b>' + (passed ? '$' + fmt(CONFIG.REWARD) : '還差 ' + (CONFIG.PASS - n) + ' 週') + '</b></li>' +
+    '<li class="' + ((m || r > 0) ? 'on' : '') + '"><span>招募＋MUFO 獎勵<br><small style="font-weight:700;color:var(--mut)">' + sub + '</small></span><b>$' + fmt(combined) + '</b></li></ul>' +
+    '<p class="note">沒有報名費。以上為系統依活動規則試算。</p>' +
+    '<details><summary>獎勵辦法</summary><div class="in">' +
+    '<div class="tier"><b>達成工作量（12 週完成 10 週）</b><br>獲得 $' + fmt(CONFIG.REWARD) + '</div>' +
+    '<div class="tier"><b>達成工作量 ＋ 招募 1 人以上</b><br>獲得 $' + fmt(CONFIG.REWARD) + '，每招募 1 人額外獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '</div>' +
+    '<div class="tier"><b>未達工作量 ＋ 招募 1 人以上</b><br>每招募 1 人仍可獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '</div>' +
+    '<div class="tier"><b>達成 MUFO</b><br>招募獎勵＋MUFO 獎金合併計算，總共封頂 $' + fmt(CONFIG.MUFO_REWARD) + '，不會再往上加</div>' +
+    '</div></details></div>';
+}
+
+/* ---------- 動作 ---------- */
+function deletePhoto(kind, field, i){
+  if(!confirm('要刪除這張照片嗎？')) return;
+  if(kind === 'task'){
+    const w = S.sel;
+    if(!canEdit(w)) return;
+    const list = photosOf(wkObj(w), field).slice();
+    list.splice(i, 1);
+    S.prog.weeks[w] = Object.assign({}, wkObj(w), {[field]: list});
+    const ctx = memberCtx();
+    queue('d' + w + field, () => persistWeek(ctx, w, {[field]: list}));
+  }else if(kind === 'recruit'){
+    if(!isOpen()) return;
+    const list = toArr(S.prog.recruitPhotos).slice();
+    list.splice(i, 1);
+    S.prog.recruitPhotos = list;
+    const ctx = memberCtx();
+    queue('drecruit', () => persistRecruits(ctx));
+  }
+  paint();
+}
+const defaultSel = () => { const c = curWeek(); return c >= 1 ? Math.min(c, CONFIG.WEEKS) : 1; };
+
+async function enter(){
+  busy(true);
+  try{
+    S.prog = await loadProg(S.key);
+    if(!isDemo) dbReq('PATCH', 'users/' + S.key, {name:S.name, at:Date.now()}).catch(() => {});
+  }catch(e){
+    console.error(e);
+    S.prog = {weeks:{}, recruitPhotos:[], mufo:null};
+    toast('讀取失敗，請重新整理頁面', true);
+  }
+  busy(false);
+  S.loaded = true;
+  S.sel = defaultSel();
+  renderHome();
+}
+function pickMe(name){
+  S.name = name; S.key = keyOf(name);
+  LS.set('whc_me', {name:name});
+  enter();
+}
+
+/* ---------- 導覽 ---------- */
+function tabsHTML(a){
+  return '<nav class="tabs"><button class="' + (a === 'play' ? 'on' : '') + '" data-act="nav" data-v="">我的打卡</button>' +
+    '<button class="' + (a === 'board' ? 'on' : '') + '" data-act="nav" data-v="board">成績榜</button></nav>';
+}
+function route(){
+  const h = location.hash.replace('#', '');
+  window.scrollTo(0, 0);
+  if(h === 'board') return renderStandings();
+  if(h === 'admin') return renderAdmin();
+  if(S.key) return S.loaded ? renderHome() : enter();
+  renderMe();
+}
+
+/* ---------- 成績榜（公開，所有人都看得到） ---------- */
+const R = {data:{}, err:false, progs:{}, view:null};
+function demoSummary(name){
+  const key = keyOf(name), local = LS.get('whc_demo_' + key);
+  if(local) return summaryOf(normProg(local), name);
+  let hs = 0;
+  for(const ch of key) hs = (hs * 31 + ch.charCodeAt(0)) >>> 0;
+  const n = hs % 11, done = [];
+  for(let w = 1; w <= n; w++) done.push(w);
+  return {name, done, n};
+}
+async function loadSummaries(){
+  if(isDemo){
+    const m = {};
+    allNames().forEach(n => { m[keyOf(n)] = demoSummary(n); });
+    return m;
+  }
+  return (await dbReq('GET', 'summary')) || {};
+}
+function rosterStats(){
+  const names = allNames();
+  if(!names.length) return [];
+  return names.map(n => {
+    const s = R.data[keyOf(n)] || {};
+    const done = Array.isArray(s.done) ? s.done : Object.values(s.done || {});
+    const cnt = Math.min(CONFIG.WEEKS, done.length);
+    return {name:n, n:cnt, done, pct:Math.min(100, Math.round(cnt / CONFIG.PASS * 100))};
+  });
+}
+async function renderStandings(){
+  S.screen = 'standings';
+  $('app').innerHTML = heroHTML(true) + '<main class="wrap">' + tabsHTML('board') +
+    '<section id="st"><div class="card"><p class="note" style="margin:0">讀取成績中…</p></div></section>' + footHTML() + '</main>';
+  try{ R.data = await loadSummaries(); R.err = false; }catch(e){ console.error(e); R.err = true; }
+  paintStandings();
+}
+function viewShots(list){
+  if(!list.length) return '<p class="note" style="margin:4px 0 0">沒有照片</p>';
+  return '<div class="ashots">' + list.map((p, i) =>
+    '<a class="vshot" href="' + esc(p.url) + '" target="_blank" rel="noopener"><img src="' + esc(p.thumb || p.url) + '" alt="第 ' + (i + 1) + ' 張" loading="lazy"></a>').join('') + '</div>';
+}
+function viewerHTML(key){
+  const p = R.progs[key], v = R.view;
+  if(!p || !v) return '';
+  let btns = '';
+  for(let w = 1; w <= CONFIG.WEEKS; w++){
+    const x = wkIn(p, w), has = TASKS.some(t => photosOf(x, t.field).length), done = weekDoneIn(p, w);
+    btns += '<button class="vw' + (w === v.w ? ' on' : '') + (done ? ' done' : '') + (has ? '' : ' none') + '" data-act="vweek" data-v="' + w + '" aria-label="第 ' + w + ' 週' + (done ? '，已完成' : '') + '">' + w + '</button>';
+  }
+  const x = wkIn(p, v.w);
+  const tasks = TASKS.map(t => {
+    const list = photosOf(x, t.field);
+    return '<div class="adm-task"><b>' + esc(t.title) + '</b>　' + list.length + ' / ' + t.need + ' 張' + viewShots(list) + '</div>';
+  }).join('');
+  const rc = toArr(p.recruitPhotos), mu = (p.mufo && p.mufo.url) ? [p.mufo] : [];
+  return '<div class="vpanel"><div class="vweeks" role="group" aria-label="選擇週次">' + btns + '</div>' +
+    '<p class="note" style="margin:8px 0 2px">第 ' + v.w + ' 週　' + weekRange(v.w) + '　（紅色 ＝ 該週已完成）</p>' + tasks +
+    '<details><summary>招募證明（' + rc.length + ' 張）</summary><div class="in">' + viewShots(rc) + '</div></details>' +
+    '<details><summary>MUFO 完成畫面（' + (mu.length ? '已上傳' : '未上傳') + '）</summary><div class="in">' + viewShots(mu) + '</div></details></div>';
+}
+async function seedDemoData(){
+  if(isDemo) return;
+  if(!confirm('要產生示範成績嗎？會把全部 ' + allNames().length + ' 位參賽者的隨機進度寫入「成績榜」，方便展示，之後可以一次清除。')) return;
+  busy(true);
+  try{
+    const patch = {};
+    allNames().forEach(n => {
+      const r = Math.random();
+      let cnt;
+      if(r < 0.15) cnt = 0;
+      else if(r < 0.7) cnt = 1 + Math.floor(Math.random() * 9);
+      else cnt = 10 + Math.floor(Math.random() * 3);
+      const done = Array.from({length: Math.min(cnt, CONFIG.WEEKS)}, (_, i) => i + 1);
+      patch[keyOf(n)] = {name: n, done, n: done.length, demo: true, at: Date.now()};
+    });
+    await dbReq('PATCH', 'summary', patch);
+    toast('示範成績已產生 ✓');
+  }catch(e){ console.error(e); toast('產生失敗，請再試一次', true); }
+  busy(false);
+  if(S.screen === 'standings'){ R.progs = {}; R.view = null; renderStandings(); }
+}
+async function clearDemoData(){
+  if(isDemo) return;
+  if(!confirm('要清除示範成績嗎？只會刪除標記為示範的資料。')) return;
+  busy(true);
+  try{
+    const all = (await dbReq('GET', 'summary')) || {};
+    const patch = {};
+    Object.keys(all).forEach(k => { if(all[k] && all[k].demo) patch[k] = null; });
+    if(Object.keys(patch).length) await dbReq('PATCH', 'summary', patch);
+    toast('示範成績已清除 ✓');
+  }catch(e){ console.error(e); toast('清除失敗，請再試一次', true); }
+  busy(false);
+  if(S.screen === 'standings'){ R.progs = {}; R.view = null; renderStandings(); }
+}
+async function toggleView(name){
+  const key = keyOf(name);
+  if(R.view && R.view.key === key){ R.view = null; paintStandings(); return; }
+  R.view = {key, name, w:1};
+  if(!R.progs[key]){
+    busy(true);
+    try{ R.progs[key] = await loadProg(key); }
+    catch(e){ console.error(e); toast('照片讀取失敗，請再試一次', true); R.view = null; busy(false); paintStandings(); return; }
+    busy(false);
+  }
+  const p = R.progs[key];
+  for(let w = CONFIG.WEEKS; w >= 1; w--){
+    if(TASKS.some(t => photosOf(wkIn(p, w), t.field).length)){ R.view.w = w; break; }
+  }
+  paintStandings();
+}
+function paintStandings(){
+  const box = $('st');
+  if(S.screen !== 'standings' || !box) return;
+  if(R.err){
+    box.innerHTML = '<div class="card"><p class="note" style="margin:0 0 10px">成績讀取失敗，請確認網路後再試一次。</p><button class="btn small" data-act="st-refresh">重新整理</button></div>';
     return;
   }
-  me = { ...snap.data(), email };
-  $('#hdr').classList.remove('hidden');
-  $('#meName').textContent = `${me.nameZh || email}（${ROLE[me.role] || me.role}）`;
-  app.innerHTML = '<div class="card"><p class="muted">載入資料中…</p></div>';
+  const all = rosterStats();
+  if(!all.length){
+    box.innerHTML = '<div class="card"><span class="tag">成績榜</span><p class="note">參賽名單建立後，成績會顯示在這裡。</p></div>';
+    return;
+  }
+  const people = all.length, passed = all.filter(r => r.n >= CONFIG.PASS).length;
+  const overall = Math.round(all.reduce((b, r) => b + Math.min(1, r.n / CONFIG.PASS), 0) / people * 100);
+  const rows = all.slice().sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'zh-Hant'));
+  let html = '<div class="card"><div class="row"><span class="tag">成績榜</span><button class="btn ghost small" data-act="st-refresh">重新整理</button></div>' +
+    (isDemo ? '<div class="banner" style="margin:0 0 10px">示範模式：先用範例數字展示，你自己的打卡會即時反映在自己的名字上。</div>' : '') +
+    '<div class="stats"><div class="stat"><b>' + people + '</b><span>參賽人數</span></div><div class="stat"><b>' + passed + '</b><span>已通關</span></div><div class="stat"><b>' + overall + '%</b><span>全體進度</span></div></div>' +
+    '<p class="note">進度 ＝ 完成週數 ÷ ' + CONFIG.PASS + '，完成 ' + CONFIG.PASS + ' 週就是 100%。</p></div>';
+  html += '<div class="card" style="margin-top:18px"><div style="margin-top:2px">' +
+    rows.map(r => {
+      const key = keyOf(r.name), open = !!(R.view && R.view.key === key);
+      let dots = '';
+      for(let w = 1; w <= CONFIG.WEEKS; w++) dots += '<i class="' + (r.done.indexOf(w) >= 0 ? 'on' : '') + '" title="第 ' + w + ' 週"></i>';
+      return '<div class="mrow"><div class="h"><b>' + esc(r.name) + '</b>' +
+        (r.n >= CONFIG.PASS ? '<span class="chip red">通關 ★</span>' : '') + '<span class="r">' + r.pct + '%</span></div>' +
+        '<p class="note" style="margin:2px 0 0">完成 ' + r.n + ' 週（通關要 ' + CONFIG.PASS + ' 週）</p>' +
+        '<div class="dots" aria-label="12 週完成狀況">' + dots + '</div>' +
+        '<p style="margin:10px 0 0"><button class="btn ghost small" data-act="view" data-v="' + esc(r.name) + '">' + (open ? '收起照片' : '看上傳的照片') + '</button></p>' +
+        (open ? viewerHTML(key) : '') + '</div>';
+    }).join('') + '</div></div>';
+  box.innerHTML = html;
+}
 
-  unsubUsers = onSnapshot(collection(db, 'users'), s => {
-    users.clear();
-    s.forEach(d => users.set(d.id, { ...d.data(), email: d.id }));
-    if (me && (!users.has(me.email) || users.get(me.email).active === false)) { signOut(auth); return; }
-    if (!document.querySelector('dialog[open]')) route();
+/* ---------- 後台（調整週次、刪除照片） ---------- */
+const A = {ok:false, name:'', key:'', prog:null, open:0};
+try{ A.ok = isDemo || sessionStorage.getItem('whc_adm') === '1'; }catch(e){ A.ok = isDemo; }
+async function sha256(s){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
+}
+const memberOpts = names => names.map(n => '<option value="' + esc(n) + '">' + esc(n) + '</option>').join('');
+function renderAdmGate(){
+  const setup = !CONFIG.ADMIN_HASH;
+  $('app').innerHTML = heroHTML(true) + '<main class="wrap"><section><div class="card"><span class="tag red">後台登入</span>' +
+    (setup ? '<p class="note" style="margin:0 0 6px">還沒設定後台密碼。輸入你要用的密碼（至少 8 個字元），按「產生代碼」，把代碼貼到 index.html 設定區的 ADMIN_HASH，重新上傳後就能用這組密碼登入。</p>' : '') +
+    '<label class="lbl" for="adm-pw">' + (setup ? '想設定的密碼' : '後台密碼') + '</label><input id="adm-pw" class="inp" type="password" autocomplete="current-password">' +
+    '<p style="margin:12px 0 0"><button class="btn" data-act="' + (setup ? 'adm-hash' : 'adm-login') + '">' + (setup ? '產生代碼' : '登入') + '</button></p>' +
+    '<code class="out" id="adm-code" style="display:none"></code></div></section>' + footHTML() + '</main>';
+}
+async function admLogin(){
+  try{
+    if(await sha256($('adm-pw').value) === CONFIG.ADMIN_HASH){
+      A.ok = true;
+      try{ sessionStorage.setItem('whc_adm', '1'); }catch(e){}
+      renderAdmin();
+    }else toast('密碼不正確', true);
+  }catch(e){ toast('這個瀏覽器無法驗證密碼，請用 https 網址開啟', true); }
+}
+async function admHash(){
+  const pw = $('adm-pw').value;
+  if(pw.length < 8){ toast('密碼請至少 8 個字元', true); return; }
+  try{
+    const c = $('adm-code'); c.textContent = await sha256(pw); c.style.display = 'block';
+  }catch(e){ toast('這個瀏覽器無法產生代碼，請用 https 網址開啟', true); }
+}
+function admOut(){
+  if(isDemo){ location.hash = ''; return; }
+  A.ok = false; A.prog = null;
+  try{ sessionStorage.removeItem('whc_adm'); }catch(e){}
+  renderAdmin();
+}
+function renderAdmin(){
+  S.screen = 'admin';
+  if(!A.ok){ renderAdmGate(); return; }
+  $('app').innerHTML = heroHTML(true) + '<main class="wrap">' +
+    '<section><div class="me"><div><b>後台</b><small>' + (isDemo ? '示範模式：免密碼，資料在這台裝置' : '調整週次、刪除照片') + '</small></div><button data-act="adm-out">' + (isDemo ? '回打卡頁' : '退出') + '</button></div></section>' +
+    (isDemo ? '' : '<section><div class="card"><span class="tag red">示範資料</span>' +
+      '<p class="note" style="margin:0 0 10px">在「成績榜」灌入隨機進度方便展示，示範結束後按右邊按鈕一次清除，只會清掉標記為示範的資料，不會動到真實打卡。</p>' +
+      '<div class="row" style="gap:10px"><button class="btn small" data-act="adm-demo-seed">🎲 產生示範成績</button><button class="btn ghost small" data-act="adm-demo-clear">🧹 清除示範成績</button></div></div></section>') +
+    '<section><div class="card"><span class="tag red">選參賽者</span>' +
+    '<label class="lbl" for="adm-member">姓名</label><select class="sel" id="adm-member" data-adm="member">' + memberOpts(allNames()) + '</select></div></section>' +
+    '<section id="adm-edit"></section>' + footHTML() + '</main>';
+  admLoad();
+}
+async function admLoad(){
+  const names = allNames();
+  if(names.indexOf(A.name) < 0) A.name = names[0] || '';
+  const sel = $('adm-member'); if(sel) sel.value = A.name;
+  if(!A.name){ A.prog = null; paintAdmEdit(); return; }
+  A.key = keyOf(A.name);
+  busy(true);
+  try{ A.prog = await loadProg(A.key); }catch(e){ console.error(e); A.prog = null; toast('讀取失敗，請再試一次', true); }
+  busy(false);
+  paintAdmEdit();
+}
+function admShots(list, kind, w, f){
+  if(!list.length) return '<p class="note" style="margin:4px 0 0">沒有照片</p>';
+  return '<div class="ashots">' + list.map((p, i) =>
+    '<figure class="ashot"><a href="' + esc(p.url) + '" target="_blank" rel="noopener"><img src="' + esc(p.thumb || p.url) + '" alt="第 ' + (i + 1) + ' 張"></a><div class="acts">' +
+    (kind === 'task' ? '<button data-act="adm-mv" data-w="' + w + '" data-f="' + f + '" data-i="' + i + '">移週</button>' : '') +
+    '<button class="d" data-act="adm-del" data-kind="' + kind + '" data-w="' + w + '" data-f="' + f + '" data-i="' + i + '">刪除</button></div></figure>').join('') + '</div>';
+}
+function paintAdmEdit(){
+  const box = $('adm-edit');
+  if(!box) return;
+  const p = A.prog;
+  if(!p){ box.innerHTML = ''; return; }
+  const s = summaryOf(p, A.name), rc = toArr(p.recruitPhotos), mu = (p.mufo && p.mufo.url) ? [p.mufo] : [];
+  let weeks = '';
+  for(let w = 1; w <= CONFIG.WEEKS; w++){
+    const x = wkIn(p, w), k = TASKS.filter(t => taskDone(t, x)).length;
+    weeks += '<details' + (A.open === w ? ' open' : '') + '><summary>第 ' + w + ' 週　' + weekRange(w) + '　' + (k === TASKS.length ? '✓ 完成' : k + ' / ' + TASKS.length + ' 項') + '</summary><div class="in">' +
+      TASKS.map(t => { const list = photosOf(x, t.field); return '<div class="adm-task"><b>' + esc(t.title) + '</b>　' + list.length + ' / ' + t.need + ' 張' + admShots(list, 'task', w, t.field) + '</div>'; }).join('') +
+      '<p style="margin:10px 0 0"><button class="btn ghost small" data-act="adm-clear" data-w="' + w + '">清空這一週</button></p></div></details>';
+  }
+  box.innerHTML = '<div class="card"><span class="tag">' + esc(A.name) + '</span>' +
+    '<div class="stats"><div class="stat"><b>' + s.n + '</b><span>完成週數</span></div><div class="stat"><b>' + rc.length + '</b><span>招募人數</span></div><div class="stat"><b>' + (mu.length ? '✓' : '—') + '</b><span>MUFO</span></div></div>' +
+    weeks +
+    '<details' + (A.open === 'r' ? ' open' : '') + '><summary>招募證明（' + rc.length + ' 張）</summary><div class="in">' + admShots(rc, 'recruit', 0, '') + '</div></details>' +
+    '<details' + (A.open === 'm' ? ' open' : '') + '><summary>MUFO 完成畫面（' + (mu.length ? '已上傳' : '未上傳') + '）</summary><div class="in">' + admShots(mu, 'mufo', 0, '') + '</div></details></div>';
+}
+const admCtx = () => ({key:A.key, name:A.name, prog:A.prog});
+async function admSave(fn){
+  busy(true);
+  try{ await fn(); toast('已更新 ✓'); }
+  catch(e){ console.error(e); toast('更新失敗：' + (e && e.message ? e.message : '請再試一次'), true); busy(false); return admLoad(); }
+  busy(false);
+  paintAdmEdit();
+}
+function admDelete(el){
+  const kind = el.dataset.kind, w = +el.dataset.w, f = el.dataset.f, i = +el.dataset.i;
+  if(!confirm('確定要刪除這張照片嗎？刪除後隊員的進度會跟著更新。')) return;
+  A.open = kind === 'task' ? w : (kind === 'recruit' ? 'r' : 'm');
+  admSave(async () => {
+    const ctx = admCtx();
+    if(kind === 'task'){
+      const list = photosOf(wkIn(A.prog, w), f).slice(); list.splice(i, 1);
+      A.prog.weeks[w] = Object.assign({}, wkIn(A.prog, w), {[f]: list});
+      await persistWeek(ctx, w, {[f]: list});
+    }else if(kind === 'recruit'){
+      const list = toArr(A.prog.recruitPhotos).slice(); list.splice(i, 1);
+      A.prog.recruitPhotos = list;
+      await persistRecruits(ctx);
+    }else{
+      A.prog.mufo = null;
+      await persistMufo(ctx);
+    }
   });
+}
+function admMove(el){
+  const w = +el.dataset.w, f = el.dataset.f, i = +el.dataset.i;
+  const raw = prompt('要把這張照片移到第幾週？（輸入 1 – ' + CONFIG.WEEKS + '）');
+  if(raw === null) return;
+  const to = parseInt(raw, 10);
+  if(!(to >= 1 && to <= CONFIG.WEEKS) || to === w){ toast('請輸入 1 – ' + CONFIG.WEEKS + ' 之間、和現在不同的週次', true); return; }
+  A.open = to;
+  admSave(async () => {
+    const ctx = admCtx();
+    const src = photosOf(wkIn(A.prog, w), f).slice(), moved = src.splice(i, 1)[0];
+    const dst = photosOf(wkIn(A.prog, to), f).concat([moved]);
+    A.prog.weeks[w] = Object.assign({}, wkIn(A.prog, w), {[f]: src});
+    A.prog.weeks[to] = Object.assign({}, wkIn(A.prog, to), {[f]: dst});
+    await persistWeek(ctx, to, {[f]: dst});
+    await persistWeek(ctx, w, {[f]: src});
+  });
+}
+function admClear(w){
+  if(!confirm('確定要清空第 ' + w + ' 週的所有照片嗎？')) return;
+  A.open = w;
+  admSave(async () => {
+    const empty = {};
+    TASKS.forEach(t => { empty[t.field] = []; });
+    A.prog.weeks[w] = empty;
+    await persistWeek(admCtx(), w, empty);
+  });
+}
 
-  unsubNotes = onSnapshot(query(collection(db, 'notifications'), where('to', '==', me.email), where('read', '==', false)), s => {
-    notes = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
-    renderBell();
-  }, () => {});
-
-  // 同一台電腦換帳號登入時，不沿用上一位的本機暫存，改向伺服器重抓
-  let switched = false;
-  try { switched = localStorage.getItem('crm_last_user') !== email; localStorage.setItem('crm_last_user', email); } catch (e) { switched = true; }
-  try { await syncCustomers(switched); } catch (e) { toast('客戶資料載入不完整：' + errMsg(e), 10000); }
-  route();
-  timer = setInterval(() => softRefresh(), 5 * 60 * 1000);
+/* 事件全部掛在 document 上（iOS 檔案選擇在重繪後仍然有效） */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if(!el) return;
+  const v = el.dataset.v;
+  switch(el.dataset.act){
+    case 'me':     pickMe(v); window.scrollTo(0, 0); break;
+    case 'logout': LS.del('whc_me'); S.name = S.key = null; S.loaded = false; renderMe(); window.scrollTo(0, 0); break;
+    case 'week':   S.sel = +v; paintBoard(); paintWeek(); break;
+    case 'del':    deletePhoto(el.dataset.kind, el.dataset.field, +el.dataset.i); break;
+    case 'nav':    location.hash = v; break;
+    case 'st-refresh': R.progs = {}; R.view = null; renderStandings(); break;
+    case 'view':   toggleView(v); break;
+    case 'vweek':  if(R.view){ R.view.w = +v; paintStandings(); } break;
+    case 'adm-login': admLogin(); break;
+    case 'adm-hash':  admHash(); break;
+    case 'adm-out':   admOut(); break;
+    case 'adm-del':   admDelete(el); break;
+    case 'adm-mv':    admMove(el); break;
+    case 'adm-clear': admClear(+el.dataset.w); break;
+    case 'adm-demo-seed': seedDemoData(); break;
+    case 'adm-demo-clear': clearDemoData(); break;
+  }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if(!t || !t.matches) return;
+  if(t.matches('input[type=file][data-upload]')) handleUpload(t);
+  else if(t.matches('select[data-adm]')){
+    A.name = t.value;
+    A.open = 0;
+    admLoad();
+  }
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target && e.target.id === 'adm-pw'){
+    const b = document.querySelector('[data-act=adm-login],[data-act=adm-hash]');
+    if(b) b.click();
+  }
 });
 
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && me && Date.now() - lastSync > 60 * 1000) softRefresh();
-});
-
-// ---------------- 客戶資料同步（只抓有變動的資料，節省讀取額度）----------------
-function customersBaseQueries() {
-  const col = collection(db, 'customers');
-  if (me.role === 'sales') return [query(col, where('salesEmail', '==', me.email))];
-  if (me.role === 'manager') {
-    const qs = [query(col, where('salesEmail', '==', me.email))];
-    const regs = userRegions(me);
-    if (regs.length) qs.push(query(col, where('region', 'in', regs)));
-    return qs;
-  }
-  return [col];
-}
-async function syncOne(base, full) {
-  let max = null;
-  if (!full) {
-    try {
-      const cached = await getDocsFromCache(base);
-      cached.docs.forEach(d => {
-        const data = d.data();
-        customers.set(d.id, { id: d.id, ...data });
-        if (!d.metadata.hasPendingWrites && data.updatedAt && (!max || data.updatedAt.toMillis() > max.toMillis())) max = data.updatedAt;
-      });
-    } catch (e) { /* 沒有快取時改抓全部 */ }
-  }
-  const snap = await getDocs(max ? query(base, where('updatedAt', '>', max)) : base);
-  snap.docs.forEach(d => customers.set(d.id, { id: d.id, ...d.data() }));
-}
-async function syncCustomers(full = false) {
-  if (full) customers.clear();
-  for (const base of customersBaseQueries()) await syncOne(base, full);
-  lastSync = Date.now();
-}
-async function softRefresh() {
-  try { await syncCustomers(); if (!document.querySelector('dialog[open]')) route(); } catch (e) { /* 背景更新失敗時不打擾使用者 */ }
-}
-
-// ---------------- 路由 ----------------
-function renderNav() {
-  const h = location.hash || '#/customers';
-  const items = [['#/customers', '客戶'], ['#/records', '紀錄'], ['#/calendar', '行事曆']];
-  if (isAdmin()) items.push(['#/users', '人員管理'], ['#/settings', '編號設定'], ['#/import', '資料匯入']);
-  $('#nav').innerHTML = items.map(([href, t]) => {
-    const on = h.startsWith(href) || (href === '#/customers' && h.startsWith('#/customer/'));
-    return `<a href="${href}" class="${on ? 'active' : ''}">${t}</a>`;
-  }).join('');
-}
-function route() {
-  if (!me) return;
-  renderNav();
-  const [, page, id] = (location.hash || '#/customers').split('/');
-  if (page === 'customer' && id) viewCustomer(decodeURIComponent(id));
-  else if (page === 'calendar') viewCalendar();
-  else if (page === 'records') viewRecords();
-  else if (page === 'users' && isAdmin()) viewUsers();
-  else if (page === 'settings' && isAdmin()) viewSettings();
-  else if (page === 'import' && isAdmin()) viewImport();
-  else viewCustomers();
+/* ---------- 啟動 ---------- */
+const me = LS.get('whc_me');
+if(me && me.name && allNames().indexOf(me.name) >= 0){
+  S.name = me.name; S.key = keyOf(me.name);
 }
 window.addEventListener('hashchange', route);
-
-// ---------------- 客戶列表 ----------------
-const COLS = [
-  ['no', '編號', custNo], ['name', '客戶名稱', c => c.name], ['status', '狀態', c => c.status],
-  ['region', '區域', c => c.region], ['sales', '負責業務', c => salesLabel(c.salesEmail)],
-  ['contact', '聯絡人', c => c.contact], ['phone', '電話', c => c.phone], ['maint', '維護日期', c => c.maintenanceDate]
-];
-function viewCustomers() {
-  const leftN = isAdmin() ? leftCustomers().length : 0;
-  const checkN = isAdmin() ? [...customers.values()].filter(c => !c.deleted && c.needsCheck).length : 0;
-  app.innerHTML = `${checkN ? `<div class="card warn"><strong>⚠ 有 ${checkN} 位匯入的客戶資料待確認</strong>（編號重複或缺漏）。編輯儲存後就會解除。<button class="small" id="showCheck" style="margin-left:8px">查看名單</button></div>` : ''}${leftN ? `<div class="card warn"><strong>⚠ 有 ${leftN} 位客戶的負責業務已離職</strong>，請調整負責業務。<button class="small" id="showLeft" style="margin-left:8px">查看名單</button></div>` : ''}<div class="card"><h1>客戶</h1>
-    <div class="toolbar">
-      <div class="seg" id="seg">${[['all', '全部'], ['potential', '潛在'], ['formal', '正式']].map(([k, t]) => `<button data-k="${k}" class="${ui.status === k ? 'on' : ''}">${t}</button>`).join('')}</div>
-      <select id="fRegion"><option value="">全部區域</option>${REGIONS.map(r => `<option ${ui.region === r ? 'selected' : ''}>${r}</option>`).join('')}<option value="__none" ${ui.region === '__none' ? 'selected' : ''}>未分區</option></select>
-      ${me.role !== 'sales' ? `<select id="fSales"><option value="">全部業務</option>${salesOptions(ui.sales)}${isAdmin() ? `<option value="__left" ${ui.sales === '__left' ? 'selected' : ''}>⚠ 負責業務已離職</option><option value="__check" ${ui.sales === '__check' ? 'selected' : ''}>⚠ 匯入資料待確認</option>` : ''}</select>` : ''}
-      <input id="fQ" placeholder="搜尋名稱、編號、聯絡人、電話" value="${esc(ui.q)}">
-      <span class="spacer"></span>
-      <button class="ghost" id="refresh">重新整理</button>
-      ${isAdmin() ? '<button id="add">＋ 新增客戶</button>' : ''}
-    </div>
-    <div class="muted" id="count"></div>
-    <div class="tablewrap"><table><thead><tr id="thead"></tr></thead><tbody id="tbody" class="click"></tbody></table></div>
-  </div>`;
-  $('#showLeft')?.addEventListener('click', () => { ui.sales = '__left'; ui.status = 'all'; viewCustomers(); });
-  $('#showCheck')?.addEventListener('click', () => { ui.sales = '__check'; ui.status = 'all'; viewCustomers(); });
-  $('#seg').addEventListener('click', e => { const k = e.target.dataset.k; if (!k) return; ui.status = k; viewCustomers(); });
-  $('#fRegion').addEventListener('change', e => { ui.region = e.target.value; renderTable(); });
-  $('#fSales')?.addEventListener('change', e => { ui.sales = e.target.value; renderTable(); });
-  $('#fQ').addEventListener('input', e => { ui.q = e.target.value; renderTable(); });
-  $('#refresh').addEventListener('click', async () => {
-    try { await syncCustomers(true); renderTable(); toast('已重新整理'); } catch (e) { toast(errMsg(e)); }
-  });
-  $('#add')?.addEventListener('click', () => customerForm(null));
-  $('#thead').addEventListener('click', e => {
-    const k = e.target.closest('th')?.dataset.k; if (!k) return;
-    if (ui.sort === k) ui.dir = -ui.dir; else { ui.sort = k; ui.dir = 1; }
-    renderTable();
-  });
-  $('#tbody').addEventListener('click', e => { const id = e.target.closest('tr')?.dataset.id; if (id) location.hash = '#/customer/' + encodeURIComponent(id); });
-  renderTable();
-}
-function renderTable() {
-  const q = ui.q.trim().toLowerCase();
-  const list = [...customers.values()].filter(c => !c.deleted)
-    .filter(c => ui.status === 'all' || c.status === ui.status)
-    .filter(c => !ui.region || (ui.region === '__none' ? !c.region : c.region === ui.region))
-    .filter(c => !ui.sales || (ui.sales === '__left' ? (c.salesEmail && isLeft(c.salesEmail)) : ui.sales === '__check' ? c.needsCheck : c.salesEmail === ui.sales))
-    .filter(c => !q || [custNo(c), c.leadNo, c.name, c.contact, c.phone, c.mobile].some(v => String(v || '').toLowerCase().includes(q)));
-  const col = COLS.find(c => c[0] === ui.sort) || COLS[0];
-  list.sort((a, b) => String(col[2](a) || '').localeCompare(String(col[2](b) || ''), 'zh-Hant', { numeric: true }) * ui.dir);
-  $('#thead').innerHTML = COLS.map(([k, t]) => `<th class="sortable" data-k="${k}">${t}${ui.sort === k ? `<span class="arrow">${ui.dir > 0 ? ' ▲' : ' ▼'}</span>` : ''}</th>`).join('');
-  $('#tbody').innerHTML = list.map(c => `<tr data-id="${esc(c.id)}">
-    <td>${esc(custNo(c))}</td><td>${esc(c.name)}</td>
-    <td><span class="tag ${c.status === 'formal' ? 'formal' : 'potential'}">${c.status === 'formal' ? '正式' : '潛在'}</span></td>
-    <td>${esc(c.region)}</td><td>${esc(salesLabel(c.salesEmail))}</td><td>${esc(c.contact)}</td><td>${esc(c.phone)}</td><td>${esc(c.maintenanceDate)}</td>
-  </tr>`).join('') || '<tr><td colspan="8" class="muted">沒有資料</td></tr>';
-  $('#count').textContent = `共 ${list.length} 筆`;
-}
-
-// ---------------- 客戶詳細頁 ----------------
-function viewCustomer(id) {
-  const c = customers.get(id);
-  if (!c || c.deleted) {
-    app.innerHTML = '<div class="card"><p>找不到這位客戶，或你沒有檢視權限。</p><a href="#/customers">← 回客戶列表</a></div>';
-    return;
-  }
-  const f = (label, val) => `<div class="field"><label>${label}</label><div class="val">${esc(val) || '<span class="muted">—</span>'}</div></div>`;
-  const lic = LICENSES.filter(([k]) => c.license?.[k]).map(([, t]) => t).join('、');
-  app.innerHTML = `<p><a href="#/customers">← 客戶列表</a></p>
-  <div class="card">
-    <div class="toolbar">
-      <h1 style="margin:0">${esc(custNo(c))}　${esc(c.name)}</h1>
-      <span class="tag ${c.status === 'formal' ? 'formal' : 'potential'}">${c.status === 'formal' ? '正式客戶' : '潛在客戶'}</span>
-      <span class="spacer"></span>
-      ${isAdmin() ? `<div class="row-actions"><button class="ghost" id="edit">編輯</button>${c.status === 'potential' ? '<button class="accent" id="conv">轉為正式客戶</button>' : ''}<button class="danger" id="del">刪除</button></div>` : ''}
-    </div>
-    ${c.needsCheck ? `<div class="card warn" style="margin-bottom:12px">⚠ 待確認：${esc(c.checkNote)}　（修正後按「編輯」→ 儲存即解除）</div>` : ''}
-    <h2>基本資料</h2>
-    <div class="grid">
-      ${c.status === 'formal' ? f('正式編號', c.formalNo) : ''}${f('潛在編號', c.leadNo)}${f('區域', c.region)}${f('負責業務', salesLabel(c.salesEmail))}
-      ${COMMON.slice(1).map(([k, t]) => k === 'website' && c.website ? `<div class="field"><label>${t}</label><div class="val"><a href="${esc(/^https?:\/\//i.test(c.website) ? c.website : 'https://' + c.website)}" target="_blank" rel="noopener">${esc(c.website)}</a></div></div>` : f(t, c[k])).join('')}
-    </div>
-    ${c.status === 'formal' ? `<h2 style="margin-top:20px">產品與授權</h2><div class="grid">${f('購買產品', c.purchasedProduct)}${f('授權方式', lic)}${f('維護日期', c.maintenanceDate)}</div>` : ''}
-  </div>
-  <div id="records"><div class="card"><p class="muted">載入紀錄中…</p></div></div>`;
-  $('#edit')?.addEventListener('click', () => customerForm(c));
-  $('#conv')?.addEventListener('click', () => convertToFormal(c));
-  $('#del')?.addEventListener('click', () => deleteCustomer(c));
-  showRecords(c);
-}
-
-// ---------------- 新增／編輯客戶 ----------------
-function customerForm(c, preset = {}, onCreated = null) {
-  const isNew = !c;
-  const cur = c || { status: 'potential', license: {}, ...preset };
-  const inp = (k, t, req) => `<div class="field"><label>${t}${req ? ' *' : ''}</label><input name="${k}" value="${esc(cur[k])}"></div>`;
-  const dlg = document.createElement('dialog');
-  dlg.innerHTML = `<form id="cf">
-    <h1>${isNew ? '新增客戶' : `編輯客戶　${esc(custNo(cur))}`}</h1>
-    <div class="grid">
-      ${isNew ? '<div class="field"><label>類型 *</label><select name="status"><option value="potential">潛在客戶</option><option value="formal">正式客戶</option></select></div>' : ''}
-      ${!isNew ? `<div class="field"><label>潛在編號</label><input name="leadNo" value="${esc(cur.leadNo)}" placeholder="L-A00001"><button type="button" class="ghost small" data-newno="lead" style="margin-top:6px">取用新的 L 編號</button></div>
-      ${cur.status === 'formal' ? `<div class="field"><label>正式編號 *</label><input name="formalNo" value="${esc(cur.formalNo)}" placeholder="C00001"><button type="button" class="ghost small" data-newno="formal" style="margin-top:6px">取用新的 C 編號</button></div>` : ''}` : ''}
-      <div class="field"><label>區域</label><select name="region"><option value="">（未分區）</option>${REGIONS.map(r => `<option ${cur.region === r ? 'selected' : ''}>${r}</option>`).join('')}</select></div>
-      <div class="field"><label>負責業務</label><select name="salesEmail"><option value="">（未指定）</option>${salesOptions(cur.salesEmail)}</select></div>
-      ${COMMON.map(([k, t, r]) => inp(k, t, r)).join('')}
-    </div>
-    <div id="formalPart">
-      <h2 style="margin-top:20px">產品與授權</h2>
-      <div class="grid">${inp('purchasedProduct', '購買產品')}<div class="field"><label>維護日期</label><input type="date" name="maintenanceDate" value="${esc(cur.maintenanceDate)}"></div></div>
-      <div class="checks" style="margin-top:12px">${LICENSES.map(([k, t]) => `<label><input type="checkbox" name="lic_${k}" ${cur.license?.[k] ? 'checked' : ''}>${t}</label>`).join('')}</div>
-    </div>
-    <div class="row-actions" style="margin-top:24px;justify-content:flex-end">
-      <button type="button" class="ghost" id="cancel">取消</button><button type="submit" id="save">儲存</button>
-    </div>
-  </form>`;
-  document.body.appendChild(dlg);
-  const form = dlg.querySelector('#cf');
-  const statusNow = () => isNew ? form.status.value : cur.status;
-  const togglePart = () => dlg.querySelector('#formalPart').classList.toggle('hidden', statusNow() !== 'formal');
-  togglePart();
-  if (isNew) form.status.addEventListener('change', togglePart);
-  const close = () => { dlg.close(); dlg.remove(); };
-  dlg.querySelector('#cancel').addEventListener('click', close);
-  dlg.addEventListener('cancel', () => dlg.remove());
-  dlg.querySelectorAll('[data-newno]').forEach(btn => btn.addEventListener('click', async () => {
-    const kind = btn.dataset.newno;
-    const region = form.region.value;
-    if (kind === 'lead' && !REGION_CODE[region]) return toast('請先選區域，才能產生 L 編號');
-    if (!confirm('會用掉一個新號碼，確定取用？')) return;
-    try {
-      const key = kind === 'formal' ? 'formal' : 'lead_' + REGION_CODE[region];
-      const no = await runTransaction(db, async tx => {
-        const ref = doc(db, 'counters', key); const s0 = await tx.get(ref);
-        const n = s0.exists() ? s0.data().next : 1; tx.set(ref, { next: n + 1 });
-        return kind === 'formal' ? fmt('C', n) : fmt('L-' + REGION_CODE[region], n);
-      });
-      form[kind === 'formal' ? 'formalNo' : 'leadNo'].value = no;
-      toast('已填入 ' + no + '，按儲存後生效');
-    } catch (err) { toast(errMsg(err)); }
-  }));
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    const status = statusNow();
-    const data = {};
-    COMMON.forEach(([k]) => (data[k] = String(fd.get(k) || '').trim()));
-    data.region = fd.get('region') || '';
-    data.salesEmail = fd.get('salesEmail') || '';
-    if (status === 'formal') {
-      data.purchasedProduct = String(fd.get('purchasedProduct') || '').trim();
-      data.maintenanceDate = fd.get('maintenanceDate') || '';
-      data.license = Object.fromEntries(LICENSES.map(([k]) => [k, fd.get('lic_' + k) === 'on']));
-    }
-    if (!data.name) return toast('請填寫客戶名稱');
-    if (isNew && status === 'potential' && !data.region) return toast('潛在客戶必須選擇區域（用來產生 L 編號）');
-    if (!isNew) {
-      const lead = String(fd.get('leadNo') || '').trim().toUpperCase();
-      const formal = String(fd.get('formalNo') ?? cur.formalNo ?? '').trim().toUpperCase();
-      if (lead && !/^L-[ABC]\d{5}$/.test(lead)) return toast('潛在編號格式應為 L-A00001（A 台北、B 台中、C 台南）');
-      if (status === 'potential' && !lead) return toast('潛在客戶必須有潛在編號');
-      if (status === 'formal' && !/^C\d{5}$/.test(formal)) return toast('正式編號格式應為 C00001');
-      const clash = [...customers.values()].find(x => x.id !== cur.id && !x.deleted && ((lead && x.leadNo === lead) || (status === 'formal' && x.formalNo === formal)));
-      if (clash) return toast(`編號已被使用：${custNo(clash)} ${clash.name}`, 6000);
-      data.leadNo = lead;
-      if (status === 'formal') data.formalNo = formal;
-    }
-    dlg.querySelector('#save').disabled = true;
-    try {
-      let id = cur.id;
-      if (isNew) {
-        await runTransaction(db, async tx => {
-          const key = status === 'formal' ? 'formal' : 'lead_' + REGION_CODE[data.region];
-          const cref = doc(db, 'counters', key);
-          const s = await tx.get(cref);
-          const n = s.exists() ? s.data().next : 1;
-          const ref = doc(collection(db, 'customers'));
-          tx.set(cref, { next: n + 1 });
-          tx.set(ref, {
-            ...data, status,
-            leadNo: status === 'potential' ? fmt('L-' + REGION_CODE[data.region], n) : '',
-            formalNo: status === 'formal' ? fmt('C', n) : '',
-            deleted: false, createdBy: me.email, createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp()
-          });
-          id = ref.id;
-        });
-      } else {
-        await updateDoc(doc(db, 'customers', cur.id), { ...data, needsCheck: false, updatedBy: me.email, updatedAt: serverTimestamp() });
-      }
-      close();
-      await syncCustomers();
-      toast('已儲存');
-      if (isNew && onCreated) { try { await onCreated(id); } catch (e2) { /* 連結行程失敗不影響客戶建立 */ } }
-      if (isNew) location.hash = '#/customer/' + encodeURIComponent(id); else route();
-    } catch (err) {
-      toast(errMsg(err));
-      dlg.querySelector('#save').disabled = false;
-    }
-  });
-  dlg.showModal();
-}
-
-async function convertToFormal(c) {
-  if (!confirm(`確定將 ${c.leadNo} ${c.name} 轉為正式客戶？\n系統會產生新的 C 編號，原 L 編號保留。`)) return;
-  try {
-    await runTransaction(db, async tx => {
-      const cref = doc(db, 'counters', 'formal');
-      const ref = doc(db, 'customers', c.id);
-      const s = await tx.get(cref);
-      const cs = await tx.get(ref);
-      if (!cs.exists() || cs.data().status !== 'potential') throw new Error('此客戶已不是潛在客戶');
-      const n = s.exists() ? s.data().next : 1;
-      tx.set(cref, { next: n + 1 });
-      tx.update(ref, { status: 'formal', formalNo: fmt('C', n), convertedAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp() });
-    });
-    await syncCustomers();
-    route();
-    toast('已轉為正式客戶，請補填產品與授權資料');
-    customerForm(customers.get(c.id));
-  } catch (e) { toast(errMsg(e)); }
-}
-
-async function deleteCustomer(c) {
-  if (!confirm(`確定刪除 ${custNo(c)} ${c.name}？`)) return;
-  try {
-    await updateDoc(doc(db, 'customers', c.id), { deleted: true, updatedBy: me.email, updatedAt: serverTimestamp() });
-    await syncCustomers();
-    toast('已刪除');
-    location.hash = '#/customers';
-  } catch (e) { toast(errMsg(e)); }
-}
-
-// ---------------- 關聯紀錄（採購、問題追蹤、安裝、Demo）----------------
-const isEngineer = () => me?.role === 'engineer';
-const userOptions = (roles, sel) => [...users.values()].filter(u => (roles.includes(u.role) || (roles.includes('engineer') && u.alsoEngineer) || (roles.includes('sales') && u.alsoSales)) && (u.active !== false || u.email === sel))
-  .sort((a, b) => (a.nameZh || '').localeCompare(b.nameZh || '', 'zh-Hant'))
-  .map(u => `<option value="${esc(u.email)}" ${u.email === sel ? 'selected' : ''}>${esc(salesLabel(u.email))}</option>`).join('');
-const DEMO_TYPE = { sales: '業務 Demo', engineer: '工程師 Demo' };
-// 業務（含業務主管）只能填業務 Demo；工程師只能填工程師 Demo；管理者兩種都可
-const demoTypes = () => isAdmin() ? ['sales', 'engineer']
-  : [...((me.role === 'sales' || me.role === 'manager') ? ['sales'] : []), ...((me.role === 'engineer' || me.alsoEngineer) ? ['engineer'] : [])];
-
-const PLACES = ['客戶現場', '線上會議', '公司'];
-const REC = {
-  demos: {
-    title: 'Demo 紀錄', top: true,
-    canAdd: () => demoTypes().length > 0,
-    canEdit: r => isAdmin() || r.createdBy === me.email,
-    canDel: r => isAdmin() || r.createdBy === me.email,
-    fields: [
-      ['type', '類型', 'select', true, () => Object.entries(DEMO_TYPE).filter(([k]) => demoTypes().includes(k))],
-      ['date', '日期', 'date', true],
-      ['salesEmail', '業務', 'user', false, ['sales', 'manager']],
-      ['engineerEmail', '工程師', 'user', false, ['engineer']],
-      ['opportunity', '商機', 'list', false, ['高', '中', '低', '暫無需求']],
-      ['period', '期程', 'list', false, ['短期', '中期', '長期', '暫無需求']],
-      ['participants', '參與人員', 'text'],
-      ['products', '介紹產品', 'list', false, ['IronCAD', 'IronCAD Mechanical', 'IronCAD Draft', 'ENCY CAM', 'ENCY Robot', 'DDM (PDM)']],
-      ['content', '內容', 'textarea', false, null, true]
-    ],
-    cols: [['date', '日期'], ['type', '類型', r => DEMO_TYPE[r.type] || ''], ['salesEmail', '業務', r => salesLabel(r.salesEmail)], ['engineerEmail', '工程師', r => salesLabel(r.engineerEmail)], ['opportunity', '商機'], ['period', '期程'], ['products', '介紹產品'], ['content', '內容', null, true]]
-  },
-  purchases: {
-    title: '採購紀錄', kind: 'purchase',
-    canAdd: () => isAdmin(), canEdit: () => isAdmin(), canDel: () => isAdmin(),
-    fields: [['date', '採購日期', 'date', true], ['summary', '採購內容簡要', 'textarea', true, null, true], ['files', '序號檔／購買證明', 'files', false, null, true]],
-    cols: [['date', '採購日期'], ['summary', '採購內容簡要', null, true], ['files', '檔案']]
-  },
-  issues: {
-    title: '問題追蹤', kind: 'issue',
-    canAdd: () => isAdmin() || isEngineer(), canEdit: () => isAdmin() || isEngineer(), canDel: () => isAdmin(),
-    fields: [['date', '日期', 'date', true], ['title', '名稱', 'text', true], ['status', '狀態', 'list', false, ['發問中', '未解決', '已解決', '未來新增', '近期觀察', '不解決']], ['content', '內容', 'textarea', false, null, true], ['solution', '解決方式', 'textarea', false, null, true], ['link', '雲端連結', 'text', false, null, true], ['files', '檔案', 'files', false, null, true]],
-    cols: [['date', '日期'], ['title', '名稱'], ['status', '狀態'], ['content', '內容', null, true], ['solution', '解決方式', null, true], ['link', '雲端連結'], ['files', '檔案']]
-  },
-  installs: {
-    title: '工程師安裝紀錄',
-    canAdd: () => isAdmin() || isEngineer(), canEdit: () => isAdmin() || isEngineer(), canDel: () => isAdmin(),
-    fields: [['date', '安裝日期', 'date', true], ['software', '安裝軟體', 'list', true, ['IronCAD', 'IronCAD Draft', 'ENCY CAM', 'DDM (PDM)']], ['version', '安裝版本', 'text'], ['note', '安裝註記', 'textarea', false, null, true]],
-    cols: [['date', '安裝日期'], ['software', '安裝軟體'], ['version', '安裝版本'], ['note', '安裝註記', null, true]]
-  }
-};
-const REC_ORDER = ['demos', 'purchases', 'issues', 'installs'];
-const recCache = new Map(); // customerId -> {demos:[], purchases:[], ...}
-
-function recCol(key, c) { return REC[key].top ? collection(db, key) : collection(db, 'customers', c.id, key); }
-async function loadRecords(c) {
-  const out = {};
-  for (const k of REC_ORDER) {
-    const q = REC[k].top ? query(collection(db, k), where('customerId', '==', c.id)) : recCol(k, c);
-    out[k] = (await getDocs(q)).docs.map(d => ({ id: d.id, ...d.data() }));
-  }
-  recCache.set(c.id, out);
-  return out;
-}
-async function showRecords(c, reload = false) {
-  let data = recCache.get(c.id);
-  if (!data || reload) {
-    try { data = await loadRecords(c); } catch (e) { const box = $('#records'); if (box) box.innerHTML = `<div class="card"><p class="muted">紀錄載入失敗：${esc(errMsg(e))}</p></div>`; return; }
-  }
-  const box = $('#records');
-  if (!box || !location.hash.includes(encodeURIComponent(c.id))) return;
-  const keys = REC_ORDER.filter(k => k !== 'purchases' || c.status === 'formal' || (data.purchases || []).length);
-  box.innerHTML = keys.map(k => {
-    const R = REC[k];
-    const rows = [...(data[k] || [])].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
-    const cell = (r, [f, , fn, wrap]) => {
-      if (f === 'files') return `<td class="files">${(r.files || []).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a>`).join('') || '—'}</td>`;
-      if (f === 'link' && r.link) return `<td><a href="${esc(r.link)}" target="_blank" rel="noopener">開啟</a></td>`;
-      const v = fn ? fn(r) : r[f];
-      return `<td class="${wrap ? 'wrap' : ''}">${esc(v) || '—'}</td>`;
-    };
-    return `<div class="card" data-k="${k}">
-      <div class="sec-head"><h2>${R.title}</h2><span class="muted">${rows.length} 筆</span><span class="spacer"></span>${R.canAdd() ? `<button class="small" data-act="add">＋ 新增</button>` : ''}</div>
-      ${rows.length ? `<div class="tablewrap"><table><thead><tr>${R.cols.map(([, t]) => `<th>${t}</th>`).join('')}<th>建立者</th><th></th></tr></thead><tbody>
-        ${rows.map(r => `<tr data-id="${esc(r.id)}">${R.cols.map(col => cell(r, col)).join('')}<td>${esc(salesLabel(r.createdBy))}</td>
-          <td class="row-actions">${R.canEdit(r) ? '<button class="ghost small" data-act="edit">編輯</button>' : ''}${R.canDel(r) ? '<button class="danger small" data-act="del">刪除</button>' : ''}</td></tr>`).join('')}
-      </tbody></table></div>` : '<p class="muted">尚無紀錄</p>'}
-    </div>`;
-  }).join('');
-  box.querySelectorAll('.card[data-k]').forEach(card => card.addEventListener('click', async e => {
-    const act = e.target.dataset.act; if (!act) return;
-    const k = card.dataset.k; const id = e.target.closest('tr')?.dataset.id;
-    const r = id ? (recCache.get(c.id)[k] || []).find(x => x.id === id) : null;
-    if (act === 'add') recordForm(k, c, null);
-    if (act === 'edit' && r) recordForm(k, c, r);
-    if (act === 'del' && r) {
-      if (!confirm(`確定刪除這筆${REC[k].title}？`)) return;
-      try { await deleteDoc(doc(recCol(k, c), r.id)); toast('已刪除'); if (k === 'schedules') schedCache.clear(); afterRecordChange(c); } catch (err) { toast(errMsg(err)); }
-    }
-  }));
-}
-
-async function uploadFile(file, kind, customerNo) {
-  if (!UPLOAD_URL) throw new Error('尚未設定檔案上傳網址（UPLOAD_URL）');
-  if (file.size > 10 * 1024 * 1024) throw new Error(`${file.name} 超過 10MB`);
-  const data = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1]); fr.onerror = rej; fr.readAsDataURL(file); });
-  const j = await callScript('upload', { kind, customerNo, name: file.name, mimeType: file.type, data });
-  return { name: j.name, url: j.url };
-}
-async function callScript(action, payload) {
-  if (!UPLOAD_URL) throw new Error('尚未設定 Apps Script 網址');
-  const idToken = await auth.currentUser.getIdToken();
-  const resp = await fetch(UPLOAD_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action, idToken, ...payload }) });
-  const j = await resp.json();
-  if (!j.ok) throw new Error(j.error || '執行失敗');
-  return j;
-}
-// 行程建立後：系統內通知＋Email
-async function notifySchedule(id, data) {
-  const to = [...new Set([data.salesEmail, data.engineerEmail].filter(Boolean))];
-  if (!to.length) return;
-  const title = `新行程：${data.title}`;
-  const body = `${dateRangeText(data)} ${timeText(data)}｜${SCHED_TYPE[data.type] || ''}`;
-  for (const email of to) {
-    try { await addDoc(collection(db, 'notifications'), { to: email, from: me.email, title, body, scheduleId: id, date: data.date, read: false, createdAt: serverTimestamp() }); } catch (e) { /* 單筆失敗不影響其他 */ }
-  }
-  try {
-    const j = await callScript('notify', { scheduleId: id });
-    toast(j.sent ? `已寄出 Email 給 ${j.sent} 人` : 'Email 未寄出：Apps Script 回傳 0 位收件人（可能尚未更新為新版程式）', 10000);
-  } catch (e) { toast('行程已儲存，但 Email 通知失敗：' + errMsg(e), 10000); }
-}
-
-function recordForm(k, c, r, preset = {}) {
-  const R = REC[k];
-  const isNew = !r;
-  const cur = r || Object.assign(['demos', 'schedules'].includes(k) ? { type: me.role === 'engineer' ? 'engineer' : 'sales', date: new Date().toLocaleDateString('sv-SE'), salesEmail: ['sales', 'manager'].includes(me.role) ? me.email : (c.salesEmail || ''), engineerEmail: me.role === 'engineer' ? me.email : '' } : { date: new Date().toLocaleDateString('sv-SE') }, preset);
-  let files = [...(cur.files || [])];
-  const lock = k === 'demos' && !isAdmin() && demoTypes().length === 1 ? demoTypes()[0] : null;
-  if (lock) { cur.type = lock; if (lock === 'sales') cur.salesEmail = me.email; else cur.engineerEmail = me.email; }
-  const field = ([f, t, type, req, opt, full]) => {
-    const lab = `<label>${t}${req ? ' *' : ''}</label>`;
-    const cls = `field${full ? ' full' : ''}`;
-    if (lock && f === 'type') return `<div class="${cls}">${lab}<input type="hidden" name="type" value="${lock}"><div class="val">${DEMO_TYPE[lock]}</div></div>`;
-    if (lock && ((lock === 'sales' && f === 'salesEmail') || (lock === 'engineer' && f === 'engineerEmail'))) return `<div class="${cls}">${lab}<input type="hidden" name="${f}" value="${esc(me.email)}"><div class="val">${esc(salesLabel(me.email))}</div></div>`;
-    if (type === 'textarea') return `<div class="${cls}">${lab}<textarea name="${f}" rows="4">${esc(cur[f])}</textarea></div>`;
-    if (type === 'date') return `<div class="${cls}">${lab}<input type="date" name="${f}" value="${esc(cur[f])}"></div>`;
-    if (type === 'time') return `<div class="${cls}">${lab}<input type="time" name="${f}" value="${esc(cur[f])}"></div>`;
-    if (type === 'sched') {
-      const list = [...((recCache.get(c.id) || {}).schedules || [])].sort((a, b) => String(b.date).localeCompare(String(a.date)));
-      return `<div class="${cls}">${lab}<select name="${f}"><option value="">（不指定）</option>${list.map(x => `<option value="${esc(x.id)}" ${cur[f] === x.id ? 'selected' : ''}>${esc(x.date)} ${esc(x.startTime)} ${esc(DEMO_TYPE[x.type] || '')}</option>`).join('')}</select></div>`;
-    }
-    if (type === 'select') return `<div class="${cls}">${lab}<select name="${f}">${opt().map(([v, tt]) => `<option value="${v}" ${cur[f] === v ? 'selected' : ''}>${tt}</option>`).join('')}</select></div>`;
-    if (type === 'user') return `<div class="${cls}">${lab}<select name="${f}"><option value="">（未指定）</option>${userOptions(opt, cur[f])}</select></div>`;
-    if (type === 'list') return `<div class="${cls}">${lab}<input name="${f}" list="dl_${f}" value="${esc(cur[f])}"><datalist id="dl_${f}">${opt.map(o => `<option value="${esc(o)}">`).join('')}</datalist></div>`;
-    if (type === 'files') return `<div class="${cls}">${lab}<div class="filelist" id="flist"></div><input type="file" name="__files" multiple accept=".pdf,image/*,.lic,.dat,.txt,.zip"><div class="muted">每個檔案 10MB 以內，存放於 Google Drive</div></div>`;
-    return `<div class="${cls}">${lab}<input name="${f}" value="${esc(cur[f])}"${f === 'participants' ? ' placeholder="多位用頓號隔開，例：林工程師、王經理"' : ''}></div>`;
-  };
-  const dlg = document.createElement('dialog');
-  let target = c; // 管理者可在編輯時更換連結客戶
-  const custLine = () => `<span id="custName">${esc(custNo(target))}　${esc(target.name)}</span>${target.id !== c.id ? ' <span class="tag potential">將更換</span>' : ''}`;
-  dlg.innerHTML = `<form id="rf"><h1>${isNew ? '新增' : '編輯'}${R.title}</h1><p class="muted" id="custLine">${custLine()}</p>${!isNew && isAdmin() ? '<p><button type="button" class="ghost small" id="chgCust">更換連結客戶</button></p>' : ''}
-    <div class="grid">${R.fields.map(field).join('')}</div>
-    <div class="row-actions" style="margin-top:24px;justify-content:flex-end"><button type="button" class="ghost" id="cancel">取消</button><button type="submit" id="save">儲存</button></div></form>`;
-  document.body.appendChild(dlg);
-  const form = dlg.querySelector('#rf');
-  dlg.querySelector('#chgCust')?.addEventListener('click', () => {
-    dlg.close();
-    pickCustomer(c2 => { if (c2) { target = c2; dlg.querySelector('#custLine').innerHTML = custLine(); } dlg.showModal(); }, () => dlg.showModal());
-  });
-  const drawFiles = () => { const fl = dlg.querySelector('#flist'); if (fl) fl.innerHTML = files.map((x, i) => `<span><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a><button type="button" class="x" data-i="${i}">✕</button></span>`).join(''); };
-  drawFiles();
-  dlg.querySelector('#flist')?.addEventListener('click', e => { const i = e.target.dataset.i; if (i !== undefined) { files.splice(Number(i), 1); drawFiles(); } });
-  const close = () => { dlg.close(); dlg.remove(); };
-  dlg.querySelector('#cancel').addEventListener('click', close);
-  dlg.addEventListener('cancel', () => dlg.remove());
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const data = {};
-    for (const [f, t, type, req] of R.fields) {
-      if (type === 'files') continue;
-      data[f] = String(form[f].value || '').trim();
-      if (req && !data[f]) return toast(`請填寫${t}`);
-    }
-    const saveBtn = dlg.querySelector('#save');
-    saveBtn.disabled = true;
-    try {
-      const picker = form.querySelector('input[name=__files]');
-      if (picker && picker.files.length) {
-        saveBtn.textContent = '上傳中…';
-        for (const f of picker.files) files.push(await uploadFile(f, R.kind, custNo(c) || c.leadNo || c.id));
-      }
-      if (R.fields.some(x => x[2] === 'files')) data.files = files;
-      if (R.top) Object.assign(data, { customerId: target.id, customerName: target.name || '', customerNo: custNo(target), region: target.region || '' });
-      if (k === 'demos' && cur.scheduleId) data.scheduleId = cur.scheduleId;
-      if (k === 'demos' && !isAdmin() && !demoTypes().includes(data.type)) throw new Error('你不能填寫這種 Demo 紀錄');
-      if (k === 'schedules' && data.endTime && data.endTime < data.startTime) throw new Error('結束時間不能早於開始時間');
-      let newId = null;
-      if (isNew) newId = (await addDoc(recCol(k, c), { ...data, createdBy: me.email, createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp() })).id;
-      else if (!R.top && target.id !== c.id) {
-        // 子紀錄換客戶：搬到新客戶底下，刪除舊的
-        const { id: _id, customerId: _cid, ...old } = r;
-        const b = writeBatch(db);
-        b.set(doc(recCol(k, target), r.id), { ...old, ...data, updatedBy: me.email, updatedAt: serverTimestamp() });
-        b.delete(doc(recCol(k, c), r.id));
-        await b.commit();
-      }
-      else await updateDoc(doc(recCol(k, c), r.id), { ...data, updatedBy: me.email, updatedAt: serverTimestamp() });
-      close(); toast(target.id !== c.id ? `已儲存，並改連結到 ${target.name}` : '已儲存');
-      if (target.id !== c.id) { recCache.delete(target.id); recsCache.clear(); }
-      if (k === 'schedules') { schedCache.clear(); if (isNew) notifySchedule(newId, data); }
-      afterRecordChange(c);
-    } catch (err) { toast(errMsg(err)); saveBtn.disabled = false; saveBtn.textContent = '儲存'; }
-  });
-  dlg.showModal();
-}
-
-// ---------------- 通知鈴鐺 ----------------
-function renderBell() {
-  const b = $('#badge'); if (!b) return;
-  b.textContent = notes.length > 99 ? '99+' : notes.length;
-  b.classList.toggle('hidden', !notes.length);
-  const p = $('#npanel');
-  if (!p.classList.contains('hidden')) drawPanel();
-}
-function drawPanel() {
-  $('#npanel').innerHTML = `<div class="ph"><span>通知</span>${notes.length ? '<button class="ghost small" id="readAll">全部標為已讀</button>' : ''}</div>` +
-    (notes.map(n => `<div class="ni" data-id="${esc(n.id)}"><div class="t">${esc(n.title)}</div><div class="muted">${esc(n.body)}</div></div>`).join('') || '<div class="ni muted">沒有新通知</div>');
-}
-$('#bell').addEventListener('click', e => { e.stopPropagation(); const p = $('#npanel'); p.classList.toggle('hidden'); if (!p.classList.contains('hidden')) drawPanel(); });
-document.addEventListener('click', e => { if (!e.target.closest('.bellwrap')) $('#npanel').classList.add('hidden'); });
-$('#npanel').addEventListener('click', async e => {
-  if (e.target.id === 'readAll') { for (const n of notes) updateDoc(doc(db, 'notifications', n.id), { read: true }).catch(() => {}); return; }
-  const id = e.target.closest('.ni')?.dataset.id; if (!id) return;
-  const n = notes.find(x => x.id === id);
-  updateDoc(doc(db, 'notifications', id), { read: true }).catch(() => {});
-  $('#npanel').classList.add('hidden');
-  if (n?.date) { cal.cursor = n.date; }
-  location.hash = '#/calendar'; route();
-});
-
-// ---------------- 行事曆 ----------------
-const SCHED_TYPE = { sales: '業務 Demo', engineer: '工程師 Demo', class: '上課', leave: '休假', other: '其他' };
-const cal = { view: 'month', cursor: new Date().toLocaleDateString('sv-SE'), region: '', person: '', type: '' };
-const schedCache = new Map(); // 'YYYY-MM' -> [schedules]
-const holidayCache = new Map(); // 'YYYY' -> Map(date -> name)
-const toDate = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
-const ymdOf = d => d.toLocaleDateString('sv-SE');
-const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
-const WD = ['日', '一', '二', '三', '四', '五', '六'];
-const endOf = x => x.endDate && x.endDate > x.date ? x.endDate : x.date;
-const dateRangeText = x => endOf(x) !== x.date ? `${x.date}～${endOf(x)}` : x.date;
-const timeText = x => x.startTime ? x.startTime + (x.endTime ? '～' + x.endTime : '') : '全天';
-const evColor = x => x.type === 'leave' ? 'leave' : x.region === '台北' ? 'north' : (x.region === '台中' || x.region === '台南') ? 'midsouth' : 'none';
-
-function afterRecordChange(c) {
-  if (c?.id) recCache.delete(c.id);
-  recsCache.clear();
-  if (location.hash.startsWith('#/calendar')) viewCalendar();
-  else if (location.hash.startsWith('#/records')) viewRecords();
-  else if (c) showRecords(c, true);
-}
-async function loadMonth(ym) {
-  if (schedCache.has(ym)) return schedCache.get(ym);
-  const snap = await getDocs(query(collection(db, 'schedules'), where('date', '>=', ym + '-01'), where('date', '<=', ym + '-31')));
-  const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  schedCache.set(ym, list);
-  return list;
-}
-// 台灣國定假日（資料來源：行政院人事行政總處辦公日曆表，ruyut/TaiwanCalendar 整理）
-async function loadHolidays(year) {
-  if (holidayCache.has(year)) return holidayCache.get(year);
-  const m = new Map();
-  try {
-    const r = await fetch(`https://cdn.jsdelivr.net/gh/ruyut/TaiwanCalendar/data/${year}.json`);
-    if (r.ok) (await r.json()).forEach(d => { if (d.isHoliday && d.description) m.set(`${d.date.slice(0, 4)}-${d.date.slice(4, 6)}-${d.date.slice(6, 8)}`, d.description); });
-  } catch (e) { /* 抓不到就不顯示假日 */ }
-  holidayCache.set(year, m);
-  return m;
-}
-function calRange() {
-  const cur = toDate(cal.cursor);
-  if (cal.view === 'week') { const start = addDays(cur, -cur.getDay()); return [start, addDays(start, 6)]; }
-  const first = new Date(cur.getFullYear(), cur.getMonth(), 1);
-  const last = new Date(cur.getFullYear(), cur.getMonth() + 1, 0);
-  if (cal.view === 'list') return [first, last];
-  return [addDays(first, -first.getDay()), addDays(last, 6 - last.getDay())];
-}
-async function viewCalendar() {
-  const [start, end] = calRange();
-  const s0 = ymdOf(start), s1 = ymdOf(end);
-  const months = []; // 多抓前一個月，才看得到跨月的行程
-  for (let d = new Date(start.getFullYear(), start.getMonth() - 1, 1); ymdOf(d).slice(0, 7) <= s1.slice(0, 7); d = new Date(d.getFullYear(), d.getMonth() + 1, 1)) months.push(ymdOf(d).slice(0, 7));
-  let all = []; const hol = new Map();
-  try {
-    for (const m of months) all = all.concat(await loadMonth(m));
-    for (const y of [...new Set([s0.slice(0, 4), s1.slice(0, 4)])]) (await loadHolidays(y)).forEach((v, k) => hol.set(k, v));
-  } catch (e) { app.innerHTML = `<div class="card"><p>行程載入失敗：${esc(errMsg(e))}</p></div>`; return; }
-  if (!location.hash.startsWith('#/calendar')) return;
-  const list = all.filter(x => x.date <= s1 && endOf(x) >= s0)
-    .filter(x => !cal.region || x.region === cal.region)
-    .filter(x => !cal.person || x.salesEmail === cal.person || x.engineerEmail === cal.person)
-    .filter(x => !cal.type || x.type === cal.type)
-    .sort((a, b) => (a.date + (a.startTime || '')).localeCompare(b.date + (b.startTime || '')));
-  const cur = toDate(cal.cursor);
-  const title = cal.view === 'week' ? `${s0} ～ ${s1}` : `${cur.getFullYear()} 年 ${cur.getMonth() + 1} 月`;
-  const today = ymdOf(new Date());
-  const chip = x => `<span class="ev ${evColor(x)}" data-sid="${esc(x.id)}" title="${esc(x.title)}">${x.startTime ? esc(x.startTime) + ' ' : ''}${esc(x.title)}</span>`;
-  let body = '';
-  if (cal.view === 'list') {
-    const hols = [...hol].filter(([d]) => d >= s0 && d <= s1);
-    body = (list.length || hols.length) ? `<div class="tablewrap"><table><thead><tr><th>日期</th><th>時間</th><th>標題</th><th>類型</th><th>區域</th><th>業務</th><th>工程師</th><th>地點</th></tr></thead><tbody class="click">
-      ${hols.map(([d, n]) => `<tr><td>${d}（${WD[toDate(d).getDay()]}）</td><td>全天</td><td><span class="ev holiday">${esc(n)}</span></td><td>國定假日</td><td></td><td></td><td></td><td></td></tr>`).join('')}
-      ${list.map(x => `<tr data-sid="${esc(x.id)}"><td>${esc(dateRangeText(x))}</td><td>${esc(timeText(x))}</td><td><span class="ev ${evColor(x)}">${esc(x.title)}</span></td><td>${SCHED_TYPE[x.type] || ''}</td><td>${esc(x.region)}</td><td>${esc(salesLabel(x.salesEmail))}</td><td>${esc(salesLabel(x.engineerEmail))}</td><td>${esc(x.place)}</td></tr>`).join('')}
-    </tbody></table></div>` : '<p class="muted">這個月沒有行程</p>';
-  } else {
-    const days = []; for (let d = new Date(start); d <= end; d = addDays(d, 1)) days.push(ymdOf(d));
-    body = `<div class="cal ${cal.view === 'week' ? 'week' : ''}">${WD.map(w => `<div class="dh">${w}</div>`).join('')}${days.map(d => {
-      const dd = toDate(d); const out = cal.view === 'month' && dd.getMonth() !== cur.getMonth();
-      return `<div class="dc ${out ? 'out' : ''} ${d === today ? 'today' : ''}" data-day="${d}"><span class="dn">${cal.view === 'week' ? (dd.getMonth() + 1) + '/' : ''}${dd.getDate()}</span>${hol.has(d) ? `<span class="ev holiday">${esc(hol.get(d))}</span>` : ''}${list.filter(x => x.date <= d && endOf(x) >= d).map(chip).join('')}</div>`;
-    }).join('')}</div>`;
-  }
-  app.innerHTML = `<div class="card">
-    <div class="toolbar"><h1 style="margin:0">行事曆</h1><span class="spacer"></span><button id="addS">＋ 新增行程</button></div>
-    <div class="toolbar">
-      <button class="ghost small" id="prev">‹</button><button class="ghost small" id="today">今天</button><button class="ghost small" id="next">›</button>
-      <strong style="margin:0 8px">${title}</strong>
-      <div class="seg" id="vseg">${[['month', '月'], ['week', '週'], ['list', '清單']].map(([k, t]) => `<button data-v="${k}" class="${cal.view === k ? 'on' : ''}">${t}</button>`).join('')}</div>
-      <span class="spacer"></span>
-      <select id="cRegion"><option value="">全部區域</option>${REGIONS.map(r => `<option ${cal.region === r ? 'selected' : ''}>${r}</option>`).join('')}</select>
-      <select id="cPerson"><option value="">全部人員</option>${userOptions(['sales', 'manager', 'engineer', 'admin'], cal.person)}</select>
-      <select id="cType"><option value="">全部類型</option>${Object.entries(SCHED_TYPE).map(([k, t]) => `<option value="${k}" ${cal.type === k ? 'selected' : ''}>${t}</option>`).join('')}</select>
-      <button class="ghost small" id="cRefresh">重新整理</button>
-    </div>
-    <div class="muted" style="margin-bottom:8px">共 ${list.length} 筆行程</div>
-    ${body}
-    <div class="legend"><span class="north">北區</span><span class="midsouth">中區／南區</span><span class="leave">休假</span><span class="holiday">國定假日</span><span class="none">未分區</span>${cal.view !== 'list' ? '<span class="plain">點空白日期可新增行程</span>' : ''}</div>
-  </div>`;
-  const move = n => { const c0 = toDate(cal.cursor); cal.cursor = ymdOf(cal.view === 'week' ? addDays(c0, 7 * n) : new Date(c0.getFullYear(), c0.getMonth() + n, 1)); viewCalendar(); };
-  $('#prev').onclick = () => move(-1); $('#next').onclick = () => move(1);
-  $('#today').onclick = () => { cal.cursor = ymdOf(new Date()); viewCalendar(); };
-  $('#vseg').onclick = e => { const v = e.target.dataset.v; if (v) { cal.view = v; viewCalendar(); } };
-  $('#cRegion').onchange = e => { cal.region = e.target.value; viewCalendar(); };
-  $('#cPerson').onchange = e => { cal.person = e.target.value; viewCalendar(); };
-  $('#cType').onchange = e => { cal.type = e.target.value; viewCalendar(); };
-  $('#cRefresh').onclick = () => { schedCache.clear(); viewCalendar(); };
-  $('#addS').onclick = () => scheduleForm(null, { date: cal.cursor });
-  app.querySelector('.card').addEventListener('click', e => {
-    const sid = e.target.closest('[data-sid]')?.dataset.sid;
-    if (sid) { const x = list.find(y => y.id === sid); if (x) scheduleDetail(x); return; }
-    const day = e.target.closest('.dc')?.dataset.day;
-    if (day) scheduleForm(null, { date: day });
-  });
-}
-
-const canEditSched = x => isAdmin() || x.createdBy === me.email;
-function scheduleDetail(x) {
-  const dlg = document.createElement('dialog');
-  const f = (l, v) => `<div class="field"><label>${l}</label><div class="val">${esc(v) || '<span class="muted">—</span>'}</div></div>`;
-  const wd = d => WD[toDate(d).getDay()];
-  dlg.innerHTML = `<h1><span class="ev ${evColor(x)}" style="display:inline-block;font-size:13px;vertical-align:middle">${SCHED_TYPE[x.type] || ''}</span> ${esc(x.title)}</h1>
-    <p class="muted">${esc(x.date)}（${wd(x.date)}）${endOf(x) !== x.date ? `～${esc(endOf(x))}（${wd(endOf(x))}）` : ''}　${esc(timeText(x))}</p>
-    <div class="grid">${f('區域', x.region)}${f('業務', salesLabel(x.salesEmail))}${f('工程師', salesLabel(x.engineerEmail))}${f('地點', x.place)}
-      <div class="field full"><label>網址</label><div class="val">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.url)}</a>` : '<span class="muted">—</span>'}</div></div>
-      <div class="field full"><label>內容</label><div class="val" style="white-space:pre-wrap">${esc(x.content) || '<span class="muted">—</span>'}</div></div>
-      ${f('建立者', salesLabel(x.createdBy))}</div>
-    <div class="row-actions" style="margin-top:24px;justify-content:flex-end">
-      ${x.customerId && customers.has(x.customerId) ? '<button class="ghost" data-a="open">開啟客戶</button>' : (isAdmin() ? '<button class="accent" data-a="conv">轉為潛在客戶</button>' : '')}
-      ${demoTypes().map(t => `<button class="accent" data-a="demo" data-t="${t}">轉為${DEMO_TYPE[t]}紀錄</button>`).join('')}
-      ${canEditSched(x) ? '<button class="danger" data-a="del">刪除</button><button class="ghost" data-a="edit">編輯</button>' : ''}<button data-a="close">關閉</button></div>`;
-  document.body.appendChild(dlg);
-  const close = () => { dlg.close(); dlg.remove(); };
-  dlg.addEventListener('cancel', () => dlg.remove());
-  dlg.addEventListener('click', async e => {
-    const a = e.target.dataset.a; if (!a) return;
-    if (a === 'close') close();
-    if (a === 'edit') { close(); scheduleForm(x); }
-    if (a === 'open') { close(); location.hash = '#/customer/' + encodeURIComponent(x.customerId); }
-    if (a === 'demo') {
-      close();
-      const preset = { type: e.target.dataset.t, date: x.date, salesEmail: x.salesEmail || '', engineerEmail: x.engineerEmail || '', scheduleId: x.id };
-      const go = c => recordForm('demos', c, null, preset);
-      if (x.customerId && customers.has(x.customerId)) go(customers.get(x.customerId)); else pickCustomer(go);
-    }
-    if (a === 'conv') {
-      close();
-      customerForm(null, scheduleToCustomer(x), async id => {
-        await updateDoc(doc(db, 'schedules', x.id), { customerId: id, updatedBy: me.email, updatedAt: serverTimestamp() });
-        schedCache.clear();
-      });
-    }
-    if (a === 'del') {
-      if (!confirm('確定刪除這個行程？')) return;
-      try { await deleteDoc(doc(db, 'schedules', x.id)); close(); toast('已刪除'); schedCache.clear(); viewCalendar(); } catch (err) { toast(errMsg(err)); }
-    }
-  });
-  dlg.showModal();
-}
-
-// 從行程內容自動帶入潛在客戶欄位（「標籤：內容」格式的每一行）
-const SCHED_LABELS = [
-  ['name', ['客戶名稱', '客戶全稱', '公司名稱']],
-  ['contact', ['聯絡窗口', '聯繫窗口', '聯絡人']],
-  ['mobile', ['行動電話', '手機']],
-  ['phone', ['聯絡電話', '電話']],
-  ['address', ['公司地址', '地址']],
-  ['companyProduct', ['公司產品']],
-  ['currentSoftware', ['使用軟體', '公司軟體', '現用軟體']],
-  ['industry', ['行業別']],
-  ['email', ['E-Mail', 'Email', '信箱']],
-  ['website', ['公司官網', '官網', '公司網址']]
-];
-function scheduleToCustomer(x) {
-  const out = { status: 'potential', region: x.region || '', salesEmail: x.salesEmail || '' };
-  for (const line of String(x.content || '').split('\n')) {
-    const m = line.match(/^\s*([^：:]{1,12})\s*[：:]\s*(.+?)\s*$/);
-    if (!m) continue;
-    const hit = SCHED_LABELS.find(([, labels]) => labels.some(l => l.toLowerCase() === m[1].trim().toLowerCase()));
-    if (!hit || out[hit[0]]) continue;
-    out[hit[0]] = m[2];
-  }
-  // 「04-7683999 / 0981-315905」：09 開頭的拆到行動電話
-  if (out.phone && /[\/／]/.test(out.phone)) {
-    const parts = out.phone.split(/\s*[\/／]\s*/);
-    const mob = parts.find(p => /^09/.test(p.replace(/\D/g, '')));
-    if (mob && !out.mobile) { out.mobile = mob; out.phone = parts.filter(p => p !== mob).join(' / '); }
-  }
-  if (!out.address && x.place) out.address = x.place;
-  if (!out.name) out.name = String(x.title || '').split(/[-－\[［(（]/)[0].trim();
-  return out;
-}
-
-function scheduleForm(r, preset = {}) {
-  const isNew = !r;
-  const defRegion = userRegions(me).length === 1 ? userRegions(me)[0] : '';
-  const cur = r || Object.assign({ type: me.role === 'engineer' ? 'engineer' : 'sales', date: ymdOf(new Date()), region: defRegion,
-    salesEmail: ['sales', 'manager'].includes(me.role) ? me.email : '', engineerEmail: (me.role === 'engineer' || me.alsoEngineer) && me.role !== 'sales' ? me.email : '' }, preset);
-  const dlg = document.createElement('dialog');
-  dlg.innerHTML = `<form id="sf2"><h1>${isNew ? '新增行程' : '編輯行程'}</h1>
-    <div class="grid">
-      <div class="field full"><label>標題 *</label><input name="title" value="${esc(cur.title)}" placeholder="例：彥豪智能-Demo[Andrew,Maggie]"></div>
-      <div class="field"><label>類型</label><select name="type">${Object.entries(SCHED_TYPE).map(([k, t]) => `<option value="${k}" ${cur.type === k ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
-      <div class="field"><label>區域</label><select name="region"><option value="">（未分區）</option>${REGIONS.map(x => `<option ${cur.region === x ? 'selected' : ''}>${x}</option>`).join('')}</select></div>
-      <div class="field"><label>開始日期 *</label><input type="date" name="date" value="${esc(cur.date)}"></div>
-      <div class="field"><label>結束日期</label><input type="date" name="endDate" value="${esc(cur.endDate || '')}"><div class="muted">單日行程可留空</div></div>
-      <div class="field"><label>開始時間</label><input type="time" name="startTime" value="${esc(cur.startTime || '')}"><div class="muted">留空＝全天</div></div>
-      <div class="field"><label>結束時間</label><input type="time" name="endTime" value="${esc(cur.endTime || '')}"></div>
-      <div class="field"><label>業務</label><select name="salesEmail"><option value="">（未指定）</option>${userOptions(['sales', 'manager'], cur.salesEmail)}</select></div>
-      <div class="field"><label>工程師</label><select name="engineerEmail"><option value="">（未指定）</option>${userOptions(['engineer'], cur.engineerEmail)}</select></div>
-      <div class="field full"><label>地點</label><input name="place" value="${esc(cur.place || '')}"></div>
-      <div class="field full"><label>網址</label><input name="url" type="url" value="${esc(cur.url || '')}" placeholder="https://"></div>
-      <div class="field full"><label>內容</label><textarea name="content" rows="8" placeholder="客戶名稱、聯絡窗口、電話、備註…">${esc(cur.content || '')}</textarea></div>
-    </div>
-    <p class="muted">${isNew ? '儲存後會以系統通知＋Email 通知所選的業務、工程師。' : ''}</p>
-    <div class="row-actions" style="margin-top:16px;justify-content:flex-end"><button type="button" class="ghost" id="cancel">取消</button><button type="submit" id="save">儲存</button></div></form>`;
-  document.body.appendChild(dlg);
-  const form = dlg.querySelector('#sf2');
-  const close = () => { dlg.close(); dlg.remove(); };
-  dlg.querySelector('#cancel').onclick = close;
-  dlg.addEventListener('cancel', () => dlg.remove());
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const v = k => String(form[k].value || '').trim();
-    const data = { title: v('title'), type: v('type'), region: v('region'), date: v('date'), endDate: v('endDate'), startTime: v('startTime'), endTime: v('endTime'),
-      salesEmail: v('salesEmail'), engineerEmail: v('engineerEmail'), place: v('place'), url: v('url'), content: v('content') };
-    if (!data.title) return toast('請填寫標題');
-    if (!data.date) return toast('請選擇開始日期');
-    if (data.endDate && data.endDate < data.date) return toast('結束日期不能早於開始日期');
-    if (data.endDate === data.date) data.endDate = '';
-    if (!data.endDate && data.startTime && data.endTime && data.endTime < data.startTime) return toast('結束時間不能早於開始時間');
-    if (data.url && !/^https?:\/\//i.test(data.url)) data.url = 'https://' + data.url;
-    dlg.querySelector('#save').disabled = true;
-    try {
-      let id = r?.id;
-      if (isNew) id = (await addDoc(collection(db, 'schedules'), { ...data, createdBy: me.email, createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp() })).id;
-      else await updateDoc(doc(db, 'schedules', r.id), { ...data, updatedBy: me.email, updatedAt: serverTimestamp() });
-      close(); toast('已儲存'); schedCache.clear();
-      if (location.hash.startsWith('#/calendar')) viewCalendar();
-      if (isNew) notifySchedule(id, data);
-    } catch (err) { toast(errMsg(err)); dlg.querySelector('#save').disabled = false; }
-  });
-  dlg.showModal();
-}
-
-// ---------------- 紀錄（跨客戶集中填寫、審核）----------------
-const RTABS = [
-  ['sdemo', '業務 Demo', 'demos', 'sales'],
-  ['edemo', '工程師 Demo', 'demos', 'engineer'],
-  ['purchases', '採購紀錄', 'purchases'],
-  ['issues', '問題追蹤', 'issues'],
-  ['installs', '工程師安裝紀錄', 'installs']
-];
-const seesAllRecs = () => isAdmin() || isEngineer();
-const recsUI = { unlinked: false, tab: 'sdemo', ym: new Date().toLocaleDateString('sv-SE').slice(0, 7), region: '', sales: '', engineer: '', q: '', sort: 'date', dir: -1 };
-const recsCache = new Map(); // `${collection}|${ym}` -> rows
-
-const UNLINKED_ID = 'imp_unlinked';
-const toRow = d => ({ id: d.id, ...d.data(), customerId: d.data().customerId || d.ref.parent.parent?.id });
-// 「全部」：先讀本機快取，再只向伺服器抓有變動的，節省讀取額度
-async function loadRecsAll(col, full = false) {
-  const key = col + '|all';
-  if (recsCache.has(key) && !full) return recsCache.get(key);
-  const base = col === 'demos' ? collection(db, 'demos') : collectionGroup(db, col);
-  const map = new Map(); let max = null;
-  if (!full) {
-    try {
-      (await getDocsFromCache(base)).docs.forEach(d => {
-        map.set(d.ref.path, toRow(d));
-        const u = d.data().updatedAt;
-        if (!d.metadata.hasPendingWrites && u && (!max || u.toMillis() > max.toMillis())) max = u;
-      });
-    } catch (e) { /* 沒有快取就全部抓 */ }
-  }
-  (await getDocs(max ? query(base, where('updatedAt', '>', max)) : base)).docs.forEach(d => map.set(d.ref.path, toRow(d)));
-  const rows = [...map.values()];
-  recsCache.set(key, rows);
-  return rows;
-}
-async function loadRecsMonth(col, ym) {
-  if (ym === 'all') return loadRecsAll(col);
-  const key = col + '|' + ym;
-  if (recsCache.has(key)) return recsCache.get(key);
-  const range = [where('date', '>=', ym + '-01'), where('date', '<=', ym + '-31')];
-  const snap = await getDocs(col === 'demos' ? query(collection(db, 'demos'), ...range) : query(collectionGroup(db, col), ...range));
-  const rows = snap.docs.map(toRow);
-  recsCache.set(key, rows);
-  return rows;
-}
-function recCustomer(r) {
-  return customers.get(r.customerId) || { id: r.customerId, name: r.customerName || '（無權限檢視的客戶）', status: 'formal', formalNo: r.customerNo || '', region: r.region || '', salesEmail: r.salesEmail || '' };
-}
-const linkify = t => esc(t).replace(/https?:\/\/[^\s<]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
-
-async function viewRecords() {
-  const tabs = RTABS.filter(t => t[2] === 'demos' || seesAllRecs());
-  if (!tabs.find(t => t[0] === recsUI.tab)) recsUI.tab = tabs[0][0];
-  const [tabKey, tabTitle, col, demoType] = tabs.find(t => t[0] === recsUI.tab);
-  const R = REC[col];
-  app.innerHTML = `<div class="card"><h1>紀錄</h1><p class="muted">載入中…</p></div>`;
-  let rows;
-  try { rows = await loadRecsMonth(col, recsUI.ym); }
-  catch (e) { app.innerHTML = `<div class="card"><h1>紀錄</h1><p>載入失敗：${linkify(errMsg(e))}</p><p class="muted">若訊息裡有連結，請用管理者帳號點開並建立索引，幾分鐘後再重新整理。</p></div>`; return; }
-  if (!location.hash.startsWith('#/records')) return;
-  const q = recsUI.q.trim().toLowerCase();
-  const typed = rows.filter(r => !demoType || r.type === demoType);
-  const unlinkedN = typed.filter(r => r.customerId === UNLINKED_ID).length;
-  const list = typed.filter(r => !recsUI.unlinked || r.customerId === UNLINKED_ID).map(r => ({ r, c: recCustomer(r) }))
-    .filter(({ r, c }) => !recsUI.region || (c.region || r.region) === recsUI.region)
-    .filter(({ r, c }) => !recsUI.sales || (r.salesEmail || c.salesEmail) === recsUI.sales)
-    .filter(({ r }) => !recsUI.engineer || r.engineerEmail === recsUI.engineer)
-    .filter(({ r, c }) => !q || [c.name, custNo(c), ...R.cols.map(([f]) => r[f])].some(v => String(v || '').toLowerCase().includes(q)));
-  const val = ({ r, c }, k) => k === 'customer' ? (c.name || '') : k === 'createdBy' ? salesLabel(r.createdBy) : String((R.cols.find(x => x[0] === k)?.[2] || (x => x[k]))(r) ?? '');
-  list.sort((a, b) => val(a, recsUI.sort).localeCompare(val(b, recsUI.sort), 'zh-Hant', { numeric: true }) * recsUI.dir);
-  const cols = [R.cols[0], ['customer', '客戶'], ...R.cols.slice(1).filter(([f]) => f !== 'type')];
-  const cell = ({ r, c }, [f, , fn, wrap]) => {
-    if (f === 'customer') return `<td>${customers.has(r.customerId) ? `<a href="#/customer/${encodeURIComponent(r.customerId)}">${esc(custNo(c))} ${esc(c.name)}</a>` : `${esc(custNo(c))} ${esc(c.name)}`}</td>`;
-    if (f === 'files') return `<td class="files">${(r.files || []).map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a>`).join('') || '—'}</td>`;
-    if (f === 'link' && r.link) return `<td><a href="${esc(r.link)}" target="_blank" rel="noopener">開啟</a></td>`;
-    const v = fn ? fn(r) : r[f];
-    return `<td class="${wrap ? 'wrap' : ''}">${esc(v) || '—'}</td>`;
-  };
-  const isAll = recsUI.ym === 'all';
-  const [y, m] = isAll ? [0, 0] : recsUI.ym.split('-').map(Number);
-  const isDemo = col === 'demos';
-  app.innerHTML = `<div class="card">
-    <div class="toolbar"><h1 style="margin:0">紀錄</h1><span class="spacer"></span>${(isDemo ? demoTypes().includes(demoType) : R.canAdd()) ? '<button id="addR">＋ 新增' + tabTitle + '</button>' : ''}</div>
-    <div class="toolbar"><div class="seg" id="rtabs">${tabs.map(([k, t]) => `<button data-t="${k}" class="${recsUI.tab === k ? 'on' : ''}">${t}</button>`).join('')}</div></div>
-    <div class="toolbar">
-      <div class="seg"><button id="rMonth" class="${isAll ? '' : 'on'}">依月份</button><button id="rAll" class="${isAll ? 'on' : ''}">全部</button></div>
-      ${isAll ? '<strong style="margin:0 8px">全部紀錄</strong>' : `<button class="ghost small" id="rprev">‹</button><button class="ghost small" id="rnow">本月</button><button class="ghost small" id="rnext">›</button>
-      <strong style="margin:0 8px">${y} 年 ${m} 月</strong>`}
-      ${seesAllRecs() && (unlinkedN || recsUI.unlinked) ? `<button class="small ${recsUI.unlinked ? '' : 'ghost'}" id="rUnl">⚠ 未連結客戶 ${unlinkedN} 筆</button>` : ''}
-      <span class="spacer"></span>
-      <select id="rRegion"><option value="">全部區域</option>${REGIONS.map(x => `<option ${recsUI.region === x ? 'selected' : ''}>${x}</option>`).join('')}</select>
-      <select id="rSales"><option value="">全部業務</option>${userOptions(['sales', 'manager'], recsUI.sales)}</select>
-      ${isDemo ? `<select id="rEng"><option value="">全部工程師</option>${userOptions(['engineer'], recsUI.engineer)}</select>` : ''}
-      <input id="rQ" placeholder="搜尋客戶、內容" value="${esc(recsUI.q)}" style="max-width:200px">
-      <button class="ghost small" id="rRefresh">重新整理</button>
-    </div>
-    <div class="muted" style="margin-bottom:8px">共 ${list.length} 筆</div>
-    ${list.length ? `<div class="tablewrap"><table><thead><tr id="rhead">${cols.map(([k, t]) => `<th class="sortable" data-k="${k}">${t}${recsUI.sort === k ? `<span class="arrow">${recsUI.dir > 0 ? ' ▲' : ' ▼'}</span>` : ''}</th>`).join('')}<th class="sortable" data-k="createdBy">建立者</th><th></th></tr></thead>
-    <tbody id="rbody">${list.map((it, i) => `<tr data-i="${i}">${cols.map(col => cell(it, col)).join('')}<td>${esc(salesLabel(it.r.createdBy))}</td>
-      <td class="row-actions">${isAdmin() ? '<button class="ghost small" data-act="move">改客戶</button>' : ''}${R.canEdit(it.r) ? '<button class="ghost small" data-act="edit">編輯</button>' : ''}${R.canDel(it.r) ? '<button class="danger small" data-act="del">刪除</button>' : ''}</td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${isAll ? '沒有紀錄' : '這個月沒有紀錄'}</p>`}
-  </div>`;
-  const thisMonth = () => new Date().toLocaleDateString('sv-SE').slice(0, 7);
-  const moveM = n => { const d = new Date(y, m - 1 + n, 1); recsUI.ym = d.toLocaleDateString('sv-SE').slice(0, 7); viewRecords(); };
-  if ($('#rprev')) { $('#rprev').onclick = () => moveM(-1); $('#rnext').onclick = () => moveM(1); $('#rnow').onclick = () => { recsUI.ym = thisMonth(); viewRecords(); }; }
-  $('#rAll').onclick = () => { recsUI.ym = 'all'; viewRecords(); };
-  $('#rMonth').onclick = () => { if (isAll) { recsUI.ym = thisMonth(); recsUI.unlinked = false; viewRecords(); } };
-  $('#rUnl')?.addEventListener('click', () => { recsUI.unlinked = !recsUI.unlinked; if (recsUI.unlinked) recsUI.ym = 'all'; viewRecords(); });
-  $('#rtabs').onclick = e => { const t = e.target.dataset.t; if (t) { recsUI.tab = t; viewRecords(); } };
-  $('#rRegion').onchange = e => { recsUI.region = e.target.value; viewRecords(); };
-  $('#rSales').onchange = e => { recsUI.sales = e.target.value; viewRecords(); };
-  if ($('#rEng')) $('#rEng').onchange = e => { recsUI.engineer = e.target.value; viewRecords(); };
-  $('#rQ').onchange = e => { recsUI.q = e.target.value; viewRecords(); };
-  $('#rRefresh').onclick = async () => { recsCache.clear(); if (isAll) { try { await loadRecsAll(col, true); } catch (e) { /* 下面重新顯示時會再報錯 */ } } viewRecords(); };
-  $('#addR')?.addEventListener('click', () => pickCustomer(c => recordForm(col, c, null, isDemo ? { type: demoType } : {})));
-  $('#rhead')?.addEventListener('click', e => {
-    const k = e.target.closest('th')?.dataset.k; if (!k) return;
-    if (recsUI.sort === k) recsUI.dir = -recsUI.dir; else { recsUI.sort = k; recsUI.dir = 1; }
-    viewRecords();
-  });
-  $('#rbody')?.addEventListener('click', async e => {
-    const act = e.target.dataset.act; if (!act) return;
-    const it = list[Number(e.target.closest('tr').dataset.i)];
-    if (act === 'edit') recordForm(col, it.c, it.r);
-    if (act === 'move') pickCustomer(async c2 => {
-      if (c2.id === it.r.customerId) return;
-      if (!confirm(`把這筆${R.title}改連結到「${custNo(c2)} ${c2.name}」？`)) return;
-      try {
-        if (col === 'demos') {
-          await updateDoc(doc(db, 'demos', it.r.id), { customerId: c2.id, customerName: c2.name || '', customerNo: custNo(c2), region: c2.region || '', updatedBy: me.email, updatedAt: serverTimestamp() });
-        } else {
-          const { id, customerId, ...data } = it.r;
-          const b = writeBatch(db);
-          b.set(doc(db, 'customers', c2.id, col, id), { ...data, updatedBy: me.email, updatedAt: serverTimestamp() });
-          b.delete(doc(db, 'customers', it.r.customerId, col, id));
-          await b.commit();
-        }
-        toast('已改連結客戶'); recCache.delete(it.r.customerId); recCache.delete(c2.id); recsCache.clear(); viewRecords();
-      } catch (err) { toast(errMsg(err)); }
-    });
-    if (act === 'del') {
-      if (!confirm(`確定刪除這筆${R.title}？`)) return;
-      try { await deleteDoc(doc(recCol(col, it.c), it.r.id)); toast('已刪除'); afterRecordChange(it.c); } catch (err) { toast(errMsg(err)); }
-    }
-  });
-}
-
-function pickCustomer(cb, onCancel) {
-  const dlg = document.createElement('dialog');
-  dlg.innerHTML = `<h1>選擇客戶</h1><input id="pq" placeholder="輸入名稱、編號、聯絡人搜尋（潛在、正式客戶都可選）"><div class="pick" id="plist"></div>
-    <div class="row-actions" style="margin-top:16px;justify-content:flex-end"><button class="ghost" id="pc">取消</button></div>`;
-  document.body.appendChild(dlg);
-  const draw = () => {
-    const q = dlg.querySelector('#pq').value.trim().toLowerCase();
-    const list = [...customers.values()].filter(c => !c.deleted)
-      .filter(c => !q || [custNo(c), c.leadNo, c.formalNo, c.name, c.contact].some(v => String(v || '').toLowerCase().includes(q)))
-      .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'zh-Hant')).slice(0, 50);
-    dlg.querySelector('#plist').innerHTML = list.map(c => `<div data-id="${esc(c.id)}"><strong>${esc(custNo(c))}</strong>　${esc(c.name)} <span class="tag ${c.status === 'formal' ? 'formal' : 'potential'}">${c.status === 'formal' ? '正式' : '潛在'}</span> <span class="muted">${esc(c.region)}</span></div>`).join('') || '<p class="muted">找不到客戶</p>';
-  };
-  draw();
-  dlg.querySelector('#pq').addEventListener('input', draw);
-  dlg.querySelector('#pc').onclick = () => { dlg.close(); dlg.remove(); onCancel?.(); };
-  dlg.addEventListener('cancel', () => { dlg.remove(); onCancel?.(); });
-  dlg.querySelector('#plist').addEventListener('click', e => {
-    const id = e.target.closest('[data-id]')?.dataset.id; if (!id) return;
-    dlg.close(); dlg.remove();
-    cb(customers.get(id));
-  });
-  dlg.showModal();
-  dlg.querySelector('#pq').focus();
-}
-
-// ---------------- 資料匯入（管理者）----------------
-async function viewImport() {
-  app.innerHTML = `<div class="card"><h1>資料匯入</h1>
-    <p>選擇 Claude 產生的 <strong>customers_import.json</strong>，先檢查內容，確認後再匯入。</p>
-    <input type="file" id="impFile" accept=".json,application/json" style="max-width:420px">
-    <div id="impBox"></div></div>`;
-  $('#impFile').addEventListener('change', async e => {
-    const f = e.target.files[0]; if (!f) return;
-    let data;
-    try { data = JSON.parse(await f.text()); if (!Array.isArray(data.records)) throw new Error('格式不對'); }
-    catch (err) { $('#impBox').innerHTML = `<p style="color:var(--danger)">檔案讀取失敗：${esc(errMsg(err))}</p>`; return; }
-    importPreview(data);
-  });
-}
-const slugEmail = n => 'left-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '@import.tmic';
-async function ensurePeople(list) {
-  const map = {};
-  for (const s of list) {
-    const u = matchSales(s.nameEn);
-    if (u) { map[normName(s.nameEn)] = u.email; continue; }
-    const email = slugEmail(s.nameEn);
-    await setDoc(doc(db, 'users', email), { email, nameZh: s.nameZh || s.nameEn, nameEn: s.nameEn, role: s.role || 'sales', regions: [], region: '', alsoEngineer: false, alsoSales: false, active: false, placeholder: true, updatedBy: me.email, updatedAt: serverTimestamp() }, { merge: true });
-    map[normName(s.nameEn)] = email;
-  }
-  return map;
-}
-const normName = n => String(n || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-function matchSales(nameEn) {
-  return [...users.values()].find(u => normName(u.nameEn) === normName(nameEn));
-}
-function importPreview(data) {
-  if (data.source === 'notion-records') return recordsPreview(data);
-  const recs = data.records;
-  const formal = recs.filter(r => r.status === 'formal').length;
-  const check = recs.filter(r => r.needsCheck).length;
-  const existingNos = new Set([...customers.values()].filter(c => !c.deleted).flatMap(c => [c.leadNo, c.formalNo]).filter(Boolean));
-  const clash = recs.filter(r => (r.leadNo && existingNos.has(r.leadNo)) || (r.formalNo && existingNos.has(r.formalNo)));
-  const salesRows = (data.sales || []).map(s => ({ ...s, user: matchSales(s.nameEn), count: recs.filter(r => r.salesName === s.nameEn).length }));
-  $('#impBox').innerHTML = `
-    <h2 style="margin-top:20px">內容檢查</h2>
-    <div class="grid">
-      <div class="field"><label>匯入筆數</label><div class="val">${recs.length} 筆（正式 ${formal}、潛在 ${recs.length - formal}）</div></div>
-      <div class="field"><label>待確認</label><div class="val">${check} 筆（匯入後在客戶頁可篩選）</div></div>
-      <div class="field"><label>編號設定</label><div class="val">${Object.entries(data.counters || {}).map(([k, v]) => `${COUNTERS.find(c => c[0] === k)?.[2] || k} 下一號 ${v}`).join('、')}</div></div>
-    </div>
-    ${clash.length ? `<div class="card warn" style="margin-top:12px">⚠ 系統裡已經有 ${clash.length} 筆<strong>相同編號</strong>的客戶（例：${clash.slice(0, 5).map(r => esc(r.leadNo || r.formalNo)).join('、')}）。<br>如果那些是測試資料，請先到客戶頁刪除，再回來匯入，否則會出現重複編號。</div>` : ''}
-    <h2 style="margin-top:20px">業務對應</h2>
-    <p class="muted">英文名與「人員管理」相同的會自動對應；找不到的會建立成「離職」人員，保留姓名。</p>
-    <div class="tablewrap"><table><thead><tr><th>Notion 業務</th><th>客戶數</th><th>對應結果</th></tr></thead><tbody>
-      ${salesRows.map(s => `<tr><td>${esc(s.nameEn)}</td><td>${s.count}</td><td>${s.user ? `✅ ${esc(salesLabel(s.user.email))}` : `建立離職人員：${esc(s.nameZh || s.nameEn)} ${esc(s.nameEn)}`}</td></tr>`).join('')}
-    </tbody></table></div>
-    <div class="row-actions" style="margin-top:20px"><button id="impGo">開始匯入</button><span class="muted" id="impMsg"></span></div>`;
-  $('#impGo').onclick = () => runImport(data, salesRows);
-}
-const REC_LABEL = { demos: 'Demo 紀錄', purchases: '採購紀錄', issues: '問題追蹤', installs: '工程師安裝紀錄' };
-function recordsPreview(data) {
-  const recs = data.records, U = data.unlinked.id;
-  const byCol = {}; recs.forEach(r => { byCol[r.col] = byCol[r.col] || { all: 0, un: 0 }; byCol[r.col].all++; if (r.customerId === U) byCol[r.col].un++; });
-  const missing = recs.filter(r => r.customerId !== U && !customers.has(r.customerId));
-  const people = (data.people || []).map(p => ({ ...p, user: matchSales(p.nameEn) }));
-  $('#impBox').innerHTML = `
-    <h2 style="margin-top:20px">內容檢查（紀錄）</h2>
-    <div class="tablewrap"><table><thead><tr><th>紀錄</th><th>筆數</th><th>放進「未連結客戶」</th></tr></thead><tbody>
-      ${Object.entries(byCol).map(([k, v]) => `<tr><td>${REC_LABEL[k] || k}</td><td>${v.all}</td><td>${v.un}</td></tr>`).join('')}
-    </tbody></table></div>
-    ${missing.length ? `<div class="card warn" style="margin-top:12px">⚠ 有 ${missing.length} 筆紀錄的客戶還不在系統裡。請先完成<strong>客戶匯入</strong>再匯入紀錄。</div>` : ''}
-    <h2 style="margin-top:20px">人員對應</h2>
-    <p class="muted">英文名與「人員管理」相同的自動對應（大小寫、-、_ 不影響）；找不到的建立成「離職」人員。</p>
-    <div class="tablewrap"><table><thead><tr><th>Notion 人員</th><th>出現次數</th><th>對應結果</th></tr></thead><tbody>
-      ${people.map(p => `<tr><td>${esc(p.nameEn)}</td><td>${p.count}</td><td>${p.user ? `✅ ${esc(salesLabel(p.user.email))}` : `建立離職${p.role === 'engineer' ? '工程師' : '業務'}：${esc(p.nameEn)}`}</td></tr>`).join('')}
-    </tbody></table></div>
-    <div class="row-actions" style="margin-top:20px"><button id="impGo" ${missing.length ? 'disabled' : ''}>開始匯入紀錄</button><span class="muted" id="impMsg"></span></div>`;
-  $('#impGo').onclick = () => runRecordsImport(data);
-}
-async function runRecordsImport(data) {
-  if (!confirm(`確定匯入 ${data.records.length} 筆紀錄？\n\n同一個檔案重複匯入，會覆蓋之前匯入的同一筆紀錄。`)) return;
-  const btn = $('#impGo'), msg = $('#impMsg');
-  btn.disabled = true;
-  try {
-    const map = await ensurePeople(data.people || []);
-    const who = n => (n ? map[normName(n)] : '') || '';
-    const U = data.unlinked;
-    await setDoc(doc(db, 'customers', U.id), { status: 'potential', leadNo: '', formalNo: '', region: '', name: U.name, salesEmail: '', deleted: false, needsCheck: false, source: 'notion', createdBy: me.email, createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp() }, { merge: true });
-    if (!customers.has(U.id)) customers.set(U.id, { id: U.id, name: U.name, status: 'potential', region: '' });
-    const recs = data.records;
-    for (let i = 0; i < recs.length; i += 200) {
-      const batch = writeBatch(db);
-      for (const r of recs.slice(i, i + 200)) {
-        const c = customers.get(r.customerId) || {};
-        const { salesName, engineerName, ...rest } = r.data;
-        const base = { ...rest, createdBy: who(r.creator) || me.email, importedCreator: r.creator || '', source: 'notion', createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp() };
-        if (r.col === 'demos') {
-          batch.set(doc(db, 'demos', r.id), { ...base, salesEmail: who(salesName) || (rest.type === 'sales' ? (c.salesEmail || '') : ''), engineerEmail: who(engineerName),
-            customerId: r.customerId, customerName: c.name || '', customerNo: custNo(c), region: c.region || '' });
-        } else {
-          batch.set(doc(db, 'customers', r.customerId, r.col, r.id), base);
-        }
-      }
-      await batch.commit();
-      msg.textContent = `已匯入 ${Math.min(i + 200, recs.length)} / ${recs.length} 筆…`;
-    }
-    recCache.clear(); recsCache.clear();
-    await syncCustomers(true);
-    msg.textContent = '';
-    alert(`紀錄匯入完成：${recs.length} 筆。`);
-    location.hash = '#/records';
-  } catch (err) { toast('匯入失敗：' + errMsg(err), 10000); btn.disabled = false; }
-}
-
-async function runImport(data, salesRows) {
-  if (!confirm(`確定匯入 ${data.records.length} 筆客戶？\n\n同一個檔案重複匯入，會用檔案內容覆蓋之前匯入的同一筆資料。`)) return;
-  const btn = $('#impGo'), msg = $('#impMsg');
-  btn.disabled = true;
-  try {
-    // 1. 業務對應，找不到的建立離職人員
-    const map = {};
-    for (const s of salesRows) {
-      if (s.user) { map[s.nameEn] = s.user.email; continue; }
-      const email = slugEmail(s.nameEn);
-      await setDoc(doc(db, 'users', email), { email, nameZh: s.nameZh || s.nameEn, nameEn: s.nameEn, role: 'sales', regions: [], region: '', alsoEngineer: false, active: false, placeholder: true, updatedBy: me.email, updatedAt: serverTimestamp() }, { merge: true });
-      map[s.nameEn] = email;
-    }
-    // 2. 客戶，每批 200 筆
-    const recs = data.records;
-    for (let i = 0; i < recs.length; i += 200) {
-      const batch = writeBatch(db);
-      for (const r of recs.slice(i, i + 200)) {
-        const { id, salesName, ...rest } = r;
-        batch.set(doc(db, 'customers', id), {
-          ...rest, salesEmail: map[salesName] || '', importedSales: salesName || '', source: 'notion', deleted: false,
-          createdBy: me.email, createdAt: serverTimestamp(), updatedBy: me.email, updatedAt: serverTimestamp()
-        });
-      }
-      await batch.commit();
-      msg.textContent = `已匯入 ${Math.min(i + 200, recs.length)} / ${recs.length} 筆…`;
-    }
-    // 3. 編號：只往上調，不往回
-    for (const [k, v] of Object.entries(data.counters || {})) {
-      const s = await getDoc(doc(db, 'counters', k));
-      const cur = s.exists() ? s.data().next : 1;
-      if (v > cur) await setDoc(doc(db, 'counters', k), { next: v });
-    }
-    await syncCustomers(true);
-    msg.textContent = '';
-    alert(`匯入完成：${recs.length} 筆客戶。`);
-    location.hash = '#/customers';
-  } catch (err) { toast('匯入失敗：' + errMsg(err), 10000); btn.disabled = false; }
-}
-
-// ---------------- 人員管理（管理者）----------------
-function viewUsers() {
-  const order = { admin: 0, manager: 1, sales: 2, engineer: 3 };
-  const list = [...users.values()].sort((a, b) => (order[a.role] ?? 9) - (order[b.role] ?? 9) || (a.nameZh || '').localeCompare(b.nameZh || '', 'zh-Hant'));
-  app.innerHTML = `<div class="card">
-    <div class="toolbar"><h1 style="margin:0">人員管理</h1><span class="spacer"></span><button id="addU">＋ 新增人員</button></div>
-    <p class="muted">人員用這裡登記的 Google 帳號登入即可使用。人員離職請用「編輯 → 狀態：離職」，會保留姓名並立即停止登入。</p>
-    <div class="tablewrap"><table><thead><tr><th>中文名</th><th>英文名</th><th>Google 帳號</th><th>公司信箱</th><th>通知寄到</th><th>角色</th><th>區域</th><th>狀態</th><th></th></tr></thead>
-    <tbody id="ubody">${list.map(u => `<tr data-e="${esc(u.email)}" class="${u.active === false ? 'left' : ''}"><td>${esc(u.nameZh)}</td><td>${esc(u.nameEn)}</td><td>${esc(u.email)}</td><td>${esc(u.companyEmail || '')}</td><td>${[u.notifyGmail !== false ? 'Gmail' : '', u.notifyCompany && u.companyEmail ? '公司' : ''].filter(Boolean).join('＋') || '不寄'}</td><td>${ROLE[u.role] || esc(u.role)}${u.alsoSales && !['sales', 'manager'].includes(u.role) ? '＋業務' : ''}${u.alsoEngineer && u.role !== 'engineer' ? '＋工程師' : ''}</td><td>${esc(userRegions(u).join('、'))}</td>
-      <td>${u.active === false ? (() => { const n = leftCustomers().filter(c => c.salesEmail === u.email).length; return '離職' + (n ? `　<a href="#" data-a="cust">${n} 位客戶待調整</a>` : ''); })() : '在職'}</td>
-      <td class="row-actions"><button class="ghost" data-a="edit">編輯</button>${u.email === me.email ? '' : '<button class="danger" data-a="del">刪除</button>'}</td></tr>`).join('')}</tbody></table></div>
-    <p class="muted">共 ${list.length} 人</p>
-  </div>`;
-  $('#addU').addEventListener('click', () => userForm(null));
-  $('#ubody').addEventListener('click', async e => {
-    const a = e.target.dataset.a; const email = e.target.closest('tr')?.dataset.e;
-    if (!a || !email) return;
-    const u = users.get(email);
-    if (a === 'edit') userForm(u);
-    if (a === 'cust') { e.preventDefault(); ui.sales = '__left'; ui.status = 'all'; location.hash = '#/customers'; return; }
-    if (a === 'del') {
-      const n = [...customers.values()].filter(c => !c.deleted && c.salesEmail === email).length;
-      if (n && !confirm(`${salesLabel(email)} 目前仍負責 ${n} 位客戶，刪除後這些客戶的負責業務會變成無法辨識。\n\n建議改用「編輯 → 狀態：離職」保留此人。\n\n仍要刪除嗎？`)) return;
-      if (!confirm(`確定刪除 ${salesLabel(email)}（${email}）？刪除後此人立即無法登入。`)) return;
-      try { await deleteDoc(doc(db, 'users', email)); toast('已刪除'); } catch (err) { toast(errMsg(err)); }
-    }
-  });
-}
-
-// 更換 Google 帳號：把所有指向舊帳號的欄位改成新帳號
-async function moveUserRefs(oldE, newE) {
-  const FIELDS = ['salesEmail', 'engineerEmail', 'createdBy'];
-  const jobs = [];
-  const scan = d => {
-    const x = d.data(), upd = {};
-    FIELDS.forEach(f => { if (x[f] === oldE) upd[f] = newE; });
-    if (Object.keys(upd).length) jobs.push([d.ref, { ...upd, updatedBy: me.email, updatedAt: serverTimestamp() }]);
-  };
-  const sources = [collection(db, 'customers'), collection(db, 'demos'), collection(db, 'schedules'), collectionGroup(db, 'purchases'), collectionGroup(db, 'issues'), collectionGroup(db, 'installs')];
-  for (const src of sources) (await getDocs(src)).docs.forEach(scan);
-  for (let i = 0; i < jobs.length; i += 200) {
-    const b = writeBatch(db);
-    jobs.slice(i, i + 200).forEach(([ref, upd]) => b.update(ref, upd));
-    await b.commit();
-  }
-  return jobs.length;
-}
-
-function userForm(u) {
-  const isNew = !u;
-  const cur = u || { role: 'sales', regions: [] };
-  const curRegs = userRegions(cur);
-  const dlg = document.createElement('dialog');
-  dlg.innerHTML = `<form id="uf"><h1>${isNew ? '新增人員' : '編輯人員'}</h1>
-    <div class="grid">
-      <div class="field"><label>Google 帳號（Gmail，登入用）*</label><input name="email" type="email" value="${esc(cur.email)}"></div>
-      <div class="field"><label>公司信箱</label><input name="companyEmail" type="email" value="${esc(cur.companyEmail)}" placeholder="例：name@tmic.com.tw"></div>
-      <div class="field"><label>通知信寄到</label><div class="checks"><label><input type="checkbox" name="notifyGmail" ${cur.notifyGmail !== false ? 'checked' : ''}>Gmail</label><label><input type="checkbox" name="notifyCompany" ${cur.notifyCompany ? 'checked' : ''}>公司信箱</label></div><div class="muted">兩個都勾就兩邊都寄</div></div>
-      <div class="field"><label>中文名 *</label><input name="nameZh" value="${esc(cur.nameZh)}"></div>
-      <div class="field"><label>英文名</label><input name="nameEn" value="${esc(cur.nameEn)}"></div>
-      <div class="field"><label>角色 *</label><select name="role">${Object.entries(ROLE).map(([k, t]) => `<option value="${k}" ${cur.role === k ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
-      <div class="field"><label>負責區域（可多選）</label><div class="checks">${REGIONS.map(r => `<label><input type="checkbox" name="reg" value="${r}" ${curRegs.includes(r) ? 'checked' : ''}>${r}</label>`).join('')}</div><div class="muted">業務主管可看到所勾區域的全部客戶</div></div>
-      <div class="field"><label>狀態</label><select name="active"><option value="1" ${cur.active !== false ? 'selected' : ''}>在職</option><option value="0" ${cur.active === false ? 'selected' : ''}>離職（停止登入、保留資料）</option></select></div>
-      <div class="field"><label>其他</label><div class="checks"><label><input type="checkbox" name="alsoSales" ${cur.alsoSales ? 'checked' : ''}>兼任業務</label><label><input type="checkbox" name="alsoEngineer" ${cur.alsoEngineer ? 'checked' : ''}>兼任工程師</label></div><div class="muted">勾選後會出現在業務／工程師選單</div></div>
-    </div>
-    ${isNew ? '' : '<p class="muted">更改 Google 帳號後，此人負責的客戶、Demo 紀錄、行程、紀錄的建立者都會一起改到新帳號；之後請用新帳號登入。</p>'}
-    <div class="row-actions" style="margin-top:24px;justify-content:flex-end"><button type="button" class="ghost" id="cancel">取消</button><button type="submit" id="save">儲存</button></div>
-  </form>`;
-  document.body.appendChild(dlg);
-  const form = dlg.querySelector('#uf');
-  const close = () => { dlg.close(); dlg.remove(); };
-  dlg.querySelector('#cancel').addEventListener('click', close);
-  dlg.addEventListener('cancel', () => dlg.remove());
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const email = form.email.value.trim().toLowerCase();
-    const oldEmail = isNew ? '' : cur.email;
-    const changed = !isNew && email !== oldEmail;
-    const companyEmail = form.companyEmail.value.trim().toLowerCase();
-    const nameZh = form.nameZh.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast('請輸入正確的 Google 帳號');
-    if (!nameZh) return toast('請填寫中文名');
-    if (form.role.value === 'manager' && !form.querySelector('input[name=reg]:checked')) return toast('業務主管至少要勾選一個負責區域');
-    if ((isNew || changed) && users.has(email)) return toast('這個帳號已經在名單中');
-    if (companyEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyEmail)) return toast('公司信箱格式不正確');
-    if (form.notifyCompany.checked && !companyEmail) return toast('勾選寄到公司信箱，請先填公司信箱');
-    if (!form.notifyGmail.checked && !form.notifyCompany.checked && !confirm('兩個信箱都沒勾，此人將收不到任何通知信，確定嗎？')) return;
-    if (changed && oldEmail === me.email) return toast('不能更改自己正在登入的帳號，請由另一位管理者操作');
-    if (changed && !confirm(`確定把 Google 帳號\n${oldEmail}\n改成\n${email}？\n\n此人負責的客戶、Demo 紀錄、行程、各項紀錄都會一起改到新帳號，舊帳號會立即無法登入。`)) return;
-    if (email === me.email && form.active.value === '0') return toast('不能把自己設為離職');
-    if (!isNew && email === me.email && form.role.value !== 'admin' && !confirm('你正在移除自己的管理者權限，確定嗎？')) return;
-    dlg.querySelector('#save').disabled = true;
-    try {
-      const data = {
-        email, nameZh, nameEn: form.nameEn.value.trim(), companyEmail, notifyGmail: form.notifyGmail.checked, notifyCompany: form.notifyCompany.checked, role: form.role.value, regions: [...form.querySelectorAll('input[name=reg]:checked')].map(i => i.value), region: '', alsoEngineer: form.alsoEngineer.checked, alsoSales: form.alsoSales.checked,
-        active: form.active.value === '1', updatedBy: me.email, updatedAt: serverTimestamp()
-      };
-      if (changed) {
-        dlg.querySelector('#save').textContent = '更新中…';
-        await setDoc(doc(db, 'users', email), { ...cur, ...data, placeholder: false });
-        const n = await moveUserRefs(oldEmail, email);
-        await deleteDoc(doc(db, 'users', oldEmail));
-        close();
-        alert(`已改成新帳號，共更新 ${n} 筆資料。\n請通知 ${nameZh} 改用 ${email} 登入。`);
-        return;
-      }
-      await setDoc(doc(db, 'users', email), data, { merge: true });
-      close();
-      const n = form.active.value === '0' ? [...customers.values()].filter(c => !c.deleted && c.salesEmail === email).length : 0;
-      if (n) { alert(`${nameZh} 已設為離職。\n\n他目前負責 ${n} 位客戶，請到「客戶」頁點「查看名單」調整負責業務。`); }
-      else toast('已儲存');
-    } catch (err) { toast(errMsg(err)); dlg.querySelector('#save').disabled = false; }
-  });
-  dlg.showModal();
-}
-
-// ---------------- 編號設定（管理者）----------------
-async function viewSettings() {
-  app.innerHTML = '<div class="card"><h1>編號設定</h1><p class="muted">載入中…</p></div>';
-  const vals = {};
-  try {
-    for (const [k] of COUNTERS) { const s = await getDoc(doc(db, 'counters', k)); vals[k] = s.exists() ? s.data().next : 1; }
-  } catch (e) { toast(errMsg(e)); return; }
-  app.innerHTML = `<div class="card"><h1>編號設定</h1>
-    <p class="muted">設定每一類「下一個要使用的號碼」。例：台北潛在客戶最後一筆是 L-A00354，這裡就填 355。</p>
-    <form id="sf"><div class="grid">${COUNTERS.map(([k, t, p]) => `<div class="field"><label>${t}（${p}）下一號</label><input type="number" min="1" name="${k}" value="${vals[k]}"><div class="muted" data-p="${k}">下一筆：${fmt(p, vals[k])}</div></div>`).join('')}</div>
-    <div class="row-actions" style="margin-top:20px"><button type="submit">儲存</button></div></form></div>`;
-  const form = $('#sf');
-  form.addEventListener('input', e => {
-    const k = e.target.name; const p = COUNTERS.find(c => c[0] === k)?.[2];
-    if (p) form.querySelector(`[data-p="${k}"]`).textContent = '下一筆：' + fmt(p, Math.max(1, parseInt(e.target.value) || 1));
-  });
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!confirm('確定更新編號？設定錯誤可能產生重複編號。')) return;
-    try {
-      for (const [k] of COUNTERS) await setDoc(doc(db, 'counters', k), { next: Math.max(1, parseInt(form[k].value) || 1) });
-      toast('已儲存');
-    } catch (err) { toast(errMsg(err)); }
-  });
-}
+route();
+})();
 </script>
 </body>
 </html>

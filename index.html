@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>招募 2.0 菁英班｜十二週行動節奏挑戰</title>
+<title>韋宏小C招募特攻隊｜十二週行動節奏挑戰</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -206,44 +206,21 @@ details .in{padding:0 12px 12px;font-size:14px;line-height:1.7}
 const CONFIG = {
   DB_URL: 'https://elite2-d3f46-default-rtdb.asia-southeast1.firebasedatabase.app',
   UPLOAD_URL: 'https://script.google.com/macros/s/AKfycbyNGEdya_dqG-u4cnP0x0zO1DOcxKHYCnlbi08r3D1PXOXJanfrKOVhaXVrcmDSwJU6/exec',
-  ROOT: 'elite2',
+  ROOT: 'whc',                   // 和菁英班共用同一個 Firebase 專案，用不同的根目錄區分
+  PROJECT: 'whc',                 // 傳給 Apps Script，決定照片存到 Drive 的哪個資料夾
   START: [2026, 10, 5],          // 第 1 週的星期一（台北時間）
   WEEKS: 12,
   PASS: 10,
-  FEE: 999,
-  REFUND: 1000,
+  FEE: 0,                        // 沒有報名費
+  REWARD: 500,                   // 達成工作量（10/12 週）獎金
   RECRUIT_REWARD: 1000,
   MUFO_REWARD: 10000,
   ALLOW_PAST_EDIT: false,        // true = 過去的週次可以補登；false = 只能填本週
   ADMIN_HASH: ''                 // 後台密碼代碼：打開網址後面加 #admin，照畫面產生後貼在這裡
 };
 
-const LEADERS = [
-  {name:'林韋宏', role:'大隊長'},
-  {name:'程香綺'},{name:'林孟涵'},{name:'洪育煒'},{name:'白姍靈'},
-  {name:'原慧伶'},{name:'鄭婷芝'},{name:'張玉蘭'},{name:'侯妏蒨'},
-  {name:'王佳音'},{name:'盧妍之'},{name:'黃士哲'},{name:'洪淑雯'},{name:'饒啟民'}
-];
-
-/* 隊員名單：每位隊長底下的隊員，填在這裡，例如
-   '程香綺': ['王小明','李小華','陳小美','張小強','林小芳'],
-   隊長自己也要參賽 → 把隊長的名字也放進他自己的名單（一隊 5 人或 6 人都可以）。
-   沒填名單的隊長，在成績榜不會出現。 */
-const ROSTER = {
-  '程香綺': ['程香綺','鄭紹可','高敏純','林艾蓓','張思博','蔡易玲','蘇怡文','吳芷妤','陳夏子','蔡佩砡','江季滿','林庭瑀','杜宛芸'],
-  '林孟涵': ['黃翊瑄','林佩潔','劉淑子','陳俞曄','李皖瑜','丁芬玲','施宛伶','陳儷偵','吳亦芬','林哲安','王明智'],
-  '洪育煒': ['陳秀燕','陳宥伶','張維剛','張岱邑','陳冠余','王介芸','戴上茹','陳儀玲','吳羽林','柯情芹','姜瑋茹'],
-  '白姍靈': ['白姍靈','潘依瑩','吳采蓁','徐政升','盧麗如','林宛瑜','陳孟彙','吳沛甄','潘碧如','曾安安','楊欣瑜','劉亞宜'],
-  '原慧伶': ['原慧伶','穆美倫','林思嫻','蔡泓泊','陳如珮','林孟妍','吳曉薇','董華正','林沛晴','林宜臻','廖欣怡','江惠美'],
-  '鄭婷芝': ['鄭婷芝','陳麗妃','陳奕如','薛羽婷','馮文怡','許鳳真','藍文營','郭秋霞','方紫葳','莊子筑','蔡佳霖','馬溎璘'],
-  '張玉蘭': ['張玉蘭','陳濬治','詹雯惠','郭田田','陳秀倩','張恩慈&廖昱展','王子林','江芸婷','楊品楨','徐力偉','許世澤','徐德芬'],
-  '侯妏蒨': ['侯妏蒨','徐一禎','林君華','蔡佩真','曾靜于','陳韻如','黃冠翎','王芯語','洪美櫻','林涵培','梁晏瑄','張士弘'],
-  '王佳音': ['簡依柔','莊惠婷','王堃裕','李羿慧','吳秀珠','林佩蓉','鄭喬芃','劉玉新','王伯寧','林明樺'],
-  '盧妍之': ['盧妍之','胡雅甯','蘇郁榕','陳巧倫','范慧芳','王智甫','朱珮玲','吳慧珊','吳小樺','王紹英','陳湘潔','曾淑芳'],
-  '黃士哲': ['黃士哲','丘羽宸','張嘉蕙','江富季','廖秀霞','馮齡儀','蕭智惠','葉文竣','廖立文','程俊為','蔡岳均','曾慧寧'],
-  '洪淑雯': ['洪淑雯','黃雅莉','邱勝閎','王麗莉','林家緣','郭怡雯','紀宜君','李昂蓉','黃淑媛','陳宣安','俞宥岑','張育鳳'],
-  '饒啟民': ['饒啟民','闕采恩','符景隆','王嘉賢','賈琬菁','熊沛穎','李幸蓁','林宛誼','陳秀淑','蔡慧琳','邱佩瑩','賴枳妗'],
-};
+/* 參賽名單：單純人名，沒有隊長／隊伍分組 */
+const NAMES = ['林幼幼','黃名志','陳雅芳','張朝森','許世澤','陳巧旂','邱秀珊','廖婕詠','葉詩恩','李彩菱','劉雨婕','李啓陽','莊遵湧'];
 const DEMO_MEMBERS = ['範例隊員 1','範例隊員 2','範例隊員 3','範例隊員 4','範例隊員 5'];
 
 /* need = 每項任務要上傳幾張才算完成 */
@@ -265,9 +242,9 @@ const LS = {
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
 /* Firebase key 不能含 . # $ [ ] /，全部換成 _ */
-const keyOf = (leader, name) => (leader + '__' + name).replace(/[.#$\[\]\/\s]/g, '_');
+const keyOf = name => String(name).replace(/[.#$\[\]\/\s]/g, '_');
 
-const S = { screen:'leader', leader:null, name:null, key:null, sel:1,
+const S = { screen:'me', name:null, key:null, sel:1,
             prog:{weeks:{}, recruitPhotos:[], mufo:null} };
 
 /* ---------- 週次 ---------- */
@@ -316,13 +293,12 @@ const taskDone = (t, x) => photosOf(x, t.field).length >= t.need;
 const weekDoneIn = (prog, w) => TASKS.every(t => taskDone(t, wkIn(prog, w)));
 const weekDone = w => weekDoneIn(S.prog, w);
 function doneWeeks(){ let n = 0; for(let w=1; w<=CONFIG.WEEKS; w++) if(weekDone(w)) n++; return n; }
-const membersOf = leader => (ROSTER[leader] && ROSTER[leader].length) ? ROSTER[leader] : null;
-const teamNames = leader => membersOf(leader) || (isDemo ? DEMO_MEMBERS : []);
+const allNames = () => (NAMES && NAMES.length) ? NAMES : (isDemo ? DEMO_MEMBERS : []);
 /* 成績摘要：公開成績榜只讀這一小份，不讀照片 */
-function summaryOf(prog, leader, name){
+function summaryOf(prog, name){
   const done = [];
   for(let w = 1; w <= CONFIG.WEEKS; w++) if(weekDoneIn(prog, w)) done.push(w);
-  return {leader, name, done, n: done.length, at: Date.now()};
+  return {name, done, n: done.length, at: Date.now()};
 }
 
 /* ---------- 儲存 ---------- */
@@ -332,7 +308,7 @@ async function dbReq(method, path, body){
   if(!r.ok) throw new Error('DB ' + r.status);
   return r.json();
 }
-function saveDemo(ctx){ if(!LS.set('elite2_demo_' + ctx.key, ctx.prog)) throw new Error('本機空間不足'); }
+function saveDemo(ctx){ if(!LS.set('whc_demo_' + ctx.key, ctx.prog)) throw new Error('本機空間不足'); }
 function normProg(p){
   p = p || {};
   const weeks = {};
@@ -344,11 +320,11 @@ function normProg(p){
   return {weeks, recruitPhotos: toArr(p.recruitPhotos), mufo: p.mufo || null};
 }
 async function loadProg(key){
-  return normProg(isDemo ? LS.get('elite2_demo_' + key) : await dbReq('GET', 'progress/' + key));
+  return normProg(isDemo ? LS.get('whc_demo_' + key) : await dbReq('GET', 'progress/' + key));
 }
-/* ctx = {key, leader, name, prog}：隊員自己存、後台存，都走同一組函式 */
-const memberCtx = () => ({key:S.key, leader:S.leader, name:S.name, prog:S.prog});
-async function syncSummary(ctx){ if(!isDemo) await dbReq('PUT', 'summary/' + ctx.key, summaryOf(ctx.prog, ctx.leader, ctx.name)); }
+/* ctx = {key, name, prog}：隊員自己存、後台存，都走同一組函式 */
+const memberCtx = () => ({key:S.key, name:S.name, prog:S.prog});
+async function syncSummary(ctx){ if(!isDemo) await dbReq('PUT', 'summary/' + ctx.key, summaryOf(ctx.prog, ctx.name)); }
 async function persistWeek(ctx, w, patch){
   if(isDemo) return saveDemo(ctx);
   await dbReq('PATCH', 'progress/' + ctx.key + '/weeks/' + w, patch);
@@ -389,7 +365,7 @@ async function uploadPhoto(dataUrl, meta){
   }
   const r = await fetch(CONFIG.UPLOAD_URL, {
     method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({folder:meta.folder, filename:meta.filename, mimeType:'image/jpeg', data:dataUrl.split(',')[1]})
+    body: JSON.stringify({project:CONFIG.PROJECT, folder:meta.folder, filename:meta.filename, mimeType:'image/jpeg', data:dataUrl.split(',')[1]})
   });
   const j = await r.json();
   if(!j.ok) throw new Error(j.error || '上傳失敗');
@@ -408,7 +384,7 @@ async function handleUpload(input){
       const dataUrl = await compress(files[i], small ? 720 : 1280, small ? .6 : .75);
       const task = TASKS.find(t => t.field === field);
       const tag = kind === 'task' ? 'W' + w + '_' + (task ? task.tag : field) : (kind === 'recruit' ? '招募' : 'MUFO');
-      const up = await uploadPhoto(dataUrl, {folder: S.leader + '_' + S.name, filename: tag + '_' + Date.now() + '_' + i + '.jpg'});
+      const up = await uploadPhoto(dataUrl, {folder: S.name, filename: tag + '_' + Date.now() + '_' + i + '.jpg'});
       const val = {url:up.url, thumb:up.thumb, at:Date.now()};
       if(kind === 'task'){
         const list = photosOf(wkObj(w), field).concat([val]);
@@ -446,36 +422,23 @@ function busy(on){ $('busy').className = on ? 'on' : ''; }
 function heroHTML(compact){
   return '<div class="starband" aria-hidden="true">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div><div class="stripes" aria-hidden="true"></div>' +
   '<header class="hero' + (compact ? ' compact' : '') + '">' +
-    '<div class="ribbon">招募 2.0 菁英班</div>' +
+    '<div class="ribbon">韋宏小 C 招募特攻隊</div>' +
     '<h1 class="iw" aria-label="I want you">I WANT <span class="you">YOU</span></h1>' +
     '<p class="tagline">12 週完成 10 週，你就完賽！</p>' +
-    (compact ? '' : '<div class="chips"><span>10/5 – 12/27</span><span>報名費 $' + CONFIG.FEE + '</span><span>完賽返還 $' + fmt(CONFIG.REFUND) + '</span></div>') +
+    (compact ? '' : '<div class="chips"><span>10/5 – 12/27</span><span>完賽獎金 $' + fmt(CONFIG.REWARD) + '</span></div>') +
   '</header><div class="stripes" aria-hidden="true"></div>';
 }
 const footHTML = () => '<p class="foot">一起努力　一起成長　一起創造更多可能</p>';
 
-/* ---------- 畫面：選隊長 ---------- */
-function renderLeader(){
-  S.screen = 'leader';
-  $('app').innerHTML = heroHTML(false) + '<main class="wrap">' + tabsHTML('play') +
-    '<section><div class="card"><span class="tag">第 1 步　選你的隊長</span><div class="grid">' +
-    LEADERS.map(l => '<button class="pick' + (l.role ? ' chief' : '') + '" data-act="leader" data-v="' + esc(l.name) + '">' +
-      '<span>' + esc(l.name) + '</span>' + (l.role ? '<small>' + l.role + '</small>' : '') + '</button>').join('') +
-    '</div></div></section>' + footHTML() + '</main>';
-}
-
 /* ---------- 畫面：選自己 ---------- */
 function renderMe(){
   S.screen = 'me';
-  const list = membersOf(S.leader), names = list || (isDemo ? DEMO_MEMBERS : []);
-  $('app').innerHTML = heroHTML(true) + '<main class="wrap">' + tabsHTML('play') +
-    '<section><div class="card"><span class="tag">第 2 步　選你自己</span>' +
-    '<h2>' + esc(S.leader) + ' 的隊員</h2>' +
-    (list ? '' : '<p class="note">這位隊長的隊員名單還沒建立' + (isDemo ? '，目前顯示的是範例名稱。' : '，請聯絡主辦。') + '</p>') +
+  const names = allNames();
+  $('app').innerHTML = heroHTML(false) + '<main class="wrap">' + tabsHTML('play') +
+    '<section><div class="card"><span class="tag">選你自己</span>' +
     '<div class="list" style="margin-top:12px">' +
     names.map(n => '<button class="pick" data-act="me" data-v="' + esc(n) + '">' + esc(n) + '</button>').join('') +
-    '</div><p style="margin:16px 0 0"><button class="btn ghost small" data-act="back">重選隊長</button></p></div></section>' +
-    footHTML() + '</main>';
+    '</div></div></section>' + footHTML() + '</main>';
 }
 
 /* ---------- 畫面：主頁 ---------- */
@@ -485,7 +448,7 @@ function renderHome(){
   if(isDemo) banner = '<div class="banner">示範模式：資料只存在這台裝置，不受 10/5 開跑日限制。</div>';
   else if(!CONFIG.UPLOAD_URL) banner = '<div class="banner">還沒設定照片上傳網址，目前無法上傳照片。</div>';
   $('app').innerHTML = heroHTML(true) + '<main class="wrap">' + tabsHTML('play') +
-    '<section><div class="me"><div><b>' + esc(S.name) + '</b><small>隊長：' + esc(S.leader) + '</small></div>' +
+    '<section><div class="me"><div><b>' + esc(S.name) + '</b></div>' +
     '<button data-act="logout">換人</button></div>' + banner + '</section>' +
     '<section id="board"></section><section id="weekcard"></section><section id="recruit"></section>' +
     '<section id="mufo"></section><section id="reward"></section>' +
@@ -574,12 +537,12 @@ function paintReward(){
   const sub = m ? ('招募 ' + r + ' 人，已達成 MUFO，獎金封頂 $' + fmt(CONFIG.MUFO_REWARD)) : (r > 0 ? ('招募 ' + r + ' 人，每人 $' + fmt(CONFIG.RECRUIT_REWARD)) : '尚未招募，也尚未完成 MUFO');
   $('reward').innerHTML = '<div class="card"><span class="tag">我的獎勵</span>' +
     '<ul class="rw">' +
-    '<li class="' + (passed ? 'on' : '') + '"><span>工作量達標返還</span><b>' + (passed ? '$' + fmt(CONFIG.REFUND) : '還差 ' + (CONFIG.PASS - n) + ' 週') + '</b></li>' +
+    '<li class="' + (passed ? 'on' : '') + '"><span>工作量達標獎金</span><b>' + (passed ? '$' + fmt(CONFIG.REWARD) : '還差 ' + (CONFIG.PASS - n) + ' 週') + '</b></li>' +
     '<li class="' + ((m || r > 0) ? 'on' : '') + '"><span>招募＋MUFO 獎勵<br><small style="font-weight:700;color:var(--mut)">' + sub + '</small></span><b>$' + fmt(combined) + '</b></li></ul>' +
-    '<p class="note">報名費 $' + CONFIG.FEE + '。以上為系統依活動規則試算。</p>' +
+    '<p class="note">沒有報名費。以上為系統依活動規則試算。</p>' +
     '<details><summary>獎勵辦法</summary><div class="in">' +
-    '<div class="tier"><b>達成工作量</b><br>返還 $' + fmt(CONFIG.REFUND) + '</div>' +
-    '<div class="tier"><b>達成工作量 ＋ 招募 1 人以上</b><br>返還 $' + fmt(CONFIG.REFUND) + '，每招募 1 人額外獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '</div>' +
+    '<div class="tier"><b>達成工作量（12 週完成 10 週）</b><br>獲得 $' + fmt(CONFIG.REWARD) + '</div>' +
+    '<div class="tier"><b>達成工作量 ＋ 招募 1 人以上</b><br>獲得 $' + fmt(CONFIG.REWARD) + '，每招募 1 人額外獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '</div>' +
     '<div class="tier"><b>未達工作量 ＋ 招募 1 人以上</b><br>每招募 1 人仍可獲得 $' + fmt(CONFIG.RECRUIT_REWARD) + '</div>' +
     '<div class="tier"><b>達成 MUFO</b><br>招募獎勵＋MUFO 獎金合併計算，總共封頂 $' + fmt(CONFIG.MUFO_REWARD) + '，不會再往上加</div>' +
     '</div></details></div>';
@@ -612,7 +575,7 @@ async function enter(){
   busy(true);
   try{
     S.prog = await loadProg(S.key);
-    if(!isDemo) dbReq('PATCH', 'users/' + S.key, {name:S.name, leader:S.leader, at:Date.now()}).catch(() => {});
+    if(!isDemo) dbReq('PATCH', 'users/' + S.key, {name:S.name, at:Date.now()}).catch(() => {});
   }catch(e){
     console.error(e);
     S.prog = {weeks:{}, recruitPhotos:[], mufo:null};
@@ -624,15 +587,15 @@ async function enter(){
   renderHome();
 }
 function pickMe(name){
-  S.name = name; S.key = keyOf(S.leader, name);
-  LS.set('elite2_me', {leader:S.leader, name:name});
+  S.name = name; S.key = keyOf(name);
+  LS.set('whc_me', {name:name});
   enter();
 }
 
 /* ---------- 導覽 ---------- */
 function tabsHTML(a){
   return '<nav class="tabs"><button class="' + (a === 'play' ? 'on' : '') + '" data-act="nav" data-v="">我的打卡</button>' +
-    '<button class="' + (a === 'board' ? 'on' : '') + '" data-act="nav" data-v="board">團隊成績</button></nav>';
+    '<button class="' + (a === 'board' ? 'on' : '') + '" data-act="nav" data-v="board">成績榜</button></nav>';
 }
 function route(){
   const h = location.hash.replace('#', '');
@@ -640,42 +603,37 @@ function route(){
   if(h === 'board') return renderStandings();
   if(h === 'admin') return renderAdmin();
   if(S.key) return S.loaded ? renderHome() : enter();
-  if(S.leader) return renderMe();
-  renderLeader();
+  renderMe();
 }
 
-/* ---------- 團隊成績（公開，隊長與隊員都看得到） ---------- */
-const R = {leader:'', data:{}, err:false, progs:{}, view:null};
-function demoSummary(leader, name){
-  const key = keyOf(leader, name), local = LS.get('elite2_demo_' + key);
-  if(local) return summaryOf(normProg(local), leader, name);
+/* ---------- 成績榜（公開，所有人都看得到） ---------- */
+const R = {data:{}, err:false, progs:{}, view:null};
+function demoSummary(name){
+  const key = keyOf(name), local = LS.get('whc_demo_' + key);
+  if(local) return summaryOf(normProg(local), name);
   let hs = 0;
   for(const ch of key) hs = (hs * 31 + ch.charCodeAt(0)) >>> 0;
   const n = hs % 11, done = [];
   for(let w = 1; w <= n; w++) done.push(w);
-  return {leader, name, done, n};
+  return {name, done, n};
 }
 async function loadSummaries(){
   if(isDemo){
     const m = {};
-    LEADERS.forEach(l => teamNames(l.name).forEach(n => { m[keyOf(l.name, n)] = demoSummary(l.name, n); }));
+    allNames().forEach(n => { m[keyOf(n)] = demoSummary(n); });
     return m;
   }
   return (await dbReq('GET', 'summary')) || {};
 }
-function teamStats(){
-  return LEADERS.map(l => {
-    const names = teamNames(l.name);
-    if(!names.length) return null;
-    const rows = names.map(n => {
-      const s = R.data[keyOf(l.name, n)] || {};
-      const done = Array.isArray(s.done) ? s.done : Object.values(s.done || {});
-      const cnt = Math.min(CONFIG.WEEKS, done.length);
-      return {name:n, isLeader:n === l.name, n:cnt, done, pct:Math.min(100, Math.round(cnt / CONFIG.PASS * 100))};
-    });
-    const avg = rows.reduce((a, r) => a + Math.min(1, r.n / CONFIG.PASS), 0) / rows.length;
-    return {leader:l.name, role:l.role, rows, pct:Math.round(avg * 100), passed:rows.filter(r => r.n >= CONFIG.PASS).length};
-  }).filter(Boolean);
+function rosterStats(){
+  const names = allNames();
+  if(!names.length) return [];
+  return names.map(n => {
+    const s = R.data[keyOf(n)] || {};
+    const done = Array.isArray(s.done) ? s.done : Object.values(s.done || {});
+    const cnt = Math.min(CONFIG.WEEKS, done.length);
+    return {name:n, n:cnt, done, pct:Math.min(100, Math.round(cnt / CONFIG.PASS * 100))};
+  });
 }
 async function renderStandings(){
   S.screen = 'standings';
@@ -710,20 +668,18 @@ function viewerHTML(key){
 }
 async function seedDemoData(){
   if(isDemo) return;
-  if(!confirm('要產生示範成績嗎？會把全部隊員（約 150+ 人）的隨機進度寫入「團隊成績」，方便展示，之後可以一次清除。')) return;
+  if(!confirm('要產生示範成績嗎？會把全部 ' + allNames().length + ' 位參賽者的隨機進度寫入「成績榜」，方便展示，之後可以一次清除。')) return;
   busy(true);
   try{
     const patch = {};
-    LEADERS.forEach(l => {
-      teamNames(l.name).forEach(n => {
-        const r = Math.random();
-        let cnt;
-        if(r < 0.15) cnt = 0;
-        else if(r < 0.7) cnt = 1 + Math.floor(Math.random() * 9);
-        else cnt = 10 + Math.floor(Math.random() * 3);
-        const done = Array.from({length: Math.min(cnt, CONFIG.WEEKS)}, (_, i) => i + 1);
-        patch[keyOf(l.name, n)] = {leader: l.name, name: n, done, n: done.length, demo: true, at: Date.now()};
-      });
+    allNames().forEach(n => {
+      const r = Math.random();
+      let cnt;
+      if(r < 0.15) cnt = 0;
+      else if(r < 0.7) cnt = 1 + Math.floor(Math.random() * 9);
+      else cnt = 10 + Math.floor(Math.random() * 3);
+      const done = Array.from({length: Math.min(cnt, CONFIG.WEEKS)}, (_, i) => i + 1);
+      patch[keyOf(n)] = {name: n, done, n: done.length, demo: true, at: Date.now()};
     });
     await dbReq('PATCH', 'summary', patch);
     toast('示範成績已產生 ✓');
@@ -746,7 +702,7 @@ async function clearDemoData(){
   if(S.screen === 'standings'){ R.progs = {}; R.view = null; renderStandings(); }
 }
 async function toggleView(name){
-  const key = keyOf(R.leader, name);
+  const key = keyOf(name);
   if(R.view && R.view.key === key){ R.view = null; paintStandings(); return; }
   R.view = {key, name, w:1};
   if(!R.progs[key]){
@@ -761,12 +717,6 @@ async function toggleView(name){
   }
   paintStandings();
 }
-function teamHead(t, rank){
-  return '<div class="top">' + (rank ? '<span class="rank">' + rank + '</span>' : '') +
-    '<div><h3>' + esc(t.leader) + ' 隊</h3><small>' + (t.role ? t.role + ' · ' : '') + t.rows.length + ' 人 · 通關 ' + t.passed + ' 人</small></div>' +
-    '<span class="pc">' + t.pct + '%</span></div>' +
-    '<div class="bar" style="height:10px;margin-top:10px"><i style="width:' + t.pct + '%"></i></div>';
-}
 function paintStandings(){
   const box = $('st');
   if(S.screen !== 'standings' || !box) return;
@@ -774,51 +724,40 @@ function paintStandings(){
     box.innerHTML = '<div class="card"><p class="note" style="margin:0 0 10px">成績讀取失敗，請確認網路後再試一次。</p><button class="btn small" data-act="st-refresh">重新整理</button></div>';
     return;
   }
-  const teams = teamStats();
-  if(!teams.length){
-    box.innerHTML = '<div class="card"><span class="tag">團隊成績</span><p class="note">隊員名單建立後，成績會顯示在這裡。</p></div>';
+  const all = rosterStats();
+  if(!all.length){
+    box.innerHTML = '<div class="card"><span class="tag">成績榜</span><p class="note">參賽名單建立後，成績會顯示在這裡。</p></div>';
     return;
   }
-  const people = teams.reduce((a, t) => a + t.rows.length, 0), passed = teams.reduce((a, t) => a + t.passed, 0);
-  const overall = Math.round(teams.reduce((a, t) => a + t.rows.reduce((b, r) => b + Math.min(1, r.n / CONFIG.PASS), 0), 0) / people * 100);
-  const cur = teams.find(t => t.leader === R.leader);
-  if(!cur) R.leader = '';
-  let html = '<div class="card"><div class="row"><span class="tag">團隊成績</span><button class="btn ghost small" data-act="st-refresh">重新整理</button></div>' +
+  const people = all.length, passed = all.filter(r => r.n >= CONFIG.PASS).length;
+  const overall = Math.round(all.reduce((b, r) => b + Math.min(1, r.n / CONFIG.PASS), 0) / people * 100);
+  const rows = all.slice().sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'zh-Hant'));
+  let html = '<div class="card"><div class="row"><span class="tag">成績榜</span><button class="btn ghost small" data-act="st-refresh">重新整理</button></div>' +
     (isDemo ? '<div class="banner" style="margin:0 0 10px">示範模式：先用範例數字展示，你自己的打卡會即時反映在自己的名字上。</div>' : '') +
     '<div class="stats"><div class="stat"><b>' + people + '</b><span>參賽人數</span></div><div class="stat"><b>' + passed + '</b><span>已通關</span></div><div class="stat"><b>' + overall + '%</b><span>全體進度</span></div></div>' +
-    '<p class="note">進度 ＝ 完成週數 ÷ ' + CONFIG.PASS + '，完成 ' + CONFIG.PASS + ' 週就是 100%。隊伍進度是全隊每個人進度的平均。</p>' +
-    '<label class="lbl" for="st-filter">用隊長篩選</label><select id="st-filter" class="sel" data-filter><option value="">全部隊伍</option>' +
-    teams.map(t => '<option value="' + esc(t.leader) + '"' + (t.leader === R.leader ? ' selected' : '') + '>' + esc(t.leader) + ' 隊</option>').join('') +
-    '</select></div>';
-  if(cur){
-    const rows = cur.rows.slice().sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'zh-Hant'));
-    html += '<div class="card" style="margin-top:18px">' + teamHead(cur, 0) + '<div style="margin-top:8px">' +
-      rows.map(r => {
-        const key = keyOf(cur.leader, r.name), open = !!(R.view && R.view.key === key);
-        let dots = '';
-        for(let w = 1; w <= CONFIG.WEEKS; w++) dots += '<i class="' + (r.done.indexOf(w) >= 0 ? 'on' : '') + '" title="第 ' + w + ' 週"></i>';
-        return '<div class="mrow"><div class="h"><b>' + esc(r.name) + '</b>' + (r.isLeader ? '<span class="chip">隊長</span>' : '') +
-          (r.n >= CONFIG.PASS ? '<span class="chip red">通關 ★</span>' : '') + '<span class="r">' + r.pct + '%</span></div>' +
-          '<p class="note" style="margin:2px 0 0">完成 ' + r.n + ' 週（通關要 ' + CONFIG.PASS + ' 週）</p>' +
-          '<div class="dots" aria-label="12 週完成狀況">' + dots + '</div>' +
-          '<p style="margin:10px 0 0"><button class="btn ghost small" data-act="view" data-v="' + esc(r.name) + '">' + (open ? '收起照片' : '看上傳的照片') + '</button></p>' +
-          (open ? viewerHTML(key) : '') + '</div>';
-      }).join('') + '</div><p style="margin:14px 0 0"><button class="btn ghost small" data-act="filter" data-v="">看全部隊伍</button></p></div>';
-  }else{
-    html += '<div class="teams">' + teams.slice().sort((a, b) => b.pct - a.pct || b.passed - a.passed).map((t, i) =>
-      '<button class="team" data-act="filter" data-v="' + esc(t.leader) + '">' + teamHead(t, i + 1) + '</button>').join('') + '</div>';
-  }
+    '<p class="note">進度 ＝ 完成週數 ÷ ' + CONFIG.PASS + '，完成 ' + CONFIG.PASS + ' 週就是 100%。</p></div>';
+  html += '<div class="card" style="margin-top:18px"><div style="margin-top:2px">' +
+    rows.map(r => {
+      const key = keyOf(r.name), open = !!(R.view && R.view.key === key);
+      let dots = '';
+      for(let w = 1; w <= CONFIG.WEEKS; w++) dots += '<i class="' + (r.done.indexOf(w) >= 0 ? 'on' : '') + '" title="第 ' + w + ' 週"></i>';
+      return '<div class="mrow"><div class="h"><b>' + esc(r.name) + '</b>' +
+        (r.n >= CONFIG.PASS ? '<span class="chip red">通關 ★</span>' : '') + '<span class="r">' + r.pct + '%</span></div>' +
+        '<p class="note" style="margin:2px 0 0">完成 ' + r.n + ' 週（通關要 ' + CONFIG.PASS + ' 週）</p>' +
+        '<div class="dots" aria-label="12 週完成狀況">' + dots + '</div>' +
+        '<p style="margin:10px 0 0"><button class="btn ghost small" data-act="view" data-v="' + esc(r.name) + '">' + (open ? '收起照片' : '看上傳的照片') + '</button></p>' +
+        (open ? viewerHTML(key) : '') + '</div>';
+    }).join('') + '</div></div>';
   box.innerHTML = html;
 }
 
 /* ---------- 後台（調整週次、刪除照片） ---------- */
-const A = {ok:false, leader:'', name:'', key:'', prog:null, open:0};
-try{ A.ok = isDemo || sessionStorage.getItem('elite2_adm') === '1'; }catch(e){ A.ok = isDemo; }
+const A = {ok:false, name:'', key:'', prog:null, open:0};
+try{ A.ok = isDemo || sessionStorage.getItem('whc_adm') === '1'; }catch(e){ A.ok = isDemo; }
 async function sha256(s){
   const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
   return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
 }
-const admNames = leader => teamNames(leader);
 const memberOpts = names => names.map(n => '<option value="' + esc(n) + '">' + esc(n) + '</option>').join('');
 function renderAdmGate(){
   const setup = !CONFIG.ADMIN_HASH;
@@ -832,7 +771,7 @@ async function admLogin(){
   try{
     if(await sha256($('adm-pw').value) === CONFIG.ADMIN_HASH){
       A.ok = true;
-      try{ sessionStorage.setItem('elite2_adm', '1'); }catch(e){}
+      try{ sessionStorage.setItem('whc_adm', '1'); }catch(e){}
       renderAdmin();
     }else toast('密碼不正確', true);
   }catch(e){ toast('這個瀏覽器無法驗證密碼，請用 https 網址開啟', true); }
@@ -847,31 +786,28 @@ async function admHash(){
 function admOut(){
   if(isDemo){ location.hash = ''; return; }
   A.ok = false; A.prog = null;
-  try{ sessionStorage.removeItem('elite2_adm'); }catch(e){}
+  try{ sessionStorage.removeItem('whc_adm'); }catch(e){}
   renderAdmin();
 }
 function renderAdmin(){
   S.screen = 'admin';
   if(!A.ok){ renderAdmGate(); return; }
-  if(!A.leader){ const l = LEADERS.find(x => membersOf(x.name)) || LEADERS[0]; A.leader = l.name; }
   $('app').innerHTML = heroHTML(true) + '<main class="wrap">' +
     '<section><div class="me"><div><b>後台</b><small>' + (isDemo ? '示範模式：免密碼，資料在這台裝置' : '調整週次、刪除照片') + '</small></div><button data-act="adm-out">' + (isDemo ? '回打卡頁' : '退出') + '</button></div></section>' +
     (isDemo ? '' : '<section><div class="card"><span class="tag red">示範資料</span>' +
-      '<p class="note" style="margin:0 0 10px">在「團隊成績」灌入隨機進度方便展示，示範結束後按右邊按鈕一次清除，只會清掉標記為示範的資料，不會動到真實打卡。</p>' +
+      '<p class="note" style="margin:0 0 10px">在「成績榜」灌入隨機進度方便展示，示範結束後按右邊按鈕一次清除，只會清掉標記為示範的資料，不會動到真實打卡。</p>' +
       '<div class="row" style="gap:10px"><button class="btn small" data-act="adm-demo-seed">🎲 產生示範成績</button><button class="btn ghost small" data-act="adm-demo-clear">🧹 清除示範成績</button></div></div></section>') +
-    '<section><div class="card"><span class="tag red">選隊員</span>' +
-    '<label class="lbl" for="adm-leader">隊長</label><select class="sel" id="adm-leader" data-adm="leader">' +
-    LEADERS.map(l => '<option value="' + esc(l.name) + '"' + (l.name === A.leader ? ' selected' : '') + '>' + esc(l.name) + (l.role ? '（大隊長）' : '') + '</option>').join('') + '</select>' +
-    '<label class="lbl" for="adm-member">隊員</label><select class="sel" id="adm-member" data-adm="member">' + memberOpts(admNames(A.leader)) + '</select></div></section>' +
+    '<section><div class="card"><span class="tag red">選參賽者</span>' +
+    '<label class="lbl" for="adm-member">姓名</label><select class="sel" id="adm-member" data-adm="member">' + memberOpts(allNames()) + '</select></div></section>' +
     '<section id="adm-edit"></section>' + footHTML() + '</main>';
   admLoad();
 }
 async function admLoad(){
-  const names = admNames(A.leader);
+  const names = allNames();
   if(names.indexOf(A.name) < 0) A.name = names[0] || '';
   const sel = $('adm-member'); if(sel) sel.value = A.name;
   if(!A.name){ A.prog = null; paintAdmEdit(); return; }
-  A.key = keyOf(A.leader, A.name);
+  A.key = keyOf(A.name);
   busy(true);
   try{ A.prog = await loadProg(A.key); }catch(e){ console.error(e); A.prog = null; toast('讀取失敗，請再試一次', true); }
   busy(false);
@@ -889,7 +825,7 @@ function paintAdmEdit(){
   if(!box) return;
   const p = A.prog;
   if(!p){ box.innerHTML = ''; return; }
-  const s = summaryOf(p, A.leader, A.name), rc = toArr(p.recruitPhotos), mu = (p.mufo && p.mufo.url) ? [p.mufo] : [];
+  const s = summaryOf(p, A.name), rc = toArr(p.recruitPhotos), mu = (p.mufo && p.mufo.url) ? [p.mufo] : [];
   let weeks = '';
   for(let w = 1; w <= CONFIG.WEEKS; w++){
     const x = wkIn(p, w), k = TASKS.filter(t => taskDone(t, x)).length;
@@ -903,7 +839,7 @@ function paintAdmEdit(){
     '<details' + (A.open === 'r' ? ' open' : '') + '><summary>招募證明（' + rc.length + ' 張）</summary><div class="in">' + admShots(rc, 'recruit', 0, '') + '</div></details>' +
     '<details' + (A.open === 'm' ? ' open' : '') + '><summary>MUFO 完成畫面（' + (mu.length ? '已上傳' : '未上傳') + '）</summary><div class="in">' + admShots(mu, 'mufo', 0, '') + '</div></details></div>';
 }
-const admCtx = () => ({key:A.key, leader:A.leader, name:A.name, prog:A.prog});
+const admCtx = () => ({key:A.key, name:A.name, prog:A.prog});
 async function admSave(fn){
   busy(true);
   try{ await fn(); toast('已更新 ✓'); }
@@ -965,14 +901,11 @@ document.addEventListener('click', e => {
   if(!el) return;
   const v = el.dataset.v;
   switch(el.dataset.act){
-    case 'leader': S.leader = v; renderMe(); window.scrollTo(0, 0); break;
-    case 'back':   S.leader = null; renderLeader(); window.scrollTo(0, 0); break;
     case 'me':     pickMe(v); window.scrollTo(0, 0); break;
-    case 'logout': LS.del('elite2_me'); S.leader = S.name = S.key = null; S.loaded = false; renderLeader(); window.scrollTo(0, 0); break;
+    case 'logout': LS.del('whc_me'); S.name = S.key = null; S.loaded = false; renderMe(); window.scrollTo(0, 0); break;
     case 'week':   S.sel = +v; paintBoard(); paintWeek(); break;
     case 'del':    deletePhoto(el.dataset.kind, el.dataset.field, +el.dataset.i); break;
     case 'nav':    location.hash = v; break;
-    case 'filter': R.leader = v; R.view = null; paintStandings(); window.scrollTo(0, 0); break;
     case 'st-refresh': R.progs = {}; R.view = null; renderStandings(); break;
     case 'view':   toggleView(v); break;
     case 'vweek':  if(R.view){ R.view.w = +v; paintStandings(); } break;
@@ -990,10 +923,8 @@ document.addEventListener('change', e => {
   const t = e.target;
   if(!t || !t.matches) return;
   if(t.matches('input[type=file][data-upload]')) handleUpload(t);
-  else if(t.matches('select[data-filter]')){ R.leader = t.value; R.view = null; paintStandings(); }
   else if(t.matches('select[data-adm]')){
-    if(t.dataset.adm === 'leader'){ A.leader = t.value; A.name = ''; $('adm-member').innerHTML = memberOpts(admNames(A.leader)); }
-    else A.name = t.value;
+    A.name = t.value;
     A.open = 0;
     admLoad();
   }
@@ -1006,9 +937,9 @@ document.addEventListener('keydown', e => {
 });
 
 /* ---------- 啟動 ---------- */
-const me = LS.get('elite2_me');
-if(me && LEADERS.some(l => l.name === me.leader) && me.name){
-  S.leader = me.leader; S.name = me.name; S.key = keyOf(me.leader, me.name);
+const me = LS.get('whc_me');
+if(me && me.name && allNames().indexOf(me.name) >= 0){
+  S.name = me.name; S.key = keyOf(me.name);
 }
 window.addEventListener('hashchange', route);
 route();
